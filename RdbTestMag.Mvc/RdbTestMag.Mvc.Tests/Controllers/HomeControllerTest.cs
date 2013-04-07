@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using MagStore;
 using MagStore.Data;
 using NSubstitute;
 using NUnit.Framework;
@@ -11,24 +13,24 @@ namespace RdbTestMag.Mvc.Tests.Controllers
     public class HomeControllerTest
     {
         [Test]
-        public void Index()
+        public void Index(Guid? id)
         {
             // Arrange
             var controller = BuildHomeController();
 
             // Act
-            var result = controller.Index() as ViewResult;
+            var result = controller.Index(id) as ViewResult;
 
             // Assert
-            if (result == null) return;
+            if ( result == null ) return;
             var viewData = result.ViewData;
-            Assert.AreEqual("Welcome to ASP.NET MVC!", viewData["Message"]);
+            Assert.AreEqual( "Welcome to ASP.NET MVC!", viewData[ "Message" ] );
         }
 
         private static HomeController BuildHomeController()
         {
-            var ravenRepository = new RavenRepository(Substitute.For<IDocumentStore>());
-            var controller = new HomeController(ravenRepository);
+            var store = Substitute.For<Store>();
+            var controller = new HomeController( store );
             return controller;
         }
 
@@ -42,7 +44,7 @@ namespace RdbTestMag.Mvc.Tests.Controllers
             var result = controller.About() as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull( result );
         }
     }
 }

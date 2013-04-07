@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using MagStore.Mvc;
 using RdbTestMag.Mvc.Models;
 
 namespace RdbTestMag.Mvc.Controllers
 {
 
     [HandleError]
-    public class AccountController : Controller
+    public class AccountController : MagController
     {
 
         public IFormsAuthenticationService FormsService { get; set; }

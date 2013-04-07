@@ -3,17 +3,15 @@ using Raven.Client.Document;
 
 namespace MagStore.Mvc
 {
-    public class RavenMvcBootstrapper
+    internal class RavenMvcBootstrapper
     {
         public static IDocumentStore ConnectToRavenInstance(string url, string apiKey)
         {
-            var documentStore = new DocumentStore
+            return new DocumentStore
                 {
                     Url = url,
                     ApiKey = apiKey
                 };
-            documentStore.Initialize();
-            return documentStore;
         }
     }
 }

@@ -35,7 +35,8 @@ namespace MagStore.Data
 
         public T Load<T>(Guid id) where T : IRavenEntity
         {
-            return currentSession.Load<T>(id);
+            T load = currentSession.Load<T>(id);
+            return load;
         }
 
         public int Count<T>() where T : IRavenEntity

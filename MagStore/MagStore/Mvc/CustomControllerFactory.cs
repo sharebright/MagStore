@@ -2,8 +2,6 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using MagStore.Data;
-using Raven.Client.Document;
 
 namespace MagStore.Mvc
 {
@@ -13,10 +11,10 @@ namespace MagStore.Mvc
         {
             if (controllerType == null) return base.GetControllerInstance(requestContext, controllerType);
 
-            var docStore = HttpContext.Current.Application["DocumentStore"] as DocumentStore;
-            var repository = new RavenRepository(docStore);
+            var store = HttpContext.Current.Application["Store"] as Store;
+            //var repository = store.RavenRepository; // new RavenRepository(docStore);
 
-            return Activator.CreateInstance(controllerType, repository) as IController;
+            return Activator.CreateInstance(controllerType, store) as IController;
         }
     }
 }

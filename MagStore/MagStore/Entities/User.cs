@@ -4,8 +4,12 @@ using MagStore.Entities.Enums;
 
 namespace MagStore.Entities
 {
-    public class Customer : IRavenEntity
+    public class User : IRavenEntity
     {
+        public User()
+        {
+            ShoppingCart = new Cart();
+        }
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string FirstName { get; set; }
@@ -30,5 +34,7 @@ namespace MagStore.Entities
         public AccountLevel AccountLevel { get; set; }
         public DateTime Timestamp { get; set; }
         public DateTime Create { get; set; }
+
+        public Cart ShoppingCart { get; set; }
     }
 }

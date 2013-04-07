@@ -1,55 +1,31 @@
 ﻿using System;
 using System.Web.Mvc;
+using MagStore;
 using MagStore.Data.Interfaces;
 using MagStore.Entities;
 using MagStore.Entities.Enums;
-using RdbTestMag.Mvc.Models;
+using MagStore.Mvc;
 
 namespace RdbTestMag.Mvc.Controllers
 {
     [HandleError]
-    public class HomeController : Controller
+    public class HomeController : MagController
     {
-        private readonly IRepository repository;
+        private readonly Store store;
 
-        public HomeController(IRepository repository)
+        public HomeController(Store store)
         {
-            this.repository = repository;
+            this.store = store;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(Guid? id)
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
             return View();
         }
 
         public ActionResult About()
         {
-            try
-            {
-                var newGuid = Guid.NewGuid();
-                var c = new CompoundItem
-                    {
-                        Id = newGuid,
-                        Data = new DataItem()
-                    };
-
-                repository.Add(c);
-                repository.Save();
-                var compoundItem = repository.Load<CompoundItem>(newGuid);
-
-                return View("CustomerRegistration",
-                            new RegistrationResponseModel
-                                {
-                                    Result = "There are now " + repository.Count<CompoundItem>() + " compound items"
-                                });
-            }
-            catch (Exception e)
-            {
-                return View("CustomerRegistration",
-                            new RegistrationResponseModel { Result = "Failed to save the compound item." });
-            }
+            return View();
         }
 
         public ActionResult ShoppingCart()
