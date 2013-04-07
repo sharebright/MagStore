@@ -1,0 +1,13 @@
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\RdbTestMag.Mvc.dll
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\RdbTestMag.Mvc.pdb
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\Raven.Abstractions.dll
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\Raven.Client.Lightweight.dll
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\Raven.Abstractions.pdb
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\Raven.Abstractions.xml
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\Raven.Client.Lightweight.pdb
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\Raven.Client.Lightweight.xml
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\obj\Debug\RdbTestMag.Mvc.csprojResolveAssemblyReference.cache
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\obj\Debug\RdbTestMag.Mvc.dll
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\obj\Debug\RdbTestMag.Mvc.pdb
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\MagStore.dll
+C:\dev\RdbTestMag.Mvc\RdbTestMag.Mvc\bin\MagStore.pdb

@@ -1,0 +1,11 @@
+C:\dev\MagStore\MagStore\obj\Debug\MagStore.csprojResolveAssemblyReference.cache
+C:\dev\MagStore\MagStore\bin\Debug\MagStore.dll
+C:\dev\MagStore\MagStore\bin\Debug\MagStore.pdb
+C:\dev\MagStore\MagStore\bin\Debug\Raven.Abstractions.dll
+C:\dev\MagStore\MagStore\bin\Debug\Raven.Client.Lightweight.dll
+C:\dev\MagStore\MagStore\bin\Debug\Raven.Abstractions.pdb
+C:\dev\MagStore\MagStore\bin\Debug\Raven.Abstractions.xml
+C:\dev\MagStore\MagStore\bin\Debug\Raven.Client.Lightweight.pdb
+C:\dev\MagStore\MagStore\bin\Debug\Raven.Client.Lightweight.xml
+C:\dev\MagStore\MagStore\obj\Debug\MagStore.dll
+C:\dev\MagStore\MagStore\obj\Debug\MagStore.pdb
