@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Web;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using MagStore.Entities;
+using MagStore.Entities.Enums;
 
 namespace MagStore.Mvc
 {
@@ -8,12 +10,25 @@ namespace MagStore.Mvc
     {
         public MagController()
         {
-            var customerId = System.Web.HttpContext.Current.Session[ "CustomerId" ] as Guid?;
-            if ( !customerId.HasValue )
-            {
-                System.Web.HttpContext.Current.Session[ "CustomerId" ] = Guid.NewGuid();
-            }
+            var user = (User)System.Web.HttpContext.Current.Session["CustomerId"];
+            if (user != null) return;
+            var cart = new Cart
+                {
+                    CartId = Guid.NewGuid(),
+                    OrderLines = new List<OrderLine>(),
+                    Promotions = new List<Promotion>()
+                };
 
+
+            System.Web.HttpContext.Current.Session["CurrentUser"] = new User
+                {
+                    Id = Guid.NewGuid(),
+                    AccountLevel = AccountLevel.Customer,
+                    AccountStatus = AccountStatus.Restricted,
+                    Create = DateTime.Now,
+                    AgreedToMarketing = true,
+                    ShoppingCart = cart,
+                };
         }
     }
 }

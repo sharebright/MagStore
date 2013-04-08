@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using MagStore.Data.Interfaces;
+using MagStore.Entities;
 
 namespace MagStore.Data
 {
@@ -21,6 +23,11 @@ namespace MagStore.Data
         public T Load( Guid id )
         {
             return ravenRepository.Load<T>( id );
+        }
+
+        public IList<T> List()
+        {
+            return ravenRepository.List<T>();
         }
     }
 }

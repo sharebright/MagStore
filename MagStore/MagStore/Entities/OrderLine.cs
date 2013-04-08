@@ -6,7 +6,11 @@ namespace MagStore.Entities
 {
     public class OrderLine
     {
-        public IEnumerable<Product> Products { get; set; }
+        public OrderLine()
+        {
+            Products = new List<Product>();
+        }
+        public IList<Product> Products { get; set; }
 
         private decimal SubTotal { get { return Products.Sum( x => x.Price ); } }
 

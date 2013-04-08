@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using MagStore.Entities;
 
 namespace MagStore.Data.Interfaces
 {
@@ -6,5 +8,6 @@ namespace MagStore.Data.Interfaces
     {
         void Save( T entity );
         T Load( Guid id );
+        IList<T> List();
     }
 }

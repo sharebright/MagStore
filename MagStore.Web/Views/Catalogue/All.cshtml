@@ -1,0 +1,21 @@
+﻿@model MagStore.Web.Controllers.CatalogueViewModel
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>Products</h2>
+@{
+    if (Model.Products.Count > 0)
+    {
+        foreach (var product in Model.Products)
+        {
+            <div>@product.Name</div>
+        }
+    }
+    else
+    {
+        <div>There are no products.</div>
+    }
+}

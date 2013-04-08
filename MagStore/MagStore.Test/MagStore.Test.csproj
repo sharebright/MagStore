@@ -49,8 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreatingUsersWithElevatedPrivileges.cs" />
-    <Compile Include="UserCoordinatorBase.cs" />
+    <Compile Include="Products\WhenAddingAProductToTheCart.cs" />
+    <Compile Include="Users\CreatingUsersWithElevatedPrivileges.cs" />
+    <Compile Include="Users\UserCoordinatorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

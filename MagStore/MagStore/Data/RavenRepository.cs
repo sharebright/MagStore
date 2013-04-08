@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MagStore.Data.Interfaces;
 using Raven.Client;
+using Raven.Client.Linq;
 
 namespace MagStore.Data
 {
@@ -57,6 +59,11 @@ namespace MagStore.Data
         public void Save()
         {
             CurrentSession.SaveChanges();
+        }
+
+        public IList<T> List<T>()
+        {
+            return CurrentSession.Query<T>().ToList();
         }
     }
 }

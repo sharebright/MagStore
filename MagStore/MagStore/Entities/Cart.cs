@@ -7,10 +7,15 @@ namespace MagStore.Entities
 {
     public class Cart : IRavenEntity
     {
-        public Guid CartId { get; set; }
-        public IEnumerable<OrderLine> OrderLines { get; set; }
+        public Cart()
+        {
+            OrderLines = new List<OrderLine>();
+            Promotions = new List<Promotion>();
+        }
 
-        public IEnumerable<Promotion> Promotions { get; set; }
+        public Guid CartId { get; set; }
+        public IList<OrderLine> OrderLines { get; set; }
+        public IList<Promotion> Promotions { get; set; }
 
         public decimal Total
         {

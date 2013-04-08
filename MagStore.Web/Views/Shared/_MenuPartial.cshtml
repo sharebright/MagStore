@@ -1,0 +1,15 @@
+﻿@{
+
+    <ul>
+        <ul>
+            
+            @{
+                decimal total = ((MagStore.Entities.User) HttpContext.Current.Session["CurrentUser"]).ShoppingCart.Total;
+            }
+            @total.ToString("0.00")
+        </ul>
+        <ul>
+            @Html.ActionLink("Products","All","Catalogue")
+        </ul>
+    </ul>
+}

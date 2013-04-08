@@ -7,7 +7,6 @@ C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\FluentAssertions.pdb
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\FluentAssertions.xml
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\NSubstitute.xml
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\nunit.framework.xml
-C:\dev\MagSolutions\MagStore\MagStore.Test\obj\Debug\MagStore.Test.csprojResolveAssemblyReference.cache
 C:\dev\MagSolutions\MagStore\MagStore.Test\obj\Debug\MagStore.Test.dll
 C:\dev\MagSolutions\MagStore\MagStore.Test\obj\Debug\MagStore.Test.pdb
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\MagStore.dll
@@ -22,3 +21,4 @@ C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Windsor.dll
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Core.dll
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Windsor.xml
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Core.xml
+C:\dev\MagSolutions\MagStore\MagStore.Test\obj\Debug\ResolveAssemblyReference.cache
