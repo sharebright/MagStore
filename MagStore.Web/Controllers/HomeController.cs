@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using MagStore.Entities;
-using MagStore.Mvc;
+﻿using System.Web.Mvc;
 using MagStore.Web.Models;
+using RavenDBMembership.Entities;
+using RavenDBMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {
-    public class HomeController : MagController
+    public class HomeController : Controller
     {
-        private readonly Store store;
+        private readonly IShop shop;
 
-        public HomeController(Store store)
+        public HomeController(IShop shop)
         {
-            this.store = store;
+            this.shop = shop;
         }
 
         public ActionResult Index()

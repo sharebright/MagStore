@@ -1,15 +1,29 @@
-﻿@{
+﻿@using RavenDBMembership.Entities
+@{
+    var shoppingCart = ((User) HttpContext.Current.Session["CurrentUser"]).ShoppingCart;
+    var total = shoppingCart.Total;
 
     <ul>
-        <ul>
-            
-            @{
-                decimal total = ((MagStore.Entities.User) HttpContext.Current.Session["CurrentUser"]).ShoppingCart.Total;
-            }
-            @total.ToString("0.00")
-        </ul>
-        <ul>
-            @Html.ActionLink("Products","All","Catalogue")
-        </ul>
+        <li class="cart-title"><a href="#">Shopping Cart:</a></li>
+        <li class="cart-price"><a href="#">£@total.ToString("0.00")</a></li>
+        <li class="cart-items"><a href="#">@shoppingCart.OrderLines.Select(x => x.Products).Sum(x => x.Count) items</a></li>
+        @if (Request.IsAuthenticated)
+        {
+            <li class="cart-login">
+                @if (User.IsInRole("Administrator")){
+                @Html.ActionLink("Manage Shop", "Manage", "Shop")
+                }
+            </li>
+            <li class="cart-login">
+                @Html.ActionLink("Log out " + Context.User.Identity.Name, "LogOff", "Account", null, new {id = "loginLink"})
+            </li>
+            <li><a href="#" id="button">Account</a></li>
+        }
+        else
+        {
+            <li class="cart-login">
+                @Html.ActionLink("Log in", "LogOn", "Account", null, new {id = "loginLink"})
+            </li>
+        }
     </ul>
 }

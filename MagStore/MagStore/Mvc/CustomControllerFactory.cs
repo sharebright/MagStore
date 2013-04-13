@@ -11,8 +11,8 @@ namespace MagStore.Mvc
         {
             if (controllerType == null) return base.GetControllerInstance(requestContext, controllerType);
 
-            var store = HttpContext.Current.Application["Store"] as Store;
-            //var repository = store.RavenRepository; // new RavenRepository(docStore);
+            var store = HttpContext.Current.Application["Shop"] as Shop;
+            //var repository = Shop.RavenRepository; // new RavenRepository(docStore);
 
             return Activator.CreateInstance(controllerType, store) as IController;
         }

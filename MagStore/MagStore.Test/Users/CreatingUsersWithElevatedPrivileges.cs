@@ -19,9 +19,9 @@ namespace MagStore.Test.Users
                 ShoppingCart = cart
             };
 
-            Store.GetCoordinator<User>().Save(user);
+            Shop.GetCoordinator<User>().Save(user);
 
-            var loadedUser = Store.GetCoordinator<User>().Load(id);
+            var loadedUser = Shop.GetCoordinator<User>().Load(id);
             loadedUser.ShoppingCart.Should().NotBeNull();
         }
     }
@@ -38,9 +38,9 @@ namespace MagStore.Test.Users
                 AccountLevel = AccountLevel.Elevated
             };
             // Act
-            Store.GetCoordinator<User>().Save( user );
+            Shop.GetCoordinator<User>().Save( user );
             // Assert
-            var loadedUser = Store.GetCoordinator<User>().Load(id);
+            var loadedUser = Shop.GetCoordinator<User>().Load(id);
             loadedUser.AccountLevel.Should().Be( AccountLevel.Elevated );
         }
     }

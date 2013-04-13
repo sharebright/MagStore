@@ -4,6 +4,6 @@ namespace MagStore.Web.Models
 {
     public class HomeViewModel
     {
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

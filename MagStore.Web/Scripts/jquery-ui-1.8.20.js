@@ -456,8 +456,8 @@ $.Widget.prototype = {
 		disabled: false
 	},
 	_createWidget: function( options, element ) {
-		// $.widget.bridge stores the plugin instance, but we do it anyway
-		// so that it's stored even before the _create function runs
+		// $.widget.bridge Shops the plugin instance, but we do it anyway
+		// so that it's Shopd even before the _create function runs
 		$.data( element, this.widgetName, this );
 		this.element = $( element );
 		this.options = $.extend( true, {},
@@ -838,7 +838,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		//Cache the margins of the original element
 		this._cacheMargins();
 
-		//Store the helper's css position
+		//Shop the helper's css position
 		this.cssPosition = this.helper.css("position");
 		this.scrollParent = this.helper.scrollParent();
 
@@ -1275,7 +1275,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 
 				this.instance.options.helper = this.instance.options._helper;
 
-				//If the helper has been the original item, restore properties in the sortable
+				//If the helper has been the original item, reShop properties in the sortable
 				if(inst.options.helper == 'original')
 					this.instance.currentItem.css({ top: 'auto', left: 'auto' });
 
@@ -1314,10 +1314,10 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 
 					this.instance.isOver = 1;
 					//Now we fake the start of dragging for the sortable instance,
-					//by cloning the list group item, appending it to the sortable and using it as inst.currentItem
+					//by cloning the Project group item, appending it to the sortable and using it as inst.currentItem
 					//We can then fire the start event of the sortable with our passed browser event, and our own helper (so it doesn't create a new one)
 					this.instance.currentItem = $(self).clone().removeAttr('id').appendTo(this.instance.element).data("sortable-item", true);
-					this.instance.options._helper = this.instance.options.helper; //Store helper option to later restore it
+					this.instance.options._helper = this.instance.options.helper; //Shop helper option to later reShop it
 					this.instance.options.helper = function() { return ui.helper[0]; };
 
 					event.target = this.instance.currentItem[0];
@@ -1359,7 +1359,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 					this.instance._mouseStop(event, true);
 					this.instance.options.helper = this.instance.options._helper;
 
-					//Now we remove our currentItem, the list group clone again, and the placeholder, and animate the helper back to it's original size
+					//Now we remove our currentItem, the Project group clone again, and the placeholder, and animate the helper back to it's original size
 					this.instance.currentItem.remove();
 					if(this.instance.placeholder) this.instance.placeholder.remove();
 
@@ -1572,7 +1572,7 @@ $.widget("ui.droppable", {
 			return d.is(accept);
 		};
 
-		//Store the droppable's proportions
+		//Shop the droppable's proportions
 		this.proportions = { width: this.element[0].offsetWidth, height: this.element[0].offsetHeight };
 
 		// Add the reference and positions to the manager
@@ -2071,7 +2071,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 			curtop += $(o.containment).scrollTop() || 0;
 		}
 
-		//Store needed variables
+		//Shop needed variables
 		this.offset = this.helper.offset();
 		this.position = { left: curleft, top: curtop };
 		this.size = this._helper ? { width: el.outerWidth(), height: el.outerHeight() } : { width: el.width(), height: el.height() };
@@ -4256,7 +4256,7 @@ $.extend($.effects, {
 		}
 	},
 
-	// Restores a set of previously saved properties from a data storage
+	// ReShops a set of previously saved properties from a data storage
 	restore: function(element, set) {
 		for(var i=0; i < set.length; i++) {
 			if(set[i] !== null) element.css(set[i], element.data("ec.storage."+set[i]));
@@ -4511,9 +4511,9 @@ $.fn.extend({
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * Redistributions of source code must retain the above copyright notice, this list of
+ * Redistributions of source code must retain the above copyright notice, this Project of
  * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list
+ * Redistributions in binary form must reproduce the above copyright notice, this Project
  * of conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
@@ -4680,9 +4680,9 @@ $.extend($.easing,
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * Redistributions of source code must retain the above copyright notice, this list of
+ * Redistributions of source code must retain the above copyright notice, this Project of
  * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list
+ * Redistributions in binary form must reproduce the above copyright notice, this Project
  * of conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
@@ -4730,7 +4730,7 @@ $.effects.blind = function(o) {
 		// Animate
 		wrapper.animate(animation, o.duration, o.options.easing, function() {
 			if(mode == 'hide') el.hide(); // Hide
-			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+			$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 			if(o.callback) o.callback.apply(el[0], arguments); // Callback
 			el.dequeue();
 		});
@@ -4788,7 +4788,7 @@ $.effects.bounce = function(o) {
 			animation[ref] = (motion == 'pos' ? '-=' : '+=')  + distance;
 			el.animate(animation, speed / 2, o.options.easing, function(){
 				el.hide(); // Hide
-				$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+				$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 				if(o.callback) o.callback.apply(this, arguments); // Callback
 			});
 		} else {
@@ -4796,7 +4796,7 @@ $.effects.bounce = function(o) {
 			animation1[ref] = (motion == 'pos' ? '-=' : '+=') + distance;
 			animation2[ref] = (motion == 'pos' ? '+=' : '-=') + distance;
 			el.animate(animation1, speed / 2, o.options.easing).animate(animation2, speed / 2, o.options.easing, function(){
-				$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+				$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 				if(o.callback) o.callback.apply(this, arguments); // Callback
 			});
 		};
@@ -4840,7 +4840,7 @@ $.effects.clip = function(o) {
 		// Animate
 		animate.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') el.hide(); // Hide
-			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+			$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 			if(o.callback) o.callback.apply(el[0], arguments); // Callback
 			el.dequeue();
 		}});
@@ -4879,7 +4879,7 @@ $.effects.drop = function(o) {
 		// Animate
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') el.hide(); // Hide
-			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+			$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 			if(o.callback) o.callback.apply(this, arguments); // Callback
 			el.dequeue();
 		}});
@@ -5013,7 +5013,7 @@ $.effects.fold = function(o) {
 		wrapper.animate(animation1, duration, o.options.easing)
 		.animate(animation2, duration, o.options.easing, function() {
 			if(mode == 'hide') el.hide(); // Hide
-			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+			$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 			if(o.callback) o.callback.apply(el[0], arguments); // Callback
 			el.dequeue();
 		});
@@ -5143,7 +5143,7 @@ $.effects.scale = function(o) {
 		var percent = parseInt(o.options.percent,10) || (parseInt(o.options.percent,10) == 0 ? 0 : (mode == 'hide' ? 0 : 100)); // Set default scaling percent
 		var direction = o.options.direction || 'both'; // Set default axis
 		var origin = o.options.origin; // The origin of the scaling
-		if (mode != 'effect') { // Set default origin and restore for show/hide
+		if (mode != 'effect') { // Set default origin and reShop for show/hide
 			options.origin = origin || ['middle','center'];
 			options.restore = true;
 		}
@@ -5178,7 +5178,7 @@ $.effects.size = function(o) {
 
 		// Create element
 		var el = $(this), props = ['position','top','bottom','left','right','width','height','overflow','opacity'];
-		var props1 = ['position','top','bottom','left','right','overflow','opacity']; // Always restore
+		var props1 = ['position','top','bottom','left','right','overflow','opacity']; // Always reShop
 		var props2 = ['width','height','overflow']; // Copy for children
 		var cProps = ['fontSize'];
 		var vProps = ['borderTopWidth', 'borderBottomWidth', 'paddingTop', 'paddingBottom'];
@@ -5186,7 +5186,7 @@ $.effects.size = function(o) {
 
 		// Set options
 		var mode = $.effects.setMode(el, o.options.mode || 'effect'); // Set Mode
-		var restore = o.options.restore || false; // Default restore
+		var restore = o.options.restore || false; // Default reShop
 		var scale = o.options.scale || 'both'; // Default scale mode
 		var origin = o.options.origin; // The origin of the sizing
 		var original = {height: el.height(), width: el.width()}; // Save original
@@ -5248,7 +5248,7 @@ $.effects.size = function(o) {
 				};
 				child.css(child.from); // Shift children
 				child.animate(child.to, o.duration, o.options.easing, function(){
-					if (restore) $.effects.restore(child, props2); // Restore children
+					if (restore) $.effects.restore(child, props2); // ReShop children
 				}); // Animate children
 			});
 		};
@@ -5259,7 +5259,7 @@ $.effects.size = function(o) {
 				el.css('opacity', el.from.opacity);
 			}
 			if(mode == 'hide') el.hide(); // Hide
-			$.effects.restore(el, restore ? props : props1); $.effects.removeWrapper(el); // Restore
+			$.effects.restore(el, restore ? props : props1); $.effects.removeWrapper(el); // ReShop
 			if(o.callback) o.callback.apply(this, arguments); // Callback
 			el.dequeue();
 		}});
@@ -5305,7 +5305,7 @@ $.effects.shake = function(o) {
 		};
 		el.animate(animation1, speed, o.options.easing).
 		animate(animation, speed / 2, o.options.easing, function(){ // Last shake
-			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+			$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 			if(o.callback) o.callback.apply(this, arguments); // Callback
 		});
 		el.queue('fx', function() { el.dequeue(); });
@@ -5344,7 +5344,7 @@ $.effects.slide = function(o) {
 		// Animate
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
 			if(mode == 'hide') el.hide(); // Hide
-			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+			$.effects.restore(el, props); $.effects.removeWrapper(el); // ReShop
 			if(o.callback) o.callback.apply(this, arguments); // Callback
 			el.dequeue();
 		}});
@@ -5478,7 +5478,7 @@ $.widget( "ui.accordion", {
 		self.resize();
 		
 		// ARIA
-		self.element.attr( "role", "tablist" );
+		self.element.attr( "role", "tabProject" );
 
 		self.headers
 			.attr( "role", "tab" )
@@ -6021,7 +6021,7 @@ $.widget( "ui.autocomplete", {
 			// TODO verify these actually work as intended
 			.attr({
 				role: "textbox",
-				"aria-autocomplete": "list",
+				"aria-autocomplete": "Project",
 				"aria-haspopup": "true"
 			})
 			.bind( "keydown.autocomplete", function( event ) {
@@ -6447,7 +6447,7 @@ $.widget("ui.menu", {
 		this.element
 			.addClass("ui-menu ui-widget ui-widget-content ui-corner-all")
 			.attr({
-				role: "listbox",
+				role: "Projectbox",
 				"aria-activedescendant": "ui-active-menuitem"
 			})
 			.click(function( event ) {
@@ -6464,7 +6464,7 @@ $.widget("ui.menu", {
 	refresh: function() {
 		var self = this;
 
-		// don't refresh list items that are already adapted
+		// don't refresh Project items that are already adapted
 		var items = this.element.children("li:not(.ui-menu-item):has(a)")
 			.addClass("ui-menu-item")
 			.attr("role", "menuitem");
@@ -7099,7 +7099,7 @@ function Datepicker() {
 		showCurrentAtPos: 0, // The position in multipe months at which to show the current month (starting at 0)
 		stepMonths: 1, // Number of months to step back/forward
 		stepBigMonths: 12, // Number of months to step back/forward for the big links
-		altField: '', // Selector for an alternate field to store selected dates into
+		altField: '', // Selector for an alternate field to Shop selected dates into
 		altFormat: '', // The date format to use for the alternate field
 		constrainInput: true, // The input is constrained by the current date format
 		showButtonPanel: false, // True to show button panel, false to not show it
@@ -7930,7 +7930,7 @@ $.extend(Datepicker.prototype, {
 			this._hideDatepicker();
 			this._lastInput = inst.input[0];
 			if (typeof(inst.input[0]) != 'object')
-				inst.input.focus(); // restore focus
+				inst.input.focus(); // reShop focus
 			this._lastInput = null;
 		}
 	},
@@ -9109,7 +9109,7 @@ $.widget("ui.dialog", {
 			self.overlay.$el.css('z-index', $.ui.dialog.overlay.maxZ = $.ui.dialog.maxZ);
 		}
 
-		//Save and then restore scroll since Opera 9.5+ resets when parent z-Index is changed.
+		//Save and then reShop scroll since Opera 9.5+ resets when parent z-Index is changed.
 		//  http://ui.jquery.com/bugs/ticket/3193
 		saveScroll = { scrollTop: self.element.scrollTop(), scrollLeft: self.element.scrollLeft() };
 		$.ui.dialog.maxZ += 1;
@@ -10794,7 +10794,7 @@ $.widget( "ui.tabs", {
 	},
 
 	_cleanup: function() {
-		// restore all former loading tabs labels
+		// reShop all former loading tabs labels
 		this.lis.filter( ".ui-state-processing" )
 			.removeClass( "ui-state-processing" )
 			.find( "span:data(label.tabs)" )
@@ -10837,7 +10837,7 @@ $.widget( "ui.tabs", {
 			// remote tab
 			// prevent loading the page itself if href is just "#"
 			} else if ( href && href !== "#" ) {
-				// required for restore on destroy
+				// required for reShop on destroy
 				$.data( a, "href.tabs", href );
 
 				// TODO until #3808 is fixed strip fragment identifier from url
@@ -10915,7 +10915,7 @@ $.widget( "ui.tabs", {
 			// highlight selected tab
 			this.panels.addClass( "ui-tabs-hide" );
 			this.lis.removeClass( "ui-tabs-selected ui-state-active" );
-			// check for length avoids error when initializing empty list
+			// check for length avoids error when initializing empty Project
 			if ( o.selected >= 0 && this.anchors.length ) {
 				self.element.find( self._sanitizeSelector( self.anchors[ o.selected ].hash ) ).removeClass( "ui-tabs-hide" );
 				this.lis.eq( o.selected ).addClass( "ui-tabs-selected ui-state-active" );

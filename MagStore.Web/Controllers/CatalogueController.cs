@@ -1,29 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
-using MagStore.Entities;
+using MagStore.Web.Models.Catalogue;
+using MagStore.Web.Models.Product;
+using RavenDBMembership.Entities;
+using RavenDBMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {
     public class CatalogueController : Controller
     {
-        private readonly Store store;
+        private readonly IShop shop;
 
-        public CatalogueController(Store store)
+        public CatalogueController(IShop shop)
         {
-            this.store = store;
-            store.GetCoordinator<Product>().Save(new Product {Id = Guid.NewGuid(), Name = "Test"});
+            this.shop = shop;
         }
 
-        public ActionResult All()
+        public ActionResult ViewProductsInCatalogue(string catalogueId)
         {
-            var products = store.GetCoordinator<Product>().List();
-            return View(new CatalogueViewModel { Products = products });
+            var catalogue = shop.GetCoordinator<Catalogue>().Load(catalogueId);
+            return View(new ProductsViewModel { Catalogue = catalogue });
         }
-    }
 
-    public class CatalogueViewModel
-    {
-        public IList<Product> Products { get; set; }
+        public ActionResult ViewCatalogues()
+        {
+            var catalogues = shop.GetCoordinator<Catalogue>().Project();
+            return View(new CataloguesViewModel { Catalogues = catalogues });
+        }
     }
 }

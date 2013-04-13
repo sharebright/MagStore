@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RavenDbMembership</RootNamespace>
+    <AssemblyName>RavenDbMembership</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\src\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Abstractions, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Cart.cs" />
+    <Compile Include="Entities\Catalogue.cs" />
+    <Compile Include="Entities\DiscountPromotionCriteria.cs" />
+    <Compile Include="Entities\DiscountPromotionValidator.cs" />
+    <Compile Include="Entities\Enums\AccountLevel.cs" />
+    <Compile Include="Entities\Enums\AccountStatus.cs" />
+    <Compile Include="Entities\Enums\DiscountType.cs" />
+    <Compile Include="Entities\Enums\FulfillmentStatus.cs" />
+    <Compile Include="Entities\Enums\Gender.cs" />
+    <Compile Include="Entities\Enums\ImageType.cs" />
+    <Compile Include="Entities\Enums\ProductType.cs" />
+    <Compile Include="Entities\Fulfillment.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderLine.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ProductImage.cs" />
+    <Compile Include="Entities\Promotion.cs" />
+    <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Infrastructure\AccountMembershipService.cs" />
+    <Compile Include="Infrastructure\AccountValidation.cs" />
+    <Compile Include="Infrastructure\Coordinator.cs" />
+    <Compile Include="Infrastructure\FormsAuthenticationService.cs" />
+    <Compile Include="Infrastructure\Interfaces\ICoordinator.cs" />
+    <Compile Include="Infrastructure\Interfaces\IFormsAuthenticationService.cs" />
+    <Compile Include="Infrastructure\Interfaces\IMembershipService.cs" />
+    <Compile Include="Infrastructure\Interfaces\IRavenEntity.cs" />
+    <Compile Include="Infrastructure\Interfaces\IRepository.cs" />
+    <Compile Include="Infrastructure\Interfaces\IShop.cs" />
+    <Compile Include="Infrastructure\Interfaces\IUserCoordinator.cs" />
+    <Compile Include="Infrastructure\ModelClientValidationModel.cs" />
+    <Compile Include="Infrastructure\ModelClientValidationStringLengthRule.cs" />
+    <Compile Include="Infrastructure\RavenRepository.cs" />
+    <Compile Include="Infrastructure\Shop.cs" />
+    <Compile Include="Infrastructure\ValidatePasswordLengthAttribute.cs" />
+    <Compile Include="PasswordUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\MembershipProviderValidated.cs" />
+    <Compile Include="Provider\RavenDbMembershipProvider.cs" />
+    <Compile Include="Provider\RavenDbMembershipProviderThatDisposesStore.cs" />
+    <Compile Include="Provider\RavenDbMembershipUser.cs" />
+    <Compile Include="Provider\RavenDbRoleProvider.cs" />
+    <Compile Include="Provider\SecUtility.cs" />
+    <Compile Include="ReservationForUniqueFieldValue.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="UserStrings\SR.cs" />
+    <Compile Include="UserStrings\SRValueAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

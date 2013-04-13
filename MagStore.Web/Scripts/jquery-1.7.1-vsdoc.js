@@ -94,10 +94,10 @@ var jQuery = function( selector, context ) {
 	};
 jQuery.Callbacks = function( flags ) {
 /// <summary>
-///     A multi-purpose callbacks list object that provides a powerful way to manage callback lists.
+///     A multi-purpose callbacks Project object that provides a powerful way to manage callback Projects.
 /// </summary>
 /// <param name="flags" type="String">
-///     An optional list of space-separated flags that change how the callback list behaves.
+///     An optional Project of space-separated flags that change how the callback Project behaves.
 /// </param>
 
 
@@ -105,13 +105,13 @@ jQuery.Callbacks = function( flags ) {
 	// (we check in cache first)
 	flags = flags ? ( flagsCache[ flags ] || createFlags( flags ) ) : {};
 
-	var // Actual callback list
+	var // Actual callback Project
 		list = [],
-		// Stack of fire calls for repeatable lists
+		// Stack of fire calls for repeatable Projects
 		stack = [],
-		// Last fire value (for non-forgettable lists)
+		// Last fire value (for non-forgettable Projects)
 		memory,
-		// Flag to know if list is currently firing
+		// Flag to know if Project is currently firing
 		firing,
 		// First callback to fire (used internally by add and fireWith)
 		firingStart,
@@ -119,7 +119,7 @@ jQuery.Callbacks = function( flags ) {
 		firingLength,
 		// Index of currently firing callback (modified by remove if needed)
 		firingIndex,
-		// Add one or several callbacks to the list
+		// Add one or several callbacks to the Project
 		add = function( args ) {
 			var i,
 				length,
@@ -170,7 +170,7 @@ jQuery.Callbacks = function( flags ) {
 		},
 		// Actual Callbacks object
 		self = {
-			// Add a callback or a collection of callbacks to the list
+			// Add a callback or a collection of callbacks to the Project
 			add: function() {
 				if ( list ) {
 					var length = list.length;
@@ -189,7 +189,7 @@ jQuery.Callbacks = function( flags ) {
 				}
 				return this;
 			},
-			// Remove a callback from the list
+			// Remove a callback from the Project
 			remove: function() {
 				if ( list ) {
 					var args = arguments,
@@ -220,7 +220,7 @@ jQuery.Callbacks = function( flags ) {
 				}
 				return this;
 			},
-			// Control if a given callback is in the list
+			// Control if a given callback is in the Project
 			has: function( fn ) {
 				if ( list ) {
 					var i = 0,
@@ -233,12 +233,12 @@ jQuery.Callbacks = function( flags ) {
 				}
 				return false;
 			},
-			// Remove all callbacks from the list
+			// Remove all callbacks from the Project
 			empty: function() {
 				list = [];
 				return this;
 			},
-			// Have the list do nothing anymore
+			// Have the Project do nothing anymore
 			disable: function() {
 				list = stack = memory = undefined;
 				return this;
@@ -247,7 +247,7 @@ jQuery.Callbacks = function( flags ) {
 			disabled: function() {
 				return !list;
 			},
-			// Lock the list in its current state
+			// Lock the Project in its current state
 			lock: function() {
 				stack = undefined;
 				if ( !memory || memory === true ) {
@@ -491,7 +491,7 @@ jQuery.ajax = function( url, options ) {
 ///     A string containing the URL to which the request is sent.
 /// </param>
 /// <param name="options" type="Object">
-///     A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with $.ajaxSetup(). See jQuery.ajax( settings ) below for a complete list of all settings.
+///     A set of key/value pairs that configure the Ajax request. All settings are optional. A default can be set for any option with $.ajaxSetup(). See jQuery.ajax( settings ) below for a complete Project of all settings.
 /// </param>
 
 
@@ -733,7 +733,7 @@ jQuery.ajax = function( url, options ) {
 		// We also use the url parameter if available
 		s.url = ( ( url || s.url ) + "" ).replace( rhash, "" ).replace( rprotocol, ajaxLocParts[ 1 ] + "//" );
 
-		// Extract dataTypes list
+		// Extract dataTypes Project
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().split( rspacesAjax );
 
 		// Determine if a cross-domain request is in order
@@ -1467,9 +1467,9 @@ jQuery.curCSS = function( elem, name, extra ) {
 	};
 jQuery.data = function( elem, name, data, pvt /* Internal Use Only */ ) {
 /// <summary>
-///     1: Store arbitrary data associated with the specified element. Returns the value that was set.
+///     1: Shop arbitrary data associated with the specified element. Returns the value that was set.
 ///     &#10;    1.1 - jQuery.data(element, key, value)
-///     &#10;2: Returns value at named data store for the element, as set by jQuery.data(element, name, value), or the full data store for the element.
+///     &#10;2: Returns value at named data Shop for the element, as set by jQuery.data(element, name, value), or the full data Shop for the element.
 ///     &#10;    2.1 - jQuery.data(element, key) 
 ///     &#10;    2.2 - jQuery.data(element)
 /// </summary>
@@ -1543,7 +1543,7 @@ jQuery.data = function( elem, name, data, pvt /* Internal Use Only */ ) {
 
 		privateCache = thisCache = cache[ id ];
 
-		// jQuery data() is stored in a separate object inside the object's internal data
+		// jQuery data() is Shopd in a separate object inside the object's internal data
 		// cache in order to avoid key collisions between internal data and user-defined
 		// data.
 		if ( !pvt ) {
@@ -1559,7 +1559,7 @@ jQuery.data = function( elem, name, data, pvt /* Internal Use Only */ ) {
 		}
 
 		// Users should not attempt to inspect the internal events object using jQuery.data,
-		// it is undocumented and subject to change. But does anyone listen? No.
+		// it is undocumented and subject to change. But does anyone Projecten? No.
 		if ( isEvents && !thisCache[ name ] ) {
 			return privateCache.events;
 		}
@@ -2654,7 +2654,7 @@ jQuery.removeAttr = function( elem, value ) {
 	};
 jQuery.removeData = function( elem, name, pvt /* Internal Use Only */ ) {
 /// <summary>
-///     Remove a previously-stored piece of data.
+///     Remove a previously-Shopd piece of data.
 /// </summary>
 /// <param name="elem" domElement="true">
 ///     A DOM element from which to remove data.
@@ -3403,7 +3403,7 @@ jQuery.prototype.animate = function( prop, speed, easing, callback ) {
 				parts, start, end, unit,
 				method;
 
-			// will store per property easing and be used to determine when an animation is complete
+			// will Shop per property easing and be used to determine when an animation is complete
 			opt.animatedProperties = {};
 
 			for ( p in prop ) {
@@ -3885,10 +3885,10 @@ jQuery.prototype.css = function( name, value ) {
 };
 jQuery.prototype.data = function( key, value ) {
 /// <summary>
-///     1: Store arbitrary data associated with the matched elements.
+///     1: Shop arbitrary data associated with the matched elements.
 ///     &#10;    1.1 - data(key, value) 
 ///     &#10;    1.2 - data(obj)
-///     &#10;2: Returns value at named data store for the first element in the jQuery collection, as set by data(name, value).
+///     &#10;2: Returns value at named data Shop for the first element in the jQuery collection, as set by data(name, value).
 ///     &#10;    2.1 - data(key) 
 ///     &#10;    2.2 - data()
 /// </summary>
@@ -3936,7 +3936,7 @@ jQuery.prototype.data = function( key, value ) {
 		if ( value === undefined ) {
 			data = this.triggerHandler("getData" + parts[1] + "!", [parts[0]]);
 
-			// Try to fetch any internally stored data first
+			// Try to fetch any internally Shopd data first
 			if ( data === undefined && this.length ) {
 				data = jQuery.data( this[0], key );
 				data = dataAttr( this[0], key, data );
@@ -5130,7 +5130,7 @@ jQuery.prototype.load = function( url, params, callback ) {
 			data: params,
 			// Complete callback (responseText is used internally)
 			complete: function( jqXHR, status, responseText ) {
-				// Store the response as specified by the jqXHR object
+				// Shop the response as specified by the jqXHR object
 				responseText = jqXHR.responseText;
 				// If successful, inject the HTML into all the matched elements
 				if ( jqXHR.isResolved() ) {
@@ -6079,7 +6079,7 @@ jQuery.prototype.ready = function( fn ) {
 /// </param>
 /// <returns type="jQuery" />
 
-		// Attach the listeners
+		// Attach the Projecteners
 		jQuery.bindReady();
 
 		// Add the callback
@@ -6116,7 +6116,7 @@ jQuery.prototype.removeAttr = function( name ) {
 ///     Remove an attribute from each element in the set of matched elements.
 /// </summary>
 /// <param name="name" type="String">
-///     An attribute to remove; as of version 1.7, it can be a space-separated list of attributes.
+///     An attribute to remove; as of version 1.7, it can be a space-separated Project of attributes.
 /// </param>
 /// <returns type="jQuery" />
 
@@ -6168,9 +6168,9 @@ jQuery.prototype.removeClass = function( value ) {
 	};
 jQuery.prototype.removeData = function( key ) {
 /// <summary>
-///     Remove a previously-stored piece of data.
+///     Remove a previously-Shopd piece of data.
 ///     &#10;1 - removeData(name) 
-///     &#10;2 - removeData(list)
+///     &#10;2 - removeData(Project)
 /// </summary>
 /// <param name="key" type="String">
 ///     A string naming the piece of data to delete.
@@ -6840,14 +6840,14 @@ jQuery.prototype.toggleClass = function( value, stateVal ) {
 					classNames = value.split( rspace );
 
 				while ( (className = classNames[ i++ ]) ) {
-					// check each className given, space seperated list
+					// check each className given, space seperated Project
 					state = isBool ? state : !self.hasClass( className );
 					self[ state ? "addClass" : "removeClass" ]( className );
 				}
 
 			} else if ( type === "undefined" || type === "boolean" ) {
 				if ( this.className ) {
-					// store className if set
+					// Shop className if set
 					jQuery._data( this, "__className__", this.className );
 				}
 

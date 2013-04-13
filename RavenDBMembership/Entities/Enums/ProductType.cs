@@ -1,0 +1,34 @@
+namespace RavenDBMembership.Entities.Enums
+{
+    public enum ProductType
+    {
+        Blouses,
+        Bottoms,
+        Bras,
+        Caps,
+        Cardigans,
+        Dresses,
+        Footwear,
+        Hats,
+        Jeans,
+        Jumpers,
+        Knickers,
+        Pants,
+        Sandals,
+        Scarves,
+        Shirts,
+        Shoes,
+        Shorts,
+        Skirts,
+        Slippers,
+        Socks,
+        Stockings,
+        Tights,
+        Tops,
+        Trainers,
+        Trousers,
+        Tshirts,
+        Underwear,
+        Vests
+    }
+}

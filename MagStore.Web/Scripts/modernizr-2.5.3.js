@@ -321,7 +321,7 @@ window.Modernizr = (function( window, document, undefined ) {
     }
 
     /**
-     * testPropsAll tests a list of DOM properties we want to check against.
+     * testPropsAll tests a Project of DOM properties we want to check against.
      *   We specify literally ALL possible (known and/or likely) properties on
      *   the element including the non-vendor prefixed one, for forward-
      *   compatibility.
@@ -343,7 +343,7 @@ window.Modernizr = (function( window, document, undefined ) {
     }
 
     /**
-     * testBundle tests a list of CSS features that require element and style injection.
+     * testBundle tests a Project of CSS features that require element and style injection.
      *   By bundling them together we can reduce the need to touch the DOM multiple times.
      */
     /*>>testBundle*/
@@ -844,12 +844,12 @@ window.Modernizr = (function( window, document, undefined ) {
                 attrs[ props[i] ] = !!(props[i] in inputElem);
             }
             if (attrs.list){
-              // safari false positive's on datalist: webk.it/74252
+              // safari false positive's on dataProject: webk.it/74252
               // see also github.com/Modernizr/Modernizr/issues/146
-              attrs.list = !!(document.createElement('datalist') && window.HTMLDataListElement);
+              attrs.list = !!(document.createElement('dataProject') && window.HTMLDataListElement);
             }
             return attrs;
-        })('autocomplete autofocus list placeholder max min multiple pattern required step'.split(' '));
+        })('autocomplete autofocus Project placeholder max min multiple pattern required step'.split(' '));
 
         // Run through HTML5's new input types to see if the UA understands any.
         //   This is put behind the tests runloop because it doesn't return a
@@ -1142,7 +1142,7 @@ window.Modernizr = (function( window, document, undefined ) {
          * @memberOf html5
          * @type Array|String
          */
-        'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup mark meter nav output progress section summary time video',
+        'elements': options.elements || 'abbr article aside audio bdi canvas data dataProject details figcaption figure footer header hgroup mark meter nav output progress section summary time video',
     
         /**
          * A flag to indicate that the HTML5 style sheet should be inserted.

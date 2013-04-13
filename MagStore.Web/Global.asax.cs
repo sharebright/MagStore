@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Optimization;
+using Castle.Windsor;
 using System.Web.Routing;
-using MagStore.Entities;
-using MagStore.Entities.Enums;
-using MagStore.Mvc;
+using System.Reflection;
+using Castle.MicroKernel.Registration;
+using MagStore.Web.Infrastructure;
+using Microsoft.Practices.ServiceLocation;
+using Raven.Client;
+using Raven.Client.Document;
+using RavenDBMembership.Infrastructure;
+using RavenDBMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web
 {
@@ -15,23 +19,70 @@ namespace MagStore.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static IWindsorContainer Container;
+
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new HandleErrorAttribute());
+        }
+
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
+
+            routes.MapRoute(
+                "Default", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            );
+
+        }
+
         protected void Application_Start()
         {
+            Container = new WindsorContainer();
+
+            // Common Service Locator
+            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(Container));
+
+            // RavenDB embedded
+            Container.Register(Component
+                                   .For<IDocumentStore>()
+                                   .UsingFactoryMethod(GetDocumentStore)
+                                   .LifeStyle.Singleton);
+
+            Container.Register(Component.For<IRepository>().ImplementedBy<RavenRepository>().LifestylePerWebRequest());
+            Container.Register(Component.For<IShop>().ImplementedBy<Shop>().LifeStyle.Singleton);
+            // MVC components
+            ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(Container));
+            Container.Register(Classes
+                                   .FromAssembly(Assembly.GetExecutingAssembly())
+                                   .BasedOn<IController>().LifestyleTransient()
+                );
+
             AreaRegistration.RegisterAllAreas();
+            RegisterGlobalFilters(GlobalFilters.Filters);
+            RegisterRoutes(RouteTable.Routes);
+        }
 
-            Application["Store"] = new Store(new RavenCredentials
-                {
-                    ApiKey = "b23f5154-30b0-48f8-b619-76ee77d0234d",
-                    Url = "https://ec2-eu4.cloudbird.net/databases/c818ddc6-dc4b-4b57-a439-4329fff0e61b.rdbtest-mag"
-                });
-            ControllerBuilder.Current.SetControllerFactory(typeof(CustomControllerFactory));
+        protected void Application_End()
+        {
+            var documentStore = Container.Resolve<IDocumentStore>();
+            documentStore.Dispose();
+            Container.Dispose();
+        }
 
-            
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterAuth();
+        private IDocumentStore GetDocumentStore()
+        {
+            var documentStore = new DocumentStore
+            {
+                ApiKey = "b23f5154-30b0-48f8-b619-76ee77d0234d",
+                Url = "https://ec2-eu4.cloudbird.net/databases/c818ddc6-dc4b-4b57-a439-4329fff0e61b.rdbtest-mag"
+            };
+            documentStore.Initialize();
+            return documentStore;
         }
     }
+
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
 * This file has been commented to support Visual Studio Intellisense.
 * You should not use this file at runtime inside the browser--it is only
 * intended to be used only for design-time IntelliSense.  Please use the
@@ -129,13 +129,13 @@ $.extend($.fn, {
             return valid;
         }
     },
-	// attributes: space seperated list of attributes to retrieve and remove
+	// attributes: space seperated Project of attributes to retrieve and remove
 	removeAttrs: function(attributes) {
 		/// <summary>
 		/// Remove the specified attributes from the first matched element and return them.
 		/// </summary>
 		/// <param name="attributes" type="String">
-		/// A space-seperated list of attribute names to remove.
+		/// A space-seperated Project of attribute names to remove.
 		/// </param>
 
 		var result = {},
@@ -155,7 +155,7 @@ $.extend($.fn, {
 		/// Can be either "add" or "remove".
 		/// </param>
 		/// <param name="argument" type="">
-		/// A list of rules to add or remove.
+		/// A Project of rules to add or remove.
 		/// </param>
 
 		var element = this[0];
@@ -441,7 +441,7 @@ $.extend($.validator, {
 			/// </param>
 
 			if(errors) {
-				// add items to error list and map
+				// add items to error Project and map
 				$.extend( this.errorMap, errors );
 				this.errorList = [];
 				for ( var name in errors ) {
@@ -450,7 +450,7 @@ $.extend($.validator, {
 						element: this.findByName(name)[0]
 					});
 				}
-				// remove items from success list
+				// remove items from success Project
 				this.successList = $.grep( this.successList, function(element) {
 					return !(element.name in errors);
 				});

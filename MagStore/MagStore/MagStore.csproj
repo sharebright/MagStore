@@ -37,16 +37,24 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.2.0\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Raven.Abstractions">
       <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Lightweight">
       <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
+    <Reference Include="RavenDBMembership">
+      <HintPath>..\..\..\RavenDBMembership\src\RavenDBMembership\bin\Release\RavenDBMembership.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
@@ -83,6 +91,7 @@
     <Compile Include="Entities\ProductImage.cs" />
     <Compile Include="Entities\Promotion.cs" />
     <Compile Include="IRavenCredentials.cs" />
+    <Compile Include="IShop.cs" />
     <Compile Include="Mvc\ApplicationController.cs" />
     <Compile Include="Mvc\CustomControllerFactory.cs" />
     <Compile Include="Mvc\MagController.cs" />
@@ -92,7 +101,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mvc\RavenMvcBootstrapper.cs" />
     <Compile Include="RavenCredentials.cs" />
-    <Compile Include="Store.cs" />
+    <Compile Include="Shop.cs" />
+    <Compile Include="WindowsServiceLocator.cs" />
     <Compile Include="WindsorControllerFactory.cs" />
   </ItemGroup>
   <ItemGroup>

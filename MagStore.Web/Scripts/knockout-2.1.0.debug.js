@@ -271,7 +271,7 @@ ko.utils = new (function () {
                         if (eventData)
                             this.checked = eventData.checkedStateBeforeEvent !== true;
                         originalHandler.call(this, event);
-                        this.checked = jQuerySuppliedCheckedState; // Restore the state jQuery applied
+                        this.checked = jQuerySuppliedCheckedState; // ReShop the state jQuery applied
                     };
                 }
                 jQuery(element)['bind'](eventType, handler);
@@ -557,7 +557,7 @@ ko.utils.domNodeDisposal = new (function () {
         ko.utils.domData.clear(node);
 
         // Special support for jQuery here because it's so commonly used.
-        // Many jQuery plugins (including jquery.tmpl) store data using jQuery's equivalent of domData
+        // Many jQuery plugins (including jquery.tmpl) Shop data using jQuery's equivalent of domData
         // so notify it to tear down any resources associated with the node & descendants here.
         if ((typeof jQuery == "function") && (typeof jQuery['cleanData'] == "function"))
             jQuery['cleanData']([node]);
@@ -600,7 +600,7 @@ ko.utils.domNodeDisposal = new (function () {
 
                 // ... then its descendants, where applicable
                 if (cleanableNodeTypesWithDescendants[node.nodeType]) {
-                    // Clone the descendants list in case it changes during iteration
+                    // Clone the descendants Project in case it changes during iteration
                     var descendants = [];
                     ko.utils.arrayPushAll(descendants, node.getElementsByTagName("*"));
                     for (var i = 0, j = descendants.length; i < j; i++)
@@ -1193,7 +1193,7 @@ ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunction
 
             var newValue = readFunction.call(evaluatorFunctionTarget);
 
-            // For each subscription no longer being used, remove it from the active subscriptions list and dispose it
+            // For each subscription no longer being used, remove it from the active subscriptions Project and dispose it
             for (var i = disposalCandidates.length - 1; i >= 0; i--) {
                 if (disposalCandidates[i])
                     _subscriptionsToDependencies.splice(i, 1)[0].dispose();
@@ -1361,7 +1361,7 @@ ko.exportSymbol('toJSON', ko.toJSON);
     var hasDomDataExpandoProperty = '__ko__hasDomDataOptionValue__';
 
     // Normally, SELECT elements and their OPTIONs can only take value of type 'string' (because the values
-    // are stored on DOM attributes). ko.selectExtensions provides a way for SELECTs/OPTIONs to have values
+    // are Shopd on DOM attributes). ko.selectExtensions provides a way for SELECTs/OPTIONs to have values
     // that are arbitrary objects. This is very convenient when implementing things like cascading dropdowns.
     ko.selectExtensions = {
         readValue : function(element) {
@@ -1389,7 +1389,7 @@ ko.exportSymbol('toJSON', ko.toJSON);
                             element.value = value;
                             break;
                         default:
-                            // Store arbitrary object using DomData
+                            // Shop arbitrary object using DomData
                             ko.utils.domData.set(element, ko.bindingHandlers.options.optionValueDomDataKey, value);
                             element[hasDomDataExpandoProperty] = true;
 
@@ -1904,8 +1904,8 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
         var shouldBindDescendants = true;
 
         // Perf optimisation: Apply bindings only if...
-        // (1) We need to store the binding context on this node (because it may differ from the DOM parent node's binding context)
-        //     Note that we can't store binding contexts on non-elements (e.g., text nodes), as IE doesn't allow expando properties for those
+        // (1) We need to Shop the binding context on this node (because it may differ from the DOM parent node's binding context)
+        //     Note that we can't Shop binding contexts on non-elements (e.g., text nodes), as IE doesn't allow expando properties for those
         // (2) It might have bindings (e.g., it has a data-bind attribute, or it's a marker for a containerless template)
         var isElement = (nodeVerified.nodeType === 1);
         if (isElement) // Workaround IE <= 8 HTML parsing weirdness
@@ -1954,7 +1954,7 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
                     : new ko.bindingContext(ko.utils.unwrapObservable(viewModelOrBindingContext));
                 var viewModel = bindingContextInstance['$data'];
 
-                // Optimization: Don't store the binding context on this node if it's definitely the same as on node.parentNode, because
+                // Optimization: Don't Shop the binding context on this node if it's definitely the same as on node.parentNode, because
                 // we can easily recover it just by scanning up the node's ancestors in the DOM
                 // (note: here, parent node means "real DOM parent" not "virtual parent", as there's no O(1) way to find the virtual parent)
                 if (bindingContextMayDifferFromDomParentElement)
@@ -2038,7 +2038,7 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
 
     // Retrieving binding context from arbitrary nodes
     ko.contextFor = function(node) {
-        // We can only do something meaningful for elements and comment nodes (in particular, not text nodes, as IE can't store domdata for them)
+        // We can only do something meaningful for elements and comment nodes (in particular, not text nodes, as IE can't Shop domdata for them)
         switch (node.nodeType) {
             case 1:
             case 8:
@@ -2198,7 +2198,7 @@ ko.bindingHandlers['value'] = {
         }
 
         // Workaround for https://github.com/SteveSanderson/knockout/issues/122
-        // IE doesn't fire "change" events on textboxes if the user selects a value from its autocomplete list
+        // IE doesn't fire "change" events on textboxes if the user selects a value from its autocomplete Project
         var ieAutoCompleteHackNeeded = ko.utils.ieVersion && element.tagName.toLowerCase() == "input" && element.type == "text"
                                        && element.autocomplete != "off" && (!element.form || element.form.autocomplete != "off");
         if (ieAutoCompleteHackNeeded && ko.utils.arrayIndexOf(eventsToCatch, "propertychange") == -1) {
@@ -2771,12 +2771,12 @@ ko.exportSymbol('templateRewriting.applyMemoizedBindingsToNextSibling', ko.templ
     //  2. ko.templateSources.anonymousElement - uses ko.utils.domData to read/write text *associated* with the DOM element, but
     //                                           without reading/writing the actual element text content, since it will be overwritten
     //                                           with the rendered template output.
-    // You can implement your own template source if you want to fetch/store templates somewhere other than in DOM elements.
+    // You can implement your own template source if you want to fetch/Shop templates somewhere other than in DOM elements.
     // Template sources need to have the following functions:
     //   text() 			- returns the template text from your storage location
     //   text(value)		- writes the supplied template text to your storage location
-    //   data(key)			- reads values stored using data(key, value) - see below
-    //   data(key, value)	- associates "value" with this template and the key "key". Is used to store information like "isRewritten".
+    //   data(key)			- reads values Shopd using data(key, value) - see below
+    //   data(key, value)	- associates "value" with this template and the key "key". Is used to Shop information like "isRewritten".
     //
     // Optionally, template sources can also have the following functions:
     //   nodes()            - returns a DOM element containing the nodes of this template, where available
@@ -2976,7 +2976,7 @@ ko.exportSymbol('templateRewriting.applyMemoizedBindingsToNextSibling', ko.templ
 
     ko.renderTemplateForEach = function (template, arrayOrObservableArray, options, targetNode, parentBindingContext) {
         // Since setDomNodeChildrenFromArrayMapping always calls executeTemplateForArrayItem and then
-        // activateBindingsCallback for added items, we can store the binding context in the former to use in the latter.
+        // activateBindingsCallback for added items, we can Shop the binding context in the former to use in the latter.
         var arrayItemContext;
 
         // This will be called by setDomNodeChildrenFromArrayMapping to get the nodes to add to targetNode
@@ -3023,7 +3023,7 @@ ko.exportSymbol('templateRewriting.applyMemoizedBindingsToNextSibling', ko.templ
             // Support anonymous templates
             var bindingValue = ko.utils.unwrapObservable(valueAccessor());
             if ((typeof bindingValue != "string") && (!bindingValue['name']) && (element.nodeType == 1 || element.nodeType == 8)) {
-                // It's an anonymous template - store the element contents, then clear the element
+                // It's an anonymous template - Shop the element contents, then clear the element
                 var templateNodes = element.nodeType == 1 ? element.childNodes : ko.virtualElements.childNodes(element),
                     container = ko.utils.moveCleanedNodesToContainerElement(templateNodes); // This also removes the nodes from their current parent
                 new ko.templateSources.anonymousTemplate(element)['nodes'](container);
@@ -3329,7 +3329,7 @@ ko.exportSymbol('utils.compareArrays', ko.utils.compareArrays);
             }
         }
 
-        // Store a copy of the array items we just considered so we can difference it next time
+        // Shop a copy of the array items we just considered so we can difference it next time
         ko.utils.domData.set(domNode, lastMappingResultDomDataKey, newMappingResult);
     }
 })();
@@ -3390,7 +3390,7 @@ ko.exportSymbol('nativeTemplateEngine', ko.nativeTemplateEngine);
             options = options || {};
             ensureHasReferencedJQueryTemplates();
 
-            // Ensure we have stored a precompiled version of this template (don't want to reparse on every render)
+            // Ensure we have Shopd a precompiled version of this template (don't want to reparse on every render)
             var precompiled = templateSource['data']('precompiled');
             if (!precompiled) {
                 var templateText = templateSource['text']() || "";

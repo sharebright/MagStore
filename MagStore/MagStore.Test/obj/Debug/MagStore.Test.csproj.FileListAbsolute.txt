@@ -17,8 +17,10 @@ C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Raven.Client.Lightweight.pd
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Raven.Client.Lightweight.xml
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Raven.Abstractions.pdb
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Raven.Abstractions.xml
-C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Windsor.dll
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Core.dll
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Windsor.xml
 C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Castle.Core.xml
-C:\dev\MagSolutions\MagStore\MagStore.Test\obj\Debug\ResolveAssemblyReference.cache
+C:\dev\MagSolutions\MagStore\MagStore.Test\obj\Debug\MagStore.Test.csprojResolveAssemblyReference.cache
+C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\dev\MagSolutions\MagStore\MagStore.Test\bin\Debug\Microsoft.Practices.ServiceLocation.xml

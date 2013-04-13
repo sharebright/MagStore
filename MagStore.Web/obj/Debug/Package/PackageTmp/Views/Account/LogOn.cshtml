@@ -1,0 +1,78 @@
+﻿@model MagStore.Web.Models.LogOnModel
+
+@{
+    ViewBag.Title = "Log On";
+}
+
+@section Scripts
+{
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/jquery.ui.tabs.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet' type='text/css' />
+	
+	<!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+	<script type="text/javascript" type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
+	<script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
+	<script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
+}
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+
+<!-- MAIN CONTENT START -->
+
+	<section class="main wrapper">
+	
+		<article>
+			<h1>Log in to Store</h1>
+			<section class="tabs">
+				<ul>
+					<li><a href="#tab1">Log In</a></li>
+					<li><a href="#tab2">Register</a></li>
+				</ul>
+			    <div id="tab1">
+			        @using (Html.BeginForm("LogOn", "Account", FormMethod.Post))
+			        {
+			            <div>
+			                <fieldset>
+			                    <legend>Account Information</legend>
+
+			                    <div class="editor-label">
+			                        @Html.LabelFor(m => m.UserName)
+			                    </div>
+			                    <div class="editor-field">
+			                        @Html.TextBoxFor(m => m.UserName)
+			                        @Html.ValidationMessageFor(m => m.UserName)
+			                    </div>
+
+			                    <div class="editor-label">
+			                        @Html.LabelFor(m => m.Password)
+			                    </div>
+			                    <div class="editor-field">
+			                        @Html.PasswordFor(m => m.Password)
+			                        @Html.ValidationMessageFor(m => m.Password)
+			                    </div>
+
+			                    <div class="editor-label">
+			                        @Html.CheckBoxFor(m => m.RememberMe)
+			                        @Html.LabelFor(m => m.RememberMe)
+			                    </div>
+
+			                    <p>
+			                        <input type="submit" value="Log On" />
+			                    </p>
+			                </fieldset>
+			            </div>
+			        }
+			    </div>
+			    <div id="tab2">
+			        @Html.Partial("RegisterPartial")
+			    </div>
+			</section>
+		</article>
+				
+		<div class="clear"></div>
+
+	</section><!-- .main end -->
+
+<!-- MAIN CONTENT END -->
