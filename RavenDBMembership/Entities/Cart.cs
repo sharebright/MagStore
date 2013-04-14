@@ -13,7 +13,7 @@ namespace RavenDBMembership.Entities
             Promotions = new List<Promotion>();
         }
 
-        public string CartId { get; set; }
+        public string Id { get; set; }
         public IList<OrderLine> OrderLines { get; set; }
         public IList<Promotion> Promotions { get; set; }
 

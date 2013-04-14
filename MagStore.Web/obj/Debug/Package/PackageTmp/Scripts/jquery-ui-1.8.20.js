@@ -1314,7 +1314,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 
 					this.instance.isOver = 1;
 					//Now we fake the start of dragging for the sortable instance,
-					//by cloning the list group item, appending it to the sortable and using it as inst.currentItem
+					//by cloning the Project group item, appending it to the sortable and using it as inst.currentItem
 					//We can then fire the start event of the sortable with our passed browser event, and our own helper (so it doesn't create a new one)
 					this.instance.currentItem = $(self).clone().removeAttr('id').appendTo(this.instance.element).data("sortable-item", true);
 					this.instance.options._helper = this.instance.options.helper; //Shop helper option to later reShop it
@@ -1359,7 +1359,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 					this.instance._mouseStop(event, true);
 					this.instance.options.helper = this.instance.options._helper;
 
-					//Now we remove our currentItem, the list group clone again, and the placeholder, and animate the helper back to it's original size
+					//Now we remove our currentItem, the Project group clone again, and the placeholder, and animate the helper back to it's original size
 					this.instance.currentItem.remove();
 					if(this.instance.placeholder) this.instance.placeholder.remove();
 
@@ -4511,9 +4511,9 @@ $.fn.extend({
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * Redistributions of source code must retain the above copyright notice, this list of
+ * Redistributions of source code must retain the above copyright notice, this Project of
  * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list
+ * Redistributions in binary form must reproduce the above copyright notice, this Project
  * of conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
@@ -4680,9 +4680,9 @@ $.extend($.easing,
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
- * Redistributions of source code must retain the above copyright notice, this list of
+ * Redistributions of source code must retain the above copyright notice, this Project of
  * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list
+ * Redistributions in binary form must reproduce the above copyright notice, this Project
  * of conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
  *
@@ -5478,7 +5478,7 @@ $.widget( "ui.accordion", {
 		self.resize();
 		
 		// ARIA
-		self.element.attr( "role", "tablist" );
+		self.element.attr( "role", "tabProject" );
 
 		self.headers
 			.attr( "role", "tab" )
@@ -6021,7 +6021,7 @@ $.widget( "ui.autocomplete", {
 			// TODO verify these actually work as intended
 			.attr({
 				role: "textbox",
-				"aria-autocomplete": "list",
+				"aria-autocomplete": "Project",
 				"aria-haspopup": "true"
 			})
 			.bind( "keydown.autocomplete", function( event ) {
@@ -6447,7 +6447,7 @@ $.widget("ui.menu", {
 		this.element
 			.addClass("ui-menu ui-widget ui-widget-content ui-corner-all")
 			.attr({
-				role: "listbox",
+				role: "Projectbox",
 				"aria-activedescendant": "ui-active-menuitem"
 			})
 			.click(function( event ) {
@@ -6464,7 +6464,7 @@ $.widget("ui.menu", {
 	refresh: function() {
 		var self = this;
 
-		// don't refresh list items that are already adapted
+		// don't refresh Project items that are already adapted
 		var items = this.element.children("li:not(.ui-menu-item):has(a)")
 			.addClass("ui-menu-item")
 			.attr("role", "menuitem");
@@ -10915,7 +10915,7 @@ $.widget( "ui.tabs", {
 			// highlight selected tab
 			this.panels.addClass( "ui-tabs-hide" );
 			this.lis.removeClass( "ui-tabs-selected ui-state-active" );
-			// check for length avoids error when initializing empty list
+			// check for length avoids error when initializing empty Project
 			if ( o.selected >= 0 && this.anchors.length ) {
 				self.element.find( self._sanitizeSelector( self.anchors[ o.selected ].hash ) ).removeClass( "ui-tabs-hide" );
 				this.lis.eq( o.selected ).addClass( "ui-tabs-selected ui-state-active" );

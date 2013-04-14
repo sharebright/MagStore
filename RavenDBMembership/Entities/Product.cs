@@ -14,6 +14,7 @@ namespace RavenDBMembership.Entities
         public string Size { get; set; }
         public Gender Gender { get; set; }
         public string Brand { get; set; }
+        public string Catalogue { get; set; }
         public string Supplier { get; set; }
         public int Rating { get; set; }
         public IEnumerable<string> Reviews { get; set; }

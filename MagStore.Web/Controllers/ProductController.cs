@@ -49,13 +49,13 @@ namespace MagStore.Web.Controllers
 
         public ActionResult ViewProducts()
         {
-            var products = shop.GetCoordinator<Catalogue>().Project().SelectMany(x => x.Products);
+            var products = shop.GetCoordinator<Product>().Project();
             return View(new ViewProductViewModel { Products = products });
         }
 
         public ActionResult EditProduct(string s)
         {
-            throw new System.NotImplementedException();
+            return View();
         }
     }
 }

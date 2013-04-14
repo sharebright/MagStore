@@ -2,5 +2,6 @@
 {
     public interface IRavenEntity
     {
+        string Id { get; set; }
     }
 }

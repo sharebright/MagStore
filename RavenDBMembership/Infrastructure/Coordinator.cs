@@ -14,8 +14,7 @@ namespace RavenDbMembership.Infrastructure
 
         public void Save(T entity)
         {
-            ravenRepository.Add(entity);
-            ravenRepository.Save();
+            ravenRepository.SaveAndCommit(entity);
         }
 
         public T Load(string id)

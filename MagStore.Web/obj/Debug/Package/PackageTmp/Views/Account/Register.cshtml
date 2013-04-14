@@ -3,56 +3,80 @@
 @{
     ViewBag.Title = "Register";
 }
-
-<h2>Create a New Account</h2>
-<p>
-    Use the form below to create a new account. 
-</p>
-<p>
-    Passwords are required to be a minimum of @ViewBag.PasswordLength characters in length.
-</p>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
-    <div>
-        <fieldset>
-            <legend>Account Information</legend>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.UserName)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Email)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.Email)
-                @Html.ValidationMessageFor(m => m.Email)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Password)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.ConfirmPassword)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(m => m.ConfirmPassword)
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)
-            </div>
-
-            <p>
-                <input type="submit" value="Register" />
-            </p>
-        </fieldset>
-    </div>
+@section Scripts
+{   
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/jquery.ui.tabs.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet' type='text/css' />
+	
+	<!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+	<script type="text/javascript" type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
+	<script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
+	<script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
 }
+<!-- MAIN CONTENT START -->
+
+<section class="main wrapper">
+	
+    <article>
+
+        <h2>Create a New Account</h2>
+        <p>
+            Use the form below to create a new account. 
+        </p>
+        <p>
+            Passwords are required to be a minimum of @ViewBag.PasswordLength characters in length.
+        </p>
+
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
+            <div>
+                <fieldset>
+                    <legend>Account Information</legend>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.UserName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.UserName)
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.Password)
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(m => m.Password)
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(m => m.ConfirmPassword)
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </div>
+
+                    <p>
+                        <input type="submit" value="Register" />
+                    </p>
+                </fieldset>
+            </div>
+        }
+    </article>
+
+    <div class="clear"></div>
+
+</section>

@@ -23,7 +23,7 @@ namespace RavenDBMembership.Entities
 		{
 		    ShoppingCart = new Cart()
 		    {
-		        CartId = Guid.NewGuid().ToString(),
+		        Id = Guid.NewGuid().ToString(),
                 OrderLines = new List<OrderLine>(),
                 Promotions = new List<Promotion>()
 		    };

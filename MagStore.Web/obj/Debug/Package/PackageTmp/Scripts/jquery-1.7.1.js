@@ -272,7 +272,7 @@ jQuery.fn = jQuery.prototype = {
 	},
 
 	ready: function( fn ) {
-		// Attach the listeners
+		// Attach the Projecteners
 		jQuery.bindReady();
 
 		// Add the callback
@@ -972,23 +972,23 @@ function createFlags( flags ) {
 }
 
 /*
- * Create a callback list using the following parameters:
+ * Create a callback Project using the following parameters:
  *
- *	flags:	an optional list of space-separated flags that will change how
- *			the callback list behaves
+ *	flags:	an optional Project of space-separated flags that will change how
+ *			the callback Project behaves
  *
- * By default a callback list will act like an event callback list and can be
+ * By default a callback Project will act like an event callback Project and can be
  * "fired" multiple times.
  *
  * Possible flags:
  *
- *	once:			will ensure the callback list can only be fired once (like a Deferred)
+ *	once:			will ensure the callback Project can only be fired once (like a Deferred)
  *
  *	memory:			will keep track of previous values and will call any callback added
- *					after the list has been fired right away with the latest "memorized"
+ *					after the Project has been fired right away with the latest "memorized"
  *					values (like a Deferred)
  *
- *	unique:			will ensure a callback can only be added once (no duplicate in the list)
+ *	unique:			will ensure a callback can only be added once (no duplicate in the Project)
  *
  *	stopOnFalse:	interrupt callings when a callback returns false
  *
@@ -999,13 +999,13 @@ jQuery.Callbacks = function( flags ) {
 	// (we check in cache first)
 	flags = flags ? ( flagsCache[ flags ] || createFlags( flags ) ) : {};
 
-	var // Actual callback list
+	var // Actual callback Project
 		list = [],
-		// Stack of fire calls for repeatable lists
+		// Stack of fire calls for repeatable Projects
 		stack = [],
-		// Last fire value (for non-forgettable lists)
+		// Last fire value (for non-forgettable Projects)
 		memory,
-		// Flag to know if list is currently firing
+		// Flag to know if Project is currently firing
 		firing,
 		// First callback to fire (used internally by add and fireWith)
 		firingStart,
@@ -1013,7 +1013,7 @@ jQuery.Callbacks = function( flags ) {
 		firingLength,
 		// Index of currently firing callback (modified by remove if needed)
 		firingIndex,
-		// Add one or several callbacks to the list
+		// Add one or several callbacks to the Project
 		add = function( args ) {
 			var i,
 				length,
@@ -1064,7 +1064,7 @@ jQuery.Callbacks = function( flags ) {
 		},
 		// Actual Callbacks object
 		self = {
-			// Add a callback or a collection of callbacks to the list
+			// Add a callback or a collection of callbacks to the Project
 			add: function() {
 				if ( list ) {
 					var length = list.length;
@@ -1083,7 +1083,7 @@ jQuery.Callbacks = function( flags ) {
 				}
 				return this;
 			},
-			// Remove a callback from the list
+			// Remove a callback from the Project
 			remove: function() {
 				if ( list ) {
 					var args = arguments,
@@ -1114,7 +1114,7 @@ jQuery.Callbacks = function( flags ) {
 				}
 				return this;
 			},
-			// Control if a given callback is in the list
+			// Control if a given callback is in the Project
 			has: function( fn ) {
 				if ( list ) {
 					var i = 0,
@@ -1127,12 +1127,12 @@ jQuery.Callbacks = function( flags ) {
 				}
 				return false;
 			},
-			// Remove all callbacks from the list
+			// Remove all callbacks from the Project
 			empty: function() {
 				list = [];
 				return this;
 			},
-			// Have the list do nothing anymore
+			// Have the Project do nothing anymore
 			disable: function() {
 				list = stack = memory = undefined;
 				return this;
@@ -1141,7 +1141,7 @@ jQuery.Callbacks = function( flags ) {
 			disabled: function() {
 				return !list;
 			},
-			// Lock the list in its current state
+			// Lock the Project in its current state
 			lock: function() {
 				stack = undefined;
 				if ( !memory || memory === true ) {
@@ -1720,7 +1720,7 @@ jQuery.extend({
 		}
 
 		// Users should not attempt to inspect the internal events object using jQuery.data,
-		// it is undocumented and subject to change. But does anyone listen? No.
+		// it is undocumented and subject to change. But does anyone Projecten? No.
 		if ( isEvents && !thisCache[ name ] ) {
 			return privateCache.events;
 		}
@@ -2278,7 +2278,7 @@ jQuery.fn.extend({
 					classNames = value.split( rspace );
 
 				while ( (className = classNames[ i++ ]) ) {
-					// check each className given, space seperated list
+					// check each className given, space seperated Project
 					state = isBool ? state : !self.hasClass( className );
 					self[ state ? "addClass" : "removeClass" ]( className );
 				}
@@ -2935,7 +2935,7 @@ jQuery.event = {
 				}
 			}
 
-			// Add to the element's handler list, delegates in front
+			// Add to the element's handler Project, delegates in front
 			if ( selector ) {
 				handlers.splice( handlers.delegateCount++, 0, handleObj );
 			} else {
@@ -3104,7 +3104,7 @@ jQuery.event = {
 			event.target = elem;
 		}
 
-		// Clone any incoming data and prepend the event, creating the handler arg list
+		// Clone any incoming data and prepend the event, creating the handler arg Project
 		data = data != null ? jQuery.makeArray( data ) : [];
 		data.unshift( event );
 
@@ -3565,7 +3565,7 @@ if ( !jQuery.support.submitBubbles ) {
 					form._submit_attached = true;
 				}
 			});
-			// return undefined since we don't need an event listener
+			// return undefined since we don't need an event Projectener
 		},
 
 		teardown: function() {
@@ -4850,7 +4850,7 @@ if ( document.documentElement.compareDocumentPosition ) {
 		}
 
 		// Otherwise they're somewhere else in the tree so we need
-		// to build up a full list of the parentNodes for comparison
+		// to build up a full Project of the parentNodes for comparison
 		while ( cur ) {
 			ap.unshift( cur );
 			cur = cur.parentNode;
@@ -5639,7 +5639,7 @@ function createSafeFragment( document ) {
 	return safeFrag;
 }
 
-var nodeNames = "abbr|article|aside|audio|canvas|datalist|details|figcaption|figure|footer|" +
+var nodeNames = "abbr|article|aside|audio|canvas|dataProject|details|figcaption|figure|footer|" +
 		"header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
 	rinlinejQuery = / jQuery\d+="(?:\d+|null)"/g,
 	rleadingWhitespace = /^\s+/,
@@ -7449,7 +7449,7 @@ jQuery.extend({
 		// We also use the url parameter if available
 		s.url = ( ( url || s.url ) + "" ).replace( rhash, "" ).replace( rprotocol, ajaxLocParts[ 1 ] + "//" );
 
-		// Extract dataTypes list
+		// Extract dataTypes Project
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().split( rspacesAjax );
 
 		// Determine if a cross-domain request is in order
@@ -7731,7 +7731,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 	}
 
 	// If we found a dataType
-	// We add the dataType to the list if needed
+	// We add the dataType to the Project if needed
 	// and return the corresponding response
 	if ( finalDataType ) {
 		if ( finalDataType !== dataTypes[ 0 ] ) {
@@ -8141,7 +8141,7 @@ if ( jQuery.support.ajax ) {
 									responses = {};
 									xml = xhr.responseXML;
 
-									// Construct response list
+									// Construct response Project
 									if ( xml && xml.documentElement /* #4958 */ ) {
 										responses.xml = xml;
 									}
@@ -8189,13 +8189,13 @@ if ( jQuery.support.ajax ) {
 					} else {
 						handle = ++xhrId;
 						if ( xhrOnUnloadAbort ) {
-							// Create the active xhrs callbacks list if needed
+							// Create the active xhrs callbacks Project if needed
 							// and attach the unload handler
 							if ( !xhrCallbacks ) {
 								xhrCallbacks = {};
 								jQuery( window ).unload( xhrOnUnloadAbort );
 							}
-							// Add to list of active xhrs callbacks
+							// Add to Project of active xhrs callbacks
 							xhrCallbacks[ handle ] = callback;
 						}
 						xhr.onreadystatechange = callback;

@@ -6,7 +6,7 @@ namespace RavenDBMembership.Entities
 {
     public class Fulfillment : IRavenEntity
     {
-        public string FulfillmentId { get; set; }
+        public string Id { get; set; }
         public string OrderId { get; set; }
         public FulfillmentStatus FulfillmentStatus { get; set; }
     }

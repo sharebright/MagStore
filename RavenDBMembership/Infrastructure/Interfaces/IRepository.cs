@@ -14,5 +14,6 @@ namespace RavenDBMembership.Infrastructure.Interfaces
         void Delete<T>(T item) where T : IRavenEntity;
         void Save();
         IList<T> Project<T>();
+        void SaveAndCommit<T>(T item) where T : IRavenEntity;
     }
 }

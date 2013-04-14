@@ -7,17 +7,23 @@
         <li class="cart-title"><a href="#">Shopping Cart:</a></li>
         <li class="cart-price"><a href="#">£@total.ToString("0.00")</a></li>
         <li class="cart-items"><a href="#">@shoppingCart.OrderLines.Select(x => x.Products).Sum(x => x.Count) items</a></li>
-        <li class="cart-login">
-            @if (Request.IsAuthenticated)
-            {
-                @Html.ActionLink("Log out " + Context.User.Identity.Name, "LogOff", "Account", null, new { id = "loginLink" })
-
-            }
-            else
-            {
-                @Html.ActionLink("Log in", "LogOn", "Account", null, new { id = "loginLink" })
-            }
-        </li>
-        <li><a href="#" id="button">Account</a></li>
+        @if (Request.IsAuthenticated)
+        {
+            <li class="cart-login">
+                @if (User.IsInRole("Administrator")){
+                @Html.ActionLink("Manage Shop", "Manage", "Shop")
+                }
+            </li>
+            <li class="cart-login">
+                @Html.ActionLink("Log out " + Context.User.Identity.Name, "LogOff", "Account", null, new {id = "loginLink"})
+            </li>
+            <li><a href="#" id="button">Account</a></li>
+        }
+        else
+        {
+            <li class="cart-login">
+                @Html.ActionLink("Log in", "LogOn", "Account", null, new {id = "loginLink"})
+            </li>
+        }
     </ul>
 }

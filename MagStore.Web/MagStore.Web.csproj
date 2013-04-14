@@ -184,6 +184,8 @@
     <Compile Include="Infrastructure\WindsorServiceLocator.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Catalogue\CataloguesViewModel.cs" />
+    <Compile Include="Models\Catalogue\CreateCatalogueInputModel.cs" />
+    <Compile Include="Models\Catalogue\CreateCatalogueViewModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -192,6 +194,9 @@
     <Compile Include="Models\Product\CreateProductViewModel.cs" />
     <Compile Include="Models\Product\ProductsViewModel.cs" />
     <Compile Include="Models\Product\ViewProductViewModel.cs" />
+    <Compile Include="Models\Promotion\CreatePromotionInputModel.cs" />
+    <Compile Include="Models\Promotion\CreatePromotionViewModel.cs" />
+    <Compile Include="Models\Promotion\PromotionsViewModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -426,6 +431,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Product\CreateProduct.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Catalogue\CreateCatalogue.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\EditProduct.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Promotion\ViewPromotions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Promotion\CreatePromotion.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

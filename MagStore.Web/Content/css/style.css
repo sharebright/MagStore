@@ -295,6 +295,10 @@ aside {
 	width:				960px;
 }
 
+#breadcrumb {
+    margin: 10px 0 -15px 30px;
+}
+
 .listing {
     width: 1260px !important;
 }
@@ -661,7 +665,7 @@ header ul li.menumain:hover {
 
 /* FORMS
 ================================================================================================*/
-
+input[type=text] { width: 216px !important; }
 input,
 select,
 textarea {

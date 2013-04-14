@@ -7,7 +7,7 @@ namespace RavenDBMembership.Entities
 {
     public class Catalogue : IRavenEntity
     {
-        public string CatalogueId { get; set; }
+        public string Id { get; set; }
         public string CatalogueName { get; set; }
         public IEnumerable<Product> Products { get; set; }
         public DiscountType DiscountType { get; set; }

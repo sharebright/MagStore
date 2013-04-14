@@ -600,7 +600,7 @@ ko.utils.domNodeDisposal = new (function () {
 
                 // ... then its descendants, where applicable
                 if (cleanableNodeTypesWithDescendants[node.nodeType]) {
-                    // Clone the descendants list in case it changes during iteration
+                    // Clone the descendants Project in case it changes during iteration
                     var descendants = [];
                     ko.utils.arrayPushAll(descendants, node.getElementsByTagName("*"));
                     for (var i = 0, j = descendants.length; i < j; i++)
@@ -1193,7 +1193,7 @@ ko.dependentObservable = function (evaluatorFunctionOrOptions, evaluatorFunction
 
             var newValue = readFunction.call(evaluatorFunctionTarget);
 
-            // For each subscription no longer being used, remove it from the active subscriptions list and dispose it
+            // For each subscription no longer being used, remove it from the active subscriptions Project and dispose it
             for (var i = disposalCandidates.length - 1; i >= 0; i--) {
                 if (disposalCandidates[i])
                     _subscriptionsToDependencies.splice(i, 1)[0].dispose();
@@ -2198,7 +2198,7 @@ ko.bindingHandlers['value'] = {
         }
 
         // Workaround for https://github.com/SteveSanderson/knockout/issues/122
-        // IE doesn't fire "change" events on textboxes if the user selects a value from its autocomplete list
+        // IE doesn't fire "change" events on textboxes if the user selects a value from its autocomplete Project
         var ieAutoCompleteHackNeeded = ko.utils.ieVersion && element.tagName.toLowerCase() == "input" && element.type == "text"
                                        && element.autocomplete != "off" && (!element.form || element.form.autocomplete != "off");
         if (ieAutoCompleteHackNeeded && ko.utils.arrayIndexOf(eventsToCatch, "propertychange") == -1) {
