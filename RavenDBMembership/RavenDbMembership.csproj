@@ -57,8 +57,6 @@
   <ItemGroup>
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Catalogue.cs" />
-    <Compile Include="Entities\DiscountPromotionCriteria.cs" />
-    <Compile Include="Entities\DiscountPromotionValidator.cs" />
     <Compile Include="Entities\Enums\AccountLevel.cs" />
     <Compile Include="Entities\Enums\AccountStatus.cs" />
     <Compile Include="Entities\Enums\DiscountType.cs" />

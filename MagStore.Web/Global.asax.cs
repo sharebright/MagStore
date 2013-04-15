@@ -6,6 +6,7 @@ using System.Web.Routing;
 using System.Reflection;
 using Castle.MicroKernel.Registration;
 using MagStore.Web.Infrastructure;
+using MagStore.Web.ShopHelpers;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
 using Raven.Client.Document;
@@ -54,7 +55,7 @@ namespace MagStore.Web
 
             Container.Register(Component.For<IRepository>().ImplementedBy<RavenRepository>().LifestylePerWebRequest());
             Container.Register(Component.For<IShop>().ImplementedBy<Shop>().LifeStyle.Singleton);
-            // MVC components
+
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(Container));
             Container.Register(Classes
                                    .FromAssembly(Assembly.GetExecutingAssembly())

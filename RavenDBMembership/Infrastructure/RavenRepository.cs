@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Raven.Client;
+using RavenDBMembership.Entities;
 using RavenDBMembership.Infrastructure.Interfaces;
 
 namespace RavenDBMembership.Infrastructure
@@ -35,8 +36,8 @@ namespace RavenDBMembership.Infrastructure
 
         public T Load<T>(string id) where T : IRavenEntity
         {
-            T load = session.Load<T>(id);
-            session.Dispose();
+            T load = CurrentSession.Load<T>(id);
+            CurrentSession.Dispose();
             return load;
         }
 
@@ -74,6 +75,12 @@ namespace RavenDBMembership.Infrastructure
         public IList<T> Project<T>()
         {
             var project = CurrentSession.Query<T>().ToList();
+            foreach (var promotion in project.Where(p => p.GetType() == typeof (Promotion))
+                .Select(p => (p as Promotion))
+                .Where(promotion => promotion != null))
+            {
+                promotion.Restrictions = promotion.Restrictions ?? new List<Promotion>();
+            }
             session.Dispose();
             return project;
         }

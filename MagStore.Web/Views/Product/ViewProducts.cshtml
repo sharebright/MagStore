@@ -40,7 +40,6 @@
 			        <th scope="col">Discount Type</th>
 			        <th scope="col">Gender</th>
 			        <th scope="col">Price</th>
-			        <th scope="col">Price</th>
 			        <th scope="col">Promotions</th>
 			        <th scope="col">Rating</th>
 			        <th scope="col">Reviews</th>
@@ -57,9 +56,12 @@
                         <td>@product.Brand</td>
                         <td>@product.Colour</td>
                         <td>
-                            @foreach (var age in product.AgeRange)
+                            @if (product.AgeRange != null)
                             {
-                                <b>(@age)</b>
+                                foreach (var age in product.AgeRange)
+                                {
+                                    <b>(@age)</b>
+                                }
                             }
                         </td>
                         <td>@product.DiscountAmount</td>
@@ -67,7 +69,7 @@
                         <td>@product.Gender</td>
                         <td>@product.Price</td>
                         <td>
-	                        @if (product.Promotions.Any())
+	                        @if (product.Promotions != null)
                          {
 	                            <b>Promotions:</b>
 	                            <br />

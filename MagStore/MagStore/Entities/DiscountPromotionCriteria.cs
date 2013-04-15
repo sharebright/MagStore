@@ -83,15 +83,15 @@ namespace MagStore.Entities
         private void CalibrateValidationBasedOnThePromotion(DiscountPromotionValidator discountPromotionValidator,
                                                                    Promotion promotion)
         {
-            checkProductBasedCriteria = promotion.Criteria.checkProductBasedCriteria;
-            checkPriceBasedCriteria = promotion.Criteria.checkPriceBasedCriteria;
-            checkOrderQuantityBasedCriteria = promotion.Criteria.checkOrderQuantityBasedCriteria;
-            checkCatalogueBasedCriteria = promotion.Criteria.checkCatalogueBasedCriteria;
-            checkFreeForAllBasedCriteria = promotion.Criteria.checkFreeForAllBasedCriteria;            
-            discountPromotionValidator.CatalogueMarker = promotion.DiscountPromotionValidator.CatalogueMarker;
-            discountPromotionValidator.PriceMarker = promotion.DiscountPromotionValidator.PriceMarker;
-            discountPromotionValidator.ProductMarker = promotion.DiscountPromotionValidator.ProductMarker;
-            discountPromotionValidator.QuantityMarker = promotion.DiscountPromotionValidator.QuantityMarker;
+//            checkProductBasedCriteria = promotion.Criteria.checkProductBasedCriteria;
+//            checkPriceBasedCriteria = promotion.Criteria.checkPriceBasedCriteria;
+//            checkOrderQuantityBasedCriteria = promotion.Criteria.checkOrderQuantityBasedCriteria;
+//            checkCatalogueBasedCriteria = promotion.Criteria.checkCatalogueBasedCriteria;
+//            checkFreeForAllBasedCriteria = promotion.Criteria.checkFreeForAllBasedCriteria;            
+//            discountPromotionValidator.CatalogueMarker = promotion.DiscountPromotionValidator.CatalogueMarker;
+//            discountPromotionValidator.PriceMarker = promotion.DiscountPromotionValidator.PriceMarker;
+//            discountPromotionValidator.ProductMarker = promotion.DiscountPromotionValidator.ProductMarker;
+//            discountPromotionValidator.QuantityMarker = promotion.DiscountPromotionValidator.QuantityMarker;
         }
     }
 }
