@@ -1,16 +1,15 @@
-﻿@using System.Globalization
-@using MagStore.Web.Infrastructure
-@using RavenDBMembership.Entities.Enums
-@model MagStore.Web.Models.Promotion.CreatePromotionViewModel
+﻿@model MagStore.Web.Models.Promotion.PromotionViewModel
+
 @{
-    ViewBag.Title = "Create Promotion";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "View Promotion";
+    Layout = "../Shared/_Layout.cshtml";
 }
+
 @section Scripts
 {
     <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
-    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet'
-        type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet' type='text/css'>
+	
     <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
     <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
@@ -18,13 +17,14 @@
     <script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
     <script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
 }
+
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
     <div id="breadcrumb">
         @Html.ActionLink("Manage Shop", "Manage", "Shop") / Create Promotion
     </div>
     <article>
-        <h1>Create Promotion</h1>
+        <h1>Edits Promotion</h1>
         @using (Html.BeginForm())
         {
             @Html.ValidationSummary(true)
@@ -59,7 +59,7 @@
                     @Html.LabelFor(model => model.DiscountType)
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownList("DiscountType", @Model.DiscountTypeList)
+                    @Html.TextBox("DiscountType", @Model.DiscountType)
                     @Html.ValidationMessageFor(model => model.DiscountType)
                 </div>
 
@@ -84,16 +84,7 @@
                 </div>
                 <div class="editor-field">
                     
-                    @{
-                        <div style="border: solid 1px #eee; padding: 3px 3px 3px 3px; width: 50%;">
-                            @foreach (var item in @Model.ExclusivityList)
-                            {
-                                <input type="radio" name="Exclusivity" value="@item.Key" id="Exclusivity" />
-                                <span>@item.Value</span>
-                                <br/>
-                            }
-                        </div>
-                    }
+                    @Html.TextBox("Exclusivity", Model.Exclusivity)
                 </div>
 
                 <div class="editor-label">
@@ -101,7 +92,7 @@
                 </div>
                 <div class="editor-field">
                     <div style="border: solid 1px #eee; padding: 3px 3px 3px 3px; width: 50%;">
-                        @if (@Model.Restrictions.Any())
+                        @if (@Model.Restrictions != null)
                         {
                             foreach (var restriction in @Model.Restrictions)
                             {
@@ -112,12 +103,12 @@
                         }
                         else
                         {
-                            <span>There are no promotions currently in circulation.</span>
+                            <span>There are no restrictions with this promotion.</span>
                         }
                     </div>
                 </div>
                 <p>
-                    <input type="submit" value="Create" />
+                    <input type="submit" value="Edit" />
                 </p>
             </fieldset>
         }

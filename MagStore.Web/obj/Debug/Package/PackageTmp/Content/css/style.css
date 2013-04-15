@@ -665,8 +665,12 @@ header ul li.menumain:hover {
 
 /* FORMS
 ================================================================================================*/
+input[type=checkbox] { margin-top: 5px; }
 input[type=text] { width: 216px !important; }
-input,
+input[type=text],
+input[type=datetime],
+input[type=password],
+input[type=submit],
 select,
 textarea {
 	-moz-appearance:	none;

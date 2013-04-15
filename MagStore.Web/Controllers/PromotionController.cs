@@ -52,7 +52,9 @@ namespace MagStore.Web.Controllers
 
         public ActionResult ViewPromotions()
         {
-            return View(new PromotionsViewModel{Promotions = shop.GetCoordinator<Promotion>().Project()});
+            var promotions = shop.GetCoordinator<Promotion>().Project();
+            shop.GetCoordinator<Promotion>().In
+            return View(new PromotionsViewModel{Promotions = promotions});
         }
 
         public ActionResult EditPromotion(string id)

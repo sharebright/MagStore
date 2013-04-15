@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Raven.Client;
 using RavenDBMembership.Entities;
 using RavenDBMembership.Infrastructure.Interfaces;
@@ -83,6 +84,11 @@ namespace RavenDBMembership.Infrastructure
             }
             session.Dispose();
             return project;
+        }
+
+        public IList<T> IncludeAndProject<T>(Expression<Func<T, object>> path)
+        {
+            return CurrentSession.Query<T>().Include<T>(path).ToList();
         }
     }
 }
