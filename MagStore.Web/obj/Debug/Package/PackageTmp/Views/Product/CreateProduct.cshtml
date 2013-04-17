@@ -1,4 +1,4 @@
-﻿@model MagStore.Web.Models.Product.CreateProductInputModel
+﻿@model MagStore.Web.Models.Product.CreateProductViewModel
 @{
     ViewBag.Title = "CreateProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,6 +42,14 @@
                 <div class="editor-field">
                     @Html.EditorFor(model => model.Description)
                     @Html.ValidationMessageFor(model => model.Description)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Catalogue)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Catalogue", Model.Catalogue.Select(x => new SelectListItem { Selected = false, Text = x.Key, Value = x.Value }), new { name = "Catalogue" })
+                    @Html.ValidationMessageFor(model => model.Catalogue)
                 </div>
 
                 <div class="editor-label">
@@ -104,10 +112,6 @@
                 </p>
             </fieldset>
         }
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
     </article>
 		
     <aside>

@@ -33,6 +33,7 @@
 			        <th scope="col">Name</th>
 			        <th scope="col">ProductType</th>
 			        <th scope="col">Description</th>
+			        <th scope="col">Catalogue</th>
 			        <th scope="col">Brand</th>
 			        <th scope="col">Colour</th>
 			        <th scope="col">Age Ranges</th>
@@ -49,10 +50,20 @@
                 @foreach (var product in @Model.Products)
                 {
                     <tr>
-                        <td>@Html.ActionLink(product.Id, "EditProduct", "Product", new { Id = product.Id })</td>
+                        <td>
+                            @{
+                                var f = Html.BeginForm("EditProduct", "Product", FormMethod.Post);
+                                var subStr = @product.Id.Substring(0, 4) + "...";
+                                <input id="Id" name="Id" type="hidden" value="@product.Id" />
+                                <input type="submit" title="@product.Id" value="@subStr" />
+                                
+                                f.EndForm();
+                            }
+                        </td>
                         <td>@product.Name</td>
                         <td>@product.ProductType</td>
                         <td>@product.Description</td>
+                        <td>@product.Catalogue</td>
                         <td>@product.Brand</td>
                         <td>@product.Colour</td>
                         <td>

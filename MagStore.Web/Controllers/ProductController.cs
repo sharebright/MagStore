@@ -50,7 +50,7 @@ namespace MagStore.Web.Controllers
                 };
             shop.GetCoordinator<Product>().Save(product);
 
-            return View(new CreateProductInputModel());
+            return RedirectToAction("CreateProduct", "Product");
         }
 
         public ActionResult ViewProducts()
