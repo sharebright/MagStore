@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Windsor;
 using RavenDBMembership.Entities;
+using RavenDBMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Infrastructure
 {
@@ -41,6 +42,7 @@ namespace MagStore.Web.Infrastructure
                     Id = string.Empty
                 };
             }
+            HttpContext.Current.Application["Shop"] = container.Resolve<IShop>();
             return (IController)container.Resolve(controllerType);
         }
 

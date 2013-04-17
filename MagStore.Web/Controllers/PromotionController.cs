@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using MagStore.Web.Models.Promotion;
 using MagStore.Web.ShopHelpers;
@@ -42,7 +44,7 @@ namespace MagStore.Web.Controllers
                 DiscountAmount = inputModel.DiscountAmount,
                 DiscountType = inputModel.DiscountType,
                 Exclusivity = inputModel.Exclusivity,
-                Restrictions = inputModel.Restrictions
+                Restrictions = inputModel.Restrictions.ToList()
             };
 
             shop.GetCoordinator<Promotion>().Save(promotion);
@@ -53,7 +55,6 @@ namespace MagStore.Web.Controllers
         public ActionResult ViewPromotions()
         {
             var promotions = shop.GetCoordinator<Promotion>().Project();
-            shop.GetCoordinator<Promotion>().In
             return View(new PromotionsViewModel{Promotions = promotions});
         }
 

@@ -21,7 +21,7 @@
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
     <div id="breadcrumb">
-        @Html.ActionLink("Manage Shop", "Manage", "Shop") / Create Promotion
+        @Html.ActionLink("Manage Shop", "Manage", "Shop") / Edit Promotion
     </div>
     <article>
         <h1>Edits Promotion</h1>
@@ -96,8 +96,8 @@
                         {
                             foreach (var restriction in @Model.Restrictions)
                             {
-                                <input type="checkbox" name="Restriction" value="@restriction.Id" />
-                                <span>@restriction.Name: @restriction.ValidFrom - @restriction.ValidTo</span>
+                                <input type="checkbox" name="Restriction" value="@restriction" />
+                                <span>@restriction</span>
                                 <br />
                             }
                         }

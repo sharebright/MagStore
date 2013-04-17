@@ -55,10 +55,13 @@
                         <td>
                             @if (promotion.Restrictions.Any())
                             {
+                                var editForm = Html.BeginForm("EditPromotion", "Promotion", FormMethod.Post);
                                 foreach (var promo in promotion.Restrictions)
                                 {
-                                    <div>@Html.ActionLink(promo.Name, "EditPromotion", "Promotion", new RouteValueDictionary(promo.Id))</div>
+                                    <input id="Id" name="Id" type="hidden" value="@promo">
+                                    <input type="submit" value="@promo" />
                                 }
+                                editForm.EndForm();
                             }
                             else
                             {

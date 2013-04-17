@@ -9,6 +9,7 @@ namespace MagStore.Web.Models.Product
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Catalogue { get; set; }
         public string Colour { get; set; }
         public string Size { get; set; }
         public Gender Gender { get; set; }

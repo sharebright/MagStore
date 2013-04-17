@@ -24,8 +24,8 @@ namespace RavenDBMembership.Entities
 		    ShoppingCart = new Cart()
 		    {
 		        Id = Guid.NewGuid().ToString(),
-                OrderLines = new List<OrderLine>(),
-                Promotions = new List<Promotion>()
+                Products = new List<string>(),
+                Promotions = new List<string>()
 		    };
 			Roles = new List<string>();
 			Id = "authorization/users/"; // db assigns id

@@ -46,42 +46,49 @@
 			        <th scope="col">Size</th>
 			        <th scope="col">Supplier</th>
 			    </tr>
-                @foreach (var product in @Model.Catalogue.Products)
+                @foreach (var prod in @Model.Catalogue.Products)
                 {
                     <tr>
-                        <td>@Html.ActionLink(product.Id, "EditProduct", "Product", new { Id = product.Id })</td>
-                        <td>@product.Name</td>
-                        <td>@product.ProductType</td>
-                        <td>@product.Description</td>
-                        <td>@product.Brand</td>
-                        <td>@product.Colour</td>
                         <td>
-                            @foreach (var age in product.AgeRange)
-                            {
-                                <b>(@age)</b>
-                            }
+                        @{
+                            var form = Html.BeginForm("EditProduct", "Product", FormMethod.Post);
+                                <input type="hidden" name="Id" value="@prod" />
+                                <input type="submit" value="@prod" />
+                            form.EndForm();
+                        }
                         </td>
-                        <td>@product.DiscountAmount</td>
-                        <td>@product.DiscountType</td>
-                        <td>@product.Gender</td>
-                        <td>@product.Price</td>
-                        <td>
-	                        @if (product.Promotions.Any())
-	                        {
-	                            <b>Promotions:</b>
-	                            <br />
-	                            foreach (var promotion in @product.Promotions)
-	                            {
-	                                @Html.ActionLink(product.Name, "Promotion", "Promotion")
-	                            }
-	                        }
-                        </td>
-                        <td>@product.Rating</td>
-                        <td>
-                            @product.Reviews
-                        </td>
-                        <td>@product.Size</td>
-                        <td>@product.Supplier</td>
+@*                        <td>@product.Name</td>*@
+@*                        <td>@product.ProductType</td>*@
+@*                        <td>@product.Description</td>*@
+@*                        <td>@product.Brand</td>*@
+@*                        <td>@product.Colour</td>*@
+@*                        <td>*@
+@*                            @foreach (var age in product.AgeRange)*@
+@*                            {*@
+@*                                <b>(@age)</b>*@
+@*                            }*@
+@*                        </td>*@
+@*                        <td>@product.DiscountAmount</td>*@
+@*                        <td>@product.DiscountType</td>*@
+@*                        <td>@product.Gender</td>*@
+@*                        <td>@product.Price</td>*@
+@*                        <td>*@
+@*	                        @if (product.Promotions.Any())*@
+@*	                        {*@
+@*	                            <b>Promotions:</b>*@
+@*	                            <br />*@
+@*	                            foreach (var promotion in @product.Promotions)*@
+@*	                            {*@
+@*	                                @Html.ActionLink(product.Name, "Promotion", "Promotion")*@
+@*	                            }*@
+@*	                        }*@
+@*                        </td>*@
+@*                        <td>@product.Rating</td>*@
+@*                        <td>*@
+@*                            @product.Reviews*@
+@*                        </td>*@
+@*                        <td>@product.Size</td>*@
+@*                        <td>@product.Supplier</td>*@
                     </tr>
                 }
 			</table>

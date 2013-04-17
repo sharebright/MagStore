@@ -9,9 +9,8 @@ namespace RavenDBMembership.Entities
     {
         public string Id { get; set; }
         public string CatalogueName { get; set; }
-        public IEnumerable<Product> Products { get; set; }
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
-        public IEnumerable<Promotion> Promotions { get; set; } 
+        public IEnumerable<string> Promotions { get; set; } 
     }
 }

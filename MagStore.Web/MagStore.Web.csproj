@@ -193,6 +193,7 @@
     <Compile Include="Models\LogOnModel.cs" />
     <Compile Include="Models\Product\CreateProductInputModel.cs" />
     <Compile Include="Models\Product\CreateProductViewModel.cs" />
+    <Compile Include="Models\Product\EditProductViewModel.cs" />
     <Compile Include="Models\Product\ProductsViewModel.cs" />
     <Compile Include="Models\Product\ViewProductViewModel.cs" />
     <Compile Include="Models\Promotion\CreatePromotionInputModel.cs" />
@@ -439,7 +440,7 @@
     <Content Include="Views\Catalogue\CreateCatalogue.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Product\EditProduct.cshtml" />
+    <Content Include="Views\Product\EditProduct11.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Promotion\ViewPromotions.cshtml" />
@@ -449,6 +450,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Promotion\EditPromotion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\EditProduct.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

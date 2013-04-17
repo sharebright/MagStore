@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using MagStore.Web.Models.Product;
 using RavenDBMembership.Entities;
@@ -19,7 +20,11 @@ namespace MagStore.Web.Controllers
         [HttpGet]
         public ActionResult CreateProduct()
         {
-            return View(new CreateProductInputModel());
+            var catalogues =
+                shop.GetCoordinator<Catalogue>()
+                    .Project()
+                    .Select(x => new KeyValuePair<string, string>(x.Id, x.CatalogueName));
+            return View(new CreateProductViewModel(catalogues));
         }
 
         [HttpPost]
@@ -30,6 +35,7 @@ namespace MagStore.Web.Controllers
                     Id = Guid.NewGuid().ToString(),
                     Name = inputModel.Name,
                     Description = inputModel.Description,
+                    Catalogue = inputModel.Catalogue,
                     Brand = inputModel.Brand,
                     Colour = inputModel.Colour,
                     DiscountAmount = inputModel.DiscountAmount,
@@ -53,9 +59,27 @@ namespace MagStore.Web.Controllers
             return View(new ViewProductViewModel { Products = products });
         }
 
-        public ActionResult EditProduct(string s)
+        public ActionResult EditProduct(string id)
         {
-            return View();
+            var p = shop.GetCoordinator<Product>().Load(id);
+            return View(new EditProductViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Catalogue = p.Catalogue,
+                Brand = p.Brand,
+                Colour = p.Colour,
+                DiscountAmount = p.DiscountAmount,
+                DiscountType = p.DiscountType,
+                Gender = p.Gender,
+                Price = p.Price,
+                ProductType = p.ProductType,
+                Rating = p.Rating,
+                Reviews = p.Reviews,
+                Size = p.Size,
+                Supplier = p.Supplier
+            });
         }
     }
 }

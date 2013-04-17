@@ -9,7 +9,7 @@ namespace RavenDBMembership.Entities
     {
         public Promotion()
         {
-            Restrictions = new List<Promotion>();
+            Restrictions = new List<string>();
         }
         public string Id { get; set; }
         public string Name { get; set; }
@@ -19,6 +19,6 @@ namespace RavenDBMembership.Entities
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
         public string Exclusivity { get; set; }
-        public IEnumerable<Promotion> Restrictions { get; set; }
+        public IEnumerable<string> Restrictions { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Raven.Client;
+using Raven.Client.Document;
 using RavenDBMembership.Infrastructure.Interfaces;
 using RavenDbMembership.Infrastructure;
 
@@ -24,6 +26,11 @@ namespace RavenDBMembership.Infrastructure
 //            return new Coordinator<T>(ravenRepository);
             return new Coordinator<T>(finder);
             throw new NotImplementedException();
+        }
+
+        public ILoaderWithInclude<T> Include<T>(Expression<Func<T, object>> path)
+        {
+            return finder.Include<T>(path);
         }
 
         public IUserCoordinator UserCoordinator { get; set; }

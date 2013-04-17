@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Raven.Client;
+using Raven.Client.Document;
 using RavenDBMembership.Entities;
 using RavenDBMembership.Infrastructure.Interfaces;
 
@@ -80,15 +81,15 @@ namespace RavenDBMembership.Infrastructure
                 .Select(p => (p as Promotion))
                 .Where(promotion => promotion != null))
             {
-                promotion.Restrictions = promotion.Restrictions ?? new List<Promotion>();
+                promotion.Restrictions = promotion.Restrictions ?? new List<string>();
             }
             session.Dispose();
             return project;
         }
 
-        public IList<T> IncludeAndProject<T>(Expression<Func<T, object>> path)
+        public ILoaderWithInclude<T> Include<T>(Expression<Func<T, object>> path)
         {
-            return CurrentSession.Query<T>().Include<T>(path).ToList();
+            return CurrentSession.Include<T>(path);
         }
     }
 }

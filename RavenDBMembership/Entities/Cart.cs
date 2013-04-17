@@ -9,20 +9,12 @@ namespace RavenDBMembership.Entities
     {
         public Cart()
         {
-            OrderLines = new List<OrderLine>();
-            Promotions = new List<Promotion>();
+            Products = new List<string>();
+            Promotions = new List<string>();
         }
 
         public string Id { get; set; }
-        public IList<OrderLine> OrderLines { get; set; }
-        public IList<Promotion> Promotions { get; set; }
-
-        public decimal Total
-        {
-            get 
-            {
-                return OrderLines.Sum(x => x.LinePrice);
-            }
-        }
+        public IList<string> Products { get; set; }
+        public IList<string> Promotions { get; set; }
     }
 }

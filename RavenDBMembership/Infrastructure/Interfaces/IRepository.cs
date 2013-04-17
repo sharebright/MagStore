@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Raven.Client;
+using Raven.Client.Document;
 
 namespace RavenDBMembership.Infrastructure.Interfaces
 {
@@ -13,6 +15,7 @@ namespace RavenDBMembership.Infrastructure.Interfaces
         void Add<T>(T item) where T : IRavenEntity;
         void Delete<T>(T item) where T : IRavenEntity;
         void Save();
+        ILoaderWithInclude<T> Include<T>(Expression<Func<T, object>> path);
         IList<T> Project<T>();
         void SaveAndCommit<T>(T item) where T : IRavenEntity;
     }

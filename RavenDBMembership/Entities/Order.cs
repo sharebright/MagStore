@@ -9,6 +9,6 @@ namespace RavenDBMembership.Entities
         public string Id { get; set; }
         public string PaymentId { get; set; }
         public string CustomerId { get; set; }
-        public IEnumerable<OrderLine> OrderLines { get; set; }
+        public IEnumerable<string> Products { get; set; }
     }
 }

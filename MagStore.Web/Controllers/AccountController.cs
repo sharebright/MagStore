@@ -174,11 +174,15 @@ namespace MagStore.Web.Controllers
         public ActionResult EditUser()
         {
             var currentUser = System.Web.HttpContext.Current.Session["CurrentUser"] as User;
-            var user = MembershipService.GetUser(currentUser.Username);
-            var roles = MembershipService.GetAllRoles();
-            var userRoles = MembershipService.GetRolesForUser(user.UserName);
+            if (currentUser != null)
+            {
+                var user = MembershipService.GetUser(currentUser.Username);
+                var roles = MembershipService.GetAllRoles();
+                var userRoles = MembershipService.GetRolesForUser(user.UserName);
 
-            return View(new EditUserModel(user.UserName, user.Email, roles, userRoles));
+                return View(new EditUserModel(user.UserName, user.Email, roles, userRoles));
+            }
+            return View("Error", new HandleErrorInfo(new Exception("CurrentUser is null"), "Account", "EditUser"));
         }
 
         [HttpPost]

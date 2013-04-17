@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using MagStore.Web.Models.Catalogue;
 using MagStore.Web.Models.Product;
@@ -18,9 +17,9 @@ namespace MagStore.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ViewProductsInCatalogue(string Id)
+        public ActionResult ViewProductsInCatalogue(string id)
         {
-            var catalogue = shop.GetCoordinator<Catalogue>().Load(Id);
+            var catalogue = shop.GetCoordinator<Catalogue>().Load(id);
             return View(new ProductsViewModel { Catalogue = catalogue });
         }
 
@@ -45,10 +44,9 @@ namespace MagStore.Web.Controllers
                 CatalogueName=inputModel.Name,
                 DiscountAmount =  inputModel.DiscountAmount,
                 DiscountType = inputModel.DiscountType,
-                Products = new List<Product>(),
-                Promotions = new List<Promotion>()
+                Promotions = new List<string>()
             });
-            return View(new CreateCatalogueViewModel());
+            return RedirectToAction("ViewCatalogues", "Catalogue"); // View(new CreateCatalogueViewModel());
         }
     }
 }

@@ -55,7 +55,6 @@ namespace MagStore.Web
 
             Container.Register(Component.For<IRepository>().ImplementedBy<RavenRepository>().LifestylePerWebRequest());
             Container.Register(Component.For<IShop>().ImplementedBy<Shop>().LifeStyle.Singleton);
-
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(Container));
             Container.Register(Classes
                                    .FromAssembly(Assembly.GetExecutingAssembly())

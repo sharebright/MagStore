@@ -20,6 +20,6 @@ namespace MagStore.Web.Models.Promotion
 
         public string Exclusivity { get; set; }
 
-        public IEnumerable<RavenDBMembership.Entities.Promotion> Restrictions { get; set; }
+        public IEnumerable<string> Restrictions { get; set; }
     }
 }
