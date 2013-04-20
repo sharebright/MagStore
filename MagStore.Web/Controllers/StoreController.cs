@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using RavenDBMembership.Infrastructure;
+using RavenDbMembership.Infrastructure;
 
 namespace MagStore.Web.Controllers
 {

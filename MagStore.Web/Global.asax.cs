@@ -1,17 +1,15 @@
-﻿using System;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Castle.Windsor;
 using System.Web.Routing;
 using System.Reflection;
 using Castle.MicroKernel.Registration;
+using MagStore.Azure;
 using MagStore.Web.Infrastructure;
-using MagStore.Web.ShopHelpers;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
 using Raven.Client.Document;
-using RavenDBMembership.Infrastructure;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Infrastructure;
+using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web
 {
@@ -48,18 +46,12 @@ namespace MagStore.Web
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(Container));
 
             // RavenDB embedded
-            Container.Register(Component
-                                   .For<IDocumentStore>()
-                                   .UsingFactoryMethod(GetDocumentStore)
-                                   .LifeStyle.Singleton);
-
+            Container.Register(Component.For<IDocumentStore>().UsingFactoryMethod(GetDocumentStore).LifeStyle.Singleton);
             Container.Register(Component.For<IRepository>().ImplementedBy<RavenRepository>().LifestylePerWebRequest());
             Container.Register(Component.For<IShop>().ImplementedBy<Shop>().LifeStyle.Singleton);
+            Container.Register(Component.For<IStorageAccessor>().UsingFactoryMethod(GetStorageAccessor).LifeStyle.PerWebRequest);
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(Container));
-            Container.Register(Classes
-                                   .FromAssembly(Assembly.GetExecutingAssembly())
-                                   .BasedOn<IController>().LifestyleTransient()
-                );
+            Container.Register(Classes.FromAssembly(Assembly.GetExecutingAssembly()).BasedOn<IController>().LifestyleTransient());
 
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
@@ -82,6 +74,16 @@ namespace MagStore.Web
             };
             documentStore.Initialize();
             return documentStore;
+        }
+
+        private IStorageAccessor GetStorageAccessor()
+        {
+            var storageAccessor = new StorageAccessor
+            (
+                "magshopstrg", 
+                "H3g2iG5XyUzX5BhUqBtw5VRtdSN++0aNhXDhKHpEJe2kDh/oSEOGbrhKDQ0AkdVdM0P+Ons+7mH2FMNzxNyddw=="
+            );
+            return storageAccessor;
         }
     }
 

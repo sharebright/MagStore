@@ -39,56 +39,55 @@
 			        <th scope="col">Discount Type</th>
 			        <th scope="col">Gender</th>
 			        <th scope="col">Price</th>
-			        <th scope="col">Price</th>
 			        <th scope="col">Promotions</th>
 			        <th scope="col">Rating</th>
 			        <th scope="col">Reviews</th>
 			        <th scope="col">Size</th>
 			        <th scope="col">Supplier</th>
 			    </tr>
-                @foreach (var prod in @Model.Catalogue.Products)
+                @foreach (var product in @Model.Products)
                 {
                     <tr>
                         <td>
                         @{
                             var form = Html.BeginForm("EditProduct", "Product", FormMethod.Post);
-                                <input type="hidden" name="Id" value="@prod" />
-                                <input type="submit" value="@prod" />
+                                <input type="hidden" name="Id" value="@product.Id" />
+                                <input type="submit" value="@product.Id" />
                             form.EndForm();
                         }
                         </td>
-@*                        <td>@product.Name</td>*@
-@*                        <td>@product.ProductType</td>*@
-@*                        <td>@product.Description</td>*@
-@*                        <td>@product.Brand</td>*@
-@*                        <td>@product.Colour</td>*@
-@*                        <td>*@
-@*                            @foreach (var age in product.AgeRange)*@
-@*                            {*@
-@*                                <b>(@age)</b>*@
-@*                            }*@
-@*                        </td>*@
-@*                        <td>@product.DiscountAmount</td>*@
-@*                        <td>@product.DiscountType</td>*@
-@*                        <td>@product.Gender</td>*@
-@*                        <td>@product.Price</td>*@
-@*                        <td>*@
-@*	                        @if (product.Promotions.Any())*@
-@*	                        {*@
-@*	                            <b>Promotions:</b>*@
-@*	                            <br />*@
-@*	                            foreach (var promotion in @product.Promotions)*@
-@*	                            {*@
-@*	                                @Html.ActionLink(product.Name, "Promotion", "Promotion")*@
-@*	                            }*@
-@*	                        }*@
-@*                        </td>*@
-@*                        <td>@product.Rating</td>*@
-@*                        <td>*@
-@*                            @product.Reviews*@
-@*                        </td>*@
-@*                        <td>@product.Size</td>*@
-@*                        <td>@product.Supplier</td>*@
+                        <td>@product.Name</td>
+                        <td>@product.ProductType</td>
+                        <td>@product.Description</td>
+                        <td>@product.Brand</td>
+                        <td>@product.Colour</td>
+                        <td>
+                            @foreach (var age in product.AgeRange)
+                            {
+                                <b>(@age)</b>
+                            }
+                        </td>
+                        <td>@product.DiscountAmount</td>
+                        <td>@product.DiscountType</td>
+                        <td>@product.Gender</td>
+                        <td>@product.Price</td>
+                        <td>
+	                        @if (product.Promotions.Any())
+	                        {
+	                            <b>Promotions:</b>
+	                            <br />
+	                            foreach (var promotion in @product.Promotions)
+	                            {
+	                                @Html.ActionLink(product.Name, "Promotion", "Promotion")
+	                            }
+	                        }
+                        </td>
+                        <td>@product.Rating</td>
+                        <td>
+                            @product.Reviews
+                        </td>
+                        <td>@product.Size</td>
+                        <td>@product.Supplier</td>
                     </tr>
                 }
 			</table>

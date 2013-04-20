@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using RavenDBMembership.Entities.Enums;
-using RavenDBMembership.Infrastructure.Interfaces;
+﻿using System.Collections.Generic;
+using RavenDbMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Entities.Enums;
 
-namespace RavenDBMembership.Entities
+namespace RavenDbMembership.Entities
 {
     public class Product : IRavenEntity
     {
@@ -12,7 +11,7 @@ namespace RavenDBMembership.Entities
         public string Description { get; set; }
         public string Colour { get; set; }
         public string Size { get; set; }
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
         public string Brand { get; set; }
         public string Catalogue { get; set; }
         public string Supplier { get; set; }

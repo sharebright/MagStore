@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using RavenDBMembership.Infrastructure.Interfaces;
+﻿using System.Collections.Generic;
+using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDBMembership.Entities
+namespace RavenDbMembership.Entities
 {
     public class Order : IRavenEntity
     {

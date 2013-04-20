@@ -35,6 +35,18 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\packages\FluentAssertions.2.0.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Data.Edm">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData">
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage">
+      <HintPath>..\packages\WindowsAzure.Storage.2.0.5.1\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\packages\NSubstitute.1.5.0.0\lib\NET40\NSubstitute.dll</HintPath>
     </Reference>
@@ -42,7 +54,12 @@
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Spatial">
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,15 +67,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Azure.Storage\An_azure_storage_account_with_a_resources_container.cs" />
+    <Compile Include="Azure.Storage\An_empty_container.cs" />
+    <Compile Include="Azure.Storage\From_the_azure_storage_account.cs" />
+    <Compile Include="Azure.Storage\StorageAccountSetUpFixture.cs" />
+    <Compile Include="Azure.Storage\When_saving_a_blob_to.cs" />
     <Compile Include="Products\WhenAddingAProductToTheCart.cs" />
     <Compile Include="Users\CreatingUsersWithElevatedPrivileges.cs" />
     <Compile Include="Users\UserCoordinatorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MagStore.StorageAccessor\MagStore.Azure.csproj">
+      <Project>{262E8901-EF1C-4CE7-BD6E-E54EC466D449}</Project>
+      <Name>MagStore.Azure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MagStore\MagStore.csproj">
       <Project>{8EA5C551-4050-4502-B54C-29AA63C1A70E}</Project>
       <Name>MagStore</Name>

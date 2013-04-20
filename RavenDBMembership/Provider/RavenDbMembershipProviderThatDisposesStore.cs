@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace RavenDBMembership.Provider
+namespace RavenDbMembership.Provider
 {
-    public class RavenDbMembershipProviderThatDisposesStore : Provider.RavenDbMembershipProvider, IDisposable
+    public class RavenDbMembershipProviderThatDisposesStore : RavenDbMembershipProvider, IDisposable
     {
         public void Dispose()
         {

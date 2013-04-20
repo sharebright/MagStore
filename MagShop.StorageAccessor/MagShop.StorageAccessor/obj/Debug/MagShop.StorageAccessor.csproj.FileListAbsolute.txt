@@ -1,0 +1,4 @@
+C:\dev\MagSolutions\MagShop.StorageAccessor\MagShop.StorageAccessor\bin\Debug\MagShop.StorageAccessor.dll
+C:\dev\MagSolutions\MagShop.StorageAccessor\MagShop.StorageAccessor\bin\Debug\MagShop.StorageAccessor.pdb
+C:\dev\MagSolutions\MagShop.StorageAccessor\MagShop.StorageAccessor\obj\Debug\MagShop.StorageAccessor.dll
+C:\dev\MagSolutions\MagShop.StorageAccessor\MagShop.StorageAccessor\obj\Debug\MagShop.StorageAccessor.pdb

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace RavenDBMembership
+namespace RavenDbMembership
 {
 	public static class PasswordUtil
 	{
@@ -18,13 +17,14 @@ namespace RavenDBMembership
 
 		public static string HashPassword(string pass, string salt)
 		{
-			byte[] bytes = Encoding.Unicode.GetBytes(pass);
-			byte[] src = Encoding.Unicode.GetBytes(salt);
-			byte[] dst = new byte[src.Length + bytes.Length];
+			var bytes = Encoding.Unicode.GetBytes(pass);
+			var src = Encoding.Unicode.GetBytes(salt);
+			var dst = new byte[src.Length + bytes.Length];
 			Buffer.BlockCopy(src, 0, dst, 0, src.Length);
 			Buffer.BlockCopy(bytes, 0, dst, src.Length, bytes.Length);
-			HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
-			byte[] inArray = algorithm.ComputeHash(dst);
+			var algorithm = HashAlgorithm.Create("SHA1");
+		    Debug.Assert(algorithm != null, "algorithm != null");
+		    var inArray = algorithm.ComputeHash(dst);
 			return Convert.ToBase64String(inArray);
 		}
 	}

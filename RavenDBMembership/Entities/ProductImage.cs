@@ -1,10 +1,11 @@
-﻿using RavenDBMembership.Entities.Enums;
+﻿using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDBMembership.Entities
+namespace RavenDbMembership.Entities
 {
-    public class ProductImage
+    public class ProductImage : IRavenEntity
     {
-        public ImageType ImageType { get; set; }
+        public string Id { get; set; }
+        public string ImageType { get; set; }
         public string ImageUrl { get; set; }
     }
 }

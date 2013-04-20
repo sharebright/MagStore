@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Entities.Enums;
+using RavenDbMembership.Entities.Enums;
+using RavenDbMembership.Entities;
 
 namespace MagStore.Web.Models.Product
 {
@@ -11,7 +11,7 @@ namespace MagStore.Web.Models.Product
         public string Description { get; set; }
         public string Colour { get; set; }
         public string Size { get; set; }
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
         public string Brand { get; set; }
         public string Supplier { get; set; }
         public int Rating { get; set; }

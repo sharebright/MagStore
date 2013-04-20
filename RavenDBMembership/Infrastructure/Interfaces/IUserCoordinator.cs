@@ -1,7 +1,7 @@
 ﻿using System;
-using RavenDBMembership.Entities;
+using RavenDbMembership.Entities;
 
-namespace RavenDBMembership.Infrastructure.Interfaces
+namespace RavenDbMembership.Infrastructure.Interfaces
 {
     public interface IUserCoordinator
     {

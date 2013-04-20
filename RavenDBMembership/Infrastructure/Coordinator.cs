@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace RavenDbMembership.Infrastructure
 {

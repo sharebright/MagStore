@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Entities.Enums;
+using RavenDbMembership.Entities;
+using RavenDbMembership.Entities.Enums;
 
 namespace MagStore.Web.Models.Catalogue
 {
@@ -8,9 +8,9 @@ namespace MagStore.Web.Models.Catalogue
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<RavenDBMembership.Entities.Product> Products { get; set; }
+        public IEnumerable<RavenDbMembership.Entities.Product> Products { get; set; }
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
-        public IEnumerable<RavenDBMembership.Entities.Promotion> Promotions { get; set; } 
+        public IEnumerable<RavenDbMembership.Entities.Promotion> Promotions { get; set; } 
     }
 }

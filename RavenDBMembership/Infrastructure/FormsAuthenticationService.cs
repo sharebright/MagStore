@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Security;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDBMembership.Infrastructure
+namespace RavenDbMembership.Infrastructure
 {
     public class FormsAuthenticationService : IFormsAuthenticationService
     {

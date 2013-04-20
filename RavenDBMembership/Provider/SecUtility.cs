@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using RavenDBMembership.UserStrings;
+using RavenDbMembership.UserStrings;
 
-namespace RavenDBMembership.Provider
+namespace RavenDbMembership.Provider
 {
     public class SecUtility
     {
@@ -32,15 +32,15 @@ namespace RavenDBMembership.Provider
                 param = param.Trim();
                 if (checkIfEmpty && (param.Length < 1))
                 {
-                    throw new ArgumentException(SR.Parameter_can_not_be_empty_1.WithParameters(paramName), paramName);
+                    throw new ArgumentException(Sr.Parameter_can_not_be_empty_1.WithParameters(paramName), paramName);
                 }
                 if ((maxSize > 0) && (param.Length > maxSize))
                 {
-                    throw new ArgumentException(SR.Parameter_too_long_2.WithParameters(paramName, maxSize), paramName);
+                    throw new ArgumentException(Sr.Parameter_too_long_2.WithParameters(paramName, maxSize), paramName);
                 }
                 if (checkForCommas && param.Contains(","))
                 {
-                    throw new ArgumentException(SR.Parameter_can_not_contain_comma_1.WithParameters(paramName), paramName);
+                    throw new ArgumentException(Sr.Parameter_can_not_contain_comma_1.WithParameters(paramName), paramName);
                 }
             }
         }

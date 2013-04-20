@@ -1,0 +1,11 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Home Page";
+    
+    foreach (var uri in Model)
+    {
+        <img src="@uri" alt="@uri" />
+        <br />
+    }
+}
+

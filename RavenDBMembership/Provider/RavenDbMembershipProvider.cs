@@ -7,17 +7,17 @@ using Raven.Abstractions.Exceptions;
 using Raven.Client;
 using Microsoft.Practices.ServiceLocation;
 using System.Collections.Specialized;
-using RavenDBMembership.Entities;
+using RavenDbMembership.Entities;
 
-namespace RavenDBMembership.Provider
+namespace RavenDbMembership.Provider
 {
     public class RavenDbMembershipProvider : MembershipProviderValidated
     {
-        private string _providerName = "RavenDBMembership";
+        private string providerName = "RavenDBMembership";
         private IDocumentStore documentStore;
-        private int _minRequiredPasswordLength = 7;
+        private int minRequiredPasswordLength = 7;
 
-        public IDocumentStore DocumentStore
+        protected IDocumentStore DocumentStore
         {
             get 
             {
@@ -25,9 +25,9 @@ namespace RavenDBMembership.Provider
                 {
                     throw new NullReferenceException("The DocumentStore is not set. Please set the DocumentStore or make sure that the Common Service Locator can find the IDocumentStore and call Initialize on this provider.");
                 }
-                return this.documentStore;
+                return documentStore;
             }
-            set { this.documentStore = value; }
+            set { documentStore = value; }
         }
 
         public override string ApplicationName
@@ -39,7 +39,7 @@ namespace RavenDBMembership.Provider
         {
             if (config.Keys.Cast<string>().Contains("minRequiredPasswordLength"))
             {
-                _minRequiredPasswordLength = int.Parse(config["minRequiredPasswordLength"]);
+                minRequiredPasswordLength = int.Parse(config["minRequiredPasswordLength"]);
             }
             
             // Try to find an IDocumentStore via Common Service Locator. 
@@ -48,24 +48,24 @@ namespace RavenDBMembership.Provider
                 var locator = ServiceLocator.Current;
                 if (locator != null)
                 {
-                    this.DocumentStore = locator.GetInstance<IDocumentStore>();
+                    DocumentStore = locator.GetInstance<IDocumentStore>();
                 }
             }
             catch (NullReferenceException) // Swallow Nullreference expection that occurs when there is no current service locator.
             {
             }
 
-            _providerName = name;
+            providerName = name;
             
             base.Initialize(name, config);
         }
 
         public override bool CheckedChangePassword(string username, string oldPassword, string newPassword)
         {
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 var q = from u in session.Query<User>()
-                        where u.Username == username && u.ApplicationName == this.ApplicationName
+                        where u.Username == username && u.ApplicationName == ApplicationName
                         select u;
                 var user = q.SingleOrDefault();
                 if (user == null || user.PasswordHash != PasswordUtil.HashPassword(oldPassword, user.PasswordSalt))
@@ -91,7 +91,7 @@ namespace RavenDBMembership.Provider
             if (password.Length < MinRequiredPasswordLength)
                 throw new MembershipCreateUserException(MembershipCreateStatus.InvalidPassword);
 
-            ValidatePasswordEventArgs args = new ValidatePasswordEventArgs(username, password, true);
+            var args = new ValidatePasswordEventArgs(username, password, true);
             OnValidatingPassword(args);
             if (args.Cancel)
             {
@@ -99,16 +99,15 @@ namespace RavenDBMembership.Provider
                 return null;
             }
 
-            var user = new User();
-            user.Username = username;
+            var user = new User {Username = username};
             password = password.Trim();
             user.PasswordSalt = PasswordUtil.CreateRandomSalt();
             user.PasswordHash = PasswordUtil.HashPassword(password, user.PasswordSalt);
             user.Email = email;
-            user.ApplicationName = this.ApplicationName;
+            user.ApplicationName = ApplicationName;
             user.DateCreated = DateTime.Now;
 
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 session.Advanced.UseOptimisticConcurrency = true;
 
@@ -122,7 +121,7 @@ namespace RavenDBMembership.Provider
 
                     status = MembershipCreateStatus.Success;
 
-                    return new MembershipUser(_providerName, username, user.Id, email, null, null, true, false, user.DateCreated,
+                    return new MembershipUser(providerName, username, user.Id, email, null, null, true, false, user.DateCreated,
                         new DateTime(1900, 1, 1), new DateTime(1900, 1, 1), DateTime.Now, new DateTime(1900, 1, 1));
                 }
                 catch (ConcurrencyException e)
@@ -155,12 +154,12 @@ namespace RavenDBMembership.Provider
 
         public override bool CheckedDeleteUser(string username, bool deleteAllRelatedData)
         {
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 try
                 {
                     var q = from u in session.Query<User>().Customize(c => c.WaitForNonStaleResultsAsOfNow())
-                            where u.Username == username && u.ApplicationName == this.ApplicationName
+                            where u.Username == username && u.ApplicationName == ApplicationName
                             select u;
                     var user = q.SingleOrDefault();
                     if (user == null)
@@ -221,10 +220,10 @@ namespace RavenDBMembership.Provider
 
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 var q = from u in session.Query<User>().Customize(c => c.WaitForNonStaleResultsAsOfNow())
-                        where u.Username == username && u.ApplicationName == this.ApplicationName
+                        where u.Username == username && u.ApplicationName == ApplicationName
                         select u;
                 var user = q.SingleOrDefault();
                 if (user != null)
@@ -237,7 +236,7 @@ namespace RavenDBMembership.Provider
 
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 var user = session.Load<User>(providerUserKey.ToString());
                 if (user != null)
@@ -250,10 +249,10 @@ namespace RavenDBMembership.Provider
 
         public override string GetUserNameByEmail(string email)
         {
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 var q = from u in session.Query<User>()
-                        where u.Email == email && u.ApplicationName == this.ApplicationName
+                        where u.Email == email && u.ApplicationName == ApplicationName
                         select u.Username;
                 return q.SingleOrDefault();
             }
@@ -269,7 +268,7 @@ namespace RavenDBMembership.Provider
             get { return 0; }
         }
 
-        public override int MinRequiredPasswordLength { get { return _minRequiredPasswordLength; } }
+        public override int MinRequiredPasswordLength { get { return minRequiredPasswordLength; } }
 
         public override int PasswordAttemptWindow
         {
@@ -298,12 +297,12 @@ namespace RavenDBMembership.Provider
 
         public override string ResetPassword(string username, string answer)
         {
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 try
                 {
                     var q = from u in session.Query<User>()
-                            where u.Username == username && u.ApplicationName == this.ApplicationName
+                            where u.Username == username && u.ApplicationName == ApplicationName
                             select u;
                     var user = q.SingleOrDefault();
                     if (user == null)
@@ -341,17 +340,17 @@ namespace RavenDBMembership.Provider
             SecUtility.CheckParameter(ref username, true, true, true, 0x100, "UserName");
             
             string email = user.Email;
-            SecUtility.CheckParameter(ref email, this.RequiresUniqueEmail, this.RequiresUniqueEmail, false, 0x100, "Email");
+            SecUtility.CheckParameter(ref email, RequiresUniqueEmail, RequiresUniqueEmail, false, 0x100, "Email");
             user.Email = email;
 
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 session.Advanced.UseOptimisticConcurrency = true;
 
                 try
                 {
                     var q = from u in session.Query<User>()
-                            where u.Username == user.UserName && u.ApplicationName == this.ApplicationName
+                            where u.Username == user.UserName && u.ApplicationName == ApplicationName
                             select u;
                     var dbUser = q.SingleOrDefault();
                     if (dbUser == null)
@@ -380,15 +379,14 @@ namespace RavenDBMembership.Provider
 
                     if (status == MembershipCreateStatus.DuplicateEmail)
                         throw new ProviderException("The E-mail supplied is invalid.");
-                    else
-                        throw;
+                    throw;
                 }
             }
         }
 
         public override bool ValidateUser(string username, string password)
         {
-            var updateLastLogin = true;
+            const bool updateLastLogin = true;
 
             return CheckPassword(username, password, updateLastLogin);
         }
@@ -398,10 +396,10 @@ namespace RavenDBMembership.Provider
             username = username.Trim();
             password = password.Trim();
 
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 var q = from u in session.Query<User>().Customize(c => c.WaitForNonStaleResultsAsOfNow())
-                        where u.Username == username && u.ApplicationName == this.ApplicationName
+                        where u.Username == username && u.ApplicationName == ApplicationName
                         select u;
                 var user = q.SingleOrDefault();
                 if (user != null && user.PasswordHash == PasswordUtil.HashPassword(password, user.PasswordSalt))
@@ -420,22 +418,15 @@ namespace RavenDBMembership.Provider
         private MembershipUserCollection FindUsers(Func<User, bool> predicate, int pageIndex, int pageSize, out int totalRecords)
         {
             var membershipUsers = new MembershipUserCollection();
-            using (var session = this.DocumentStore.OpenSession())
+            using (var session = DocumentStore.OpenSession())
             {
                 var q = from u in session.Query<User>()
-                            where u.ApplicationName == this.ApplicationName
+                            where u.ApplicationName == ApplicationName
                         select u;
-                IEnumerable<User> results;
-                if (predicate != null)
-                {
-                    results = q.Where(predicate);
-                }
-                else
-                {
-                    results = q;
-                }
-                totalRecords = results.Count();
-                var pagedUsers = results.Skip(pageIndex * pageSize).Take(pageSize);
+                IEnumerable<User> results = predicate != null ? q.Where(predicate) : q;
+                var users = results as User[] ?? results.ToArray();
+                totalRecords = users.Count();
+                var pagedUsers = users.Skip(pageIndex * pageSize).Take(pageSize);
                 foreach (var user in pagedUsers)
                 {
                     membershipUsers.Add(UserToMembershipUser(user));
@@ -446,7 +437,7 @@ namespace RavenDBMembership.Provider
 
         private MembershipUser UserToMembershipUser(User user)
         {
-            return new RavenDbMembershipUser(_providerName, user.Username, user.Id, user.Email, null, null, true, false
+            return new RavenDbMembershipUser(providerName, user.Username, user.Id, user.Email, null, null, true, false
                 , user.DateCreated, user.DateLastLogin.HasValue ? user.DateLastLogin.Value : new DateTime(1900, 1, 1), new DateTime(1900, 1, 1), new DateTime(1900, 1, 1), new DateTime(1900, 1, 1));
         }
     }

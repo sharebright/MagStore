@@ -84,7 +84,7 @@
     <file relUrl="Scripts/jquery-ui-1.8.20.min.js" publishTime="04/13/2013 20:45:27" />
     <file relUrl="bin/Castle.Windsor.dll" publishTime="04/08/2013 18:40:43" />
     <file relUrl="Images/heroAccent.png" publishTime="04/08/2013 18:34:43" />
-    <file relUrl="bin/MagStore.Web.dll" publishTime="04/16/2013 21:42:33" />
+    <file relUrl="bin/MagStore.Web.dll" publishTime="04/17/2013 07:26:55" />
     <file relUrl="Views/Account/LogOn.cshtml" publishTime="04/12/2013 20:10:56" />
     <file relUrl="Content/images/prev-red.gif" publishTime="07/04/2012 22:01:44" />
     <file relUrl="Views/Account/ExternalLoginConfirmation.cshtml" publishTime="04/08/2013 18:34:43" />
@@ -205,7 +205,7 @@
     <file relUrl="Content/images/cards.png" publishTime="07/03/2012 21:03:16" />
     <file relUrl="bin/System.Web.Mvc.dll" publishTime="07/10/2012 21:51:54" />
     <file relUrl="bin/EntityFramework.dll" publishTime="04/08/2013 18:34:46" />
-    <file relUrl="bin/MagStore.Web.pdb" publishTime="04/16/2013 21:42:33" />
+    <file relUrl="bin/MagStore.Web.pdb" publishTime="04/17/2013 07:26:55" />
     <file relUrl="Views/Catalogue/CreateCatalogue.cshtml" publishTime="04/14/2013 19:59:16" />
     <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="04/08/2013 18:34:53" />
     <file relUrl="bin/System.Web.Http.WebHost.xml" publishTime="05/30/2012 01:00:26" />
@@ -213,7 +213,7 @@
     <file relUrl="bin/DotNetOpenAuth.OpenId.RelyingParty.xml" publishTime="04/08/2013 18:34:57" />
     <file relUrl="Scripts/modernizr-2.5.3.js" publishTime="04/13/2013 20:45:27" />
     <file relUrl="bin/Raven.Client.Lightweight.pdb" publishTime="04/11/2013 19:16:06" />
-    <file relUrl="Web.config" publishTime="04/13/2013 21:52:41" />
+    <file relUrl="Web.config" publishTime="04/17/2013 07:37:48" />
     <file relUrl="bin/System.Web.Http.xml" publishTime="06/09/2012 01:00:32" />
     <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="04/08/2013 18:34:53" />
     <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="04/08/2013 18:34:53" />

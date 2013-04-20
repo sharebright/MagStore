@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MagStore.Web.ShopHelpers;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Entities.Enums;
+using RavenDbMembership.Entities.Enums;
 
 namespace MagStore.Web.Models.Promotion
 {
@@ -25,7 +24,7 @@ namespace MagStore.Web.Models.Promotion
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
         public string Exclusivity { get; set; }
-        public IEnumerable<RavenDBMembership.Entities.Promotion> Restrictions
+        public IEnumerable<RavenDbMembership.Entities.Promotion> Restrictions
         {
             get
             {

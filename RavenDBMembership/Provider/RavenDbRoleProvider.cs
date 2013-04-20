@@ -4,9 +4,9 @@ using System.Web.Security;
 using System.Collections.Specialized;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
-using RavenDBMembership.Entities;
+using RavenDbMembership.Entities;
 
-namespace RavenDBMembership.Provider
+namespace RavenDbMembership.Provider
 {
 	public class RavenDbRoleProvider : RoleProvider
 	{

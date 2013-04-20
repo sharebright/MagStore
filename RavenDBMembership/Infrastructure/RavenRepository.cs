@@ -4,10 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using Raven.Client;
 using Raven.Client.Document;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Entities;
+using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDBMembership.Infrastructure
+namespace RavenDbMembership.Infrastructure
 {
     public class RavenRepository : IRepository
     {
@@ -77,6 +77,13 @@ namespace RavenDBMembership.Infrastructure
         public IList<T> Project<T>()
         {
             var project = CurrentSession.Query<T>().ToList();
+            foreach (var product in project.Where(p => p.GetType() == typeof(Product))
+                .Select(p => (p as Product))
+                .Where(product => product != null))
+            {
+                product.AgeRange = product.AgeRange ?? new int[] {};
+                product.Promotions = product.Promotions ?? new List<string>();
+            }
             foreach (var promotion in project.Where(p => p.GetType() == typeof (Promotion))
                 .Select(p => (p as Promotion))
                 .Where(promotion => promotion != null))

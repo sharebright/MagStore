@@ -4,7 +4,7 @@ namespace MagStore.Web.Models.Catalogue
 {
     public class CataloguesViewModel
     {
-        public IList<RavenDBMembership.Entities.Catalogue> Catalogues { get; set; }
+        public IList<RavenDbMembership.Entities.Catalogue> Catalogues { get; set; }
 
         //        public string Id { get { return catalogue.Id; } }
 //

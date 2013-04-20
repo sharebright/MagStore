@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using RavenDBMembership.Entities.Enums;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Entities.Enums;
+using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDBMembership.Entities
+namespace RavenDbMembership.Entities
 {
 	public class User : IRavenEntity
 	{

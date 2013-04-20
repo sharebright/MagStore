@@ -61,7 +61,6 @@
     <Compile Include="Entities\Enums\AccountStatus.cs" />
     <Compile Include="Entities\Enums\DiscountType.cs" />
     <Compile Include="Entities\Enums\FulfillmentStatus.cs" />
-    <Compile Include="Entities\Enums\Gender.cs" />
     <Compile Include="Entities\Enums\ImageType.cs" />
     <Compile Include="Entities\Enums\ProductType.cs" />
     <Compile Include="Entities\Fulfillment.cs" />

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using RavenDBMembership.Entities.Enums;
+using RavenDbMembership.Entities.Enums;
 
 namespace MagStore.Web.Models.Product
 {
     public class CreateProductViewModel
     {
-        public CreateProductViewModel(IEnumerable<KeyValuePair<string, string>> catalogue)
+        public CreateProductViewModel(IEnumerable<KeyValuePair<string, string>> catalogue, IEnumerable<KeyValuePair<string, string>> promotions)
         {
             Catalogue = catalogue;
+            Promotions = promotions;
         }
 
         public string Id { get; set; }
@@ -16,7 +17,7 @@ namespace MagStore.Web.Models.Product
         public IEnumerable<KeyValuePair<string, string>> Catalogue { get; set; }
         public string Colour { get; set; }
         public string Size { get; set; }
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
         public string Brand { get; set; }
         public string Supplier { get; set; }
         public int Rating { get; set; }
@@ -27,6 +28,6 @@ namespace MagStore.Web.Models.Product
         public int[] AgeRange { get; set; }
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
-        public IEnumerable<string> Promotions { get; set; }
+        public IEnumerable<KeyValuePair<string, string>> Promotions { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Web.Security;
 
-namespace RavenDBMembership.Infrastructure
+namespace RavenDbMembership.Infrastructure
 {
     public static class AccountValidation
     {

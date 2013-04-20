@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using MagStore.Web.Models.Catalogue;
 using MagStore.Web.Models.Product;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Entities;
+using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {
@@ -19,8 +20,9 @@ namespace MagStore.Web.Controllers
         [HttpPost]
         public ActionResult ViewProductsInCatalogue(string id)
         {
+            var products = shop.GetCoordinator<Product>().Project().Where(x=>x.Catalogue == id);
             var catalogue = shop.GetCoordinator<Catalogue>().Load(id);
-            return View(new ProductsViewModel { Catalogue = catalogue });
+            return View(new ProductsViewModel { Catalogue = catalogue, Products = products });
         }
 
         public ActionResult ViewCatalogues()

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace RavenDBMembership.UserStrings
+namespace RavenDbMembership.UserStrings
 {
     [AttributeUsage(AttributeTargets.Field|AttributeTargets.Enum)]
-    public class SRValueAttribute : Attribute
+    public class SrValueAttribute : Attribute
     {
         public string Value;
 
-        public SRValueAttribute(string Value)
+        public SrValueAttribute(string Value)
         {
             this.Value = Value;
         }

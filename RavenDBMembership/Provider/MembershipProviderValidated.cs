@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Security;
-using RavenDBMembership.UserStrings;
+using RavenDbMembership.UserStrings;
 
-namespace RavenDBMembership.Provider
+namespace RavenDbMembership.Provider
 {
     public abstract class MembershipProviderValidated : MembershipProvider
     {
@@ -94,12 +90,12 @@ namespace RavenDBMembership.Provider
             if (num3 < this.MinRequiredNonAlphanumericCharacters)
             {
                 throw new ArgumentException(
-                    SR.Password_need_more_non_alpha_numeric_chars_1.WithParameters(MinRequiredNonAlphanumericCharacters),
+                    Sr.Password_need_more_non_alpha_numeric_chars_1.WithParameters(MinRequiredNonAlphanumericCharacters),
                     "newPassword");
             }
             if ((this.PasswordStrengthRegularExpression.Length > 0) && !Regex.IsMatch(newPassword, this.PasswordStrengthRegularExpression))
             {
-                throw new ArgumentException(SR.Password_does_not_match_regular_expression.WithParameters(),
+                throw new ArgumentException(Sr.Password_does_not_match_regular_expression.WithParameters(),
                     "newPassword");
             }
             ValidatePasswordEventArgs e = new ValidatePasswordEventArgs(username, newPassword, false);
@@ -110,7 +106,7 @@ namespace RavenDBMembership.Provider
                 {
                     throw e.FailureInformation;
                 }
-                throw new ArgumentException(SR.Membership_Custom_Password_Validation_Failure.WithParameters(), "newPassword");
+                throw new ArgumentException(Sr.Membership_Custom_Password_Validation_Failure.WithParameters(), "newPassword");
             }
 
             return CheckedChangePassword(username, oldPassword, newPassword);

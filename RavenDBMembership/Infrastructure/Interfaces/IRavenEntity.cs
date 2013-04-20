@@ -1,4 +1,4 @@
-﻿namespace RavenDBMembership.Infrastructure.Interfaces
+﻿namespace RavenDbMembership.Infrastructure.Interfaces
 {
     public interface IRavenEntity
     {

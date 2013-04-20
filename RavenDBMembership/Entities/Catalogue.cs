@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using RavenDBMembership.Entities.Enums;
-using RavenDBMembership.Infrastructure.Interfaces;
+﻿using System.Collections.Generic;
+using RavenDbMembership.Entities.Enums;
+using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDBMembership.Entities
+namespace RavenDbMembership.Entities
 {
     public class Catalogue : IRavenEntity
     {
@@ -11,6 +10,6 @@ namespace RavenDBMembership.Entities
         public string CatalogueName { get; set; }
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
-        public IEnumerable<string> Promotions { get; set; } 
+        public IEnumerable<string> Promotions { get; set; }
     }
 }

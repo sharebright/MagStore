@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Web", "..\MagStore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenDbMembership", "..\RavenDBMembership\RavenDbMembership.csproj", "{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Azure", "MagStore.StorageAccessor\MagStore.Azure.csproj", "{262E8901-EF1C-4CE7-BD6E-E54EC466D449}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{262E8901-EF1C-4CE7-BD6E-E54EC466D449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{262E8901-EF1C-4CE7-BD6E-E54EC466D449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{262E8901-EF1C-4CE7-BD6E-E54EC466D449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{262E8901-EF1C-4CE7-BD6E-E54EC466D449}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using Raven.Client;
 using Raven.Client.Document;
 
-namespace RavenDBMembership.Infrastructure.Interfaces
+namespace RavenDbMembership.Infrastructure.Interfaces
 {
     public interface IShop
     {

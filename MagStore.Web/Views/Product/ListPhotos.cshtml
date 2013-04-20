@@ -1,0 +1,26 @@
+﻿@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+        <div>
+              @{
+                  if (ViewBag.Photos != null)
+                  {
+                      foreach (var photo in ViewBag.Photos)
+                      {
+                          <img src="@photo.Uri"/><br />
+                      }
+                  }
+              }
+        </div>
+    </body>
+</html>

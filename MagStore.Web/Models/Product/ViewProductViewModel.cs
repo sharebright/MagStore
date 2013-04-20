@@ -4,6 +4,6 @@ namespace MagStore.Web.Models.Product
 {
     public class ViewProductViewModel
     {
-        public IEnumerable<RavenDBMembership.Entities.Product> Products { get; set; }
+        public IEnumerable<RavenDbMembership.Entities.Product> Products { get; set; }
     }
 }

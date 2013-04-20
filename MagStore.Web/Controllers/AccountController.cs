@@ -3,9 +3,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using MagStore.Web.Models;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Infrastructure;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Entities;
+using RavenDbMembership.Infrastructure;
+using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {
@@ -88,7 +88,7 @@ namespace MagStore.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
+                var createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {

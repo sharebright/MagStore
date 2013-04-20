@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using MagStore.Web.Models;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Entities;
+using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {

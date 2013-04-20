@@ -1,6 +1,6 @@
 ﻿using System.Web.Security;
 
-namespace RavenDBMembership.Infrastructure.Interfaces
+namespace RavenDbMembership.Infrastructure.Interfaces
 {
     public interface IMembershipService
     {

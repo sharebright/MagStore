@@ -1,7 +1,20 @@
-﻿@model MagStore.Web.Models.Product.CreateProductViewModel
+﻿@using RavenDbMembership.Entities.Enums
+@model MagStore.Web.Models.Product.CreateProductViewModel
 @{
     ViewBag.Title = "CreateProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section ReadyScripts
+{
+    $("input#addPhoto").click(function() { 
+        $("#photographs").append('<div style="border: solid 1px blue; margin: 3px 3px 3px 3px; padding: 3px 3px 3px 3px;">' + 
+            '<b>Attach an image to this product and specify the type of image:</b><br />' +
+            '<select name="PhotoType">' + '<option value="Thumb">Thumb</option>' + 
+            '<option value="Main">Feature</option>' + 
+            '<option value="HiRes">HiRes</option>' + 
+            '</select><br /><br />' + 
+            '<input type="file" name="File" id="Photo" /></div>');
+     });
 }
 @section Scripts
 {
@@ -22,9 +35,10 @@
     </div>
     <article>
         <h1>Create Product</h1>
-        @using (Html.BeginForm())
-        {
-            @Html.ValidationSummary(true)
+        @{
+            var form = Html.BeginForm("CreateProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" });
+
+            @Html.ValidationSummary(true);
 
             <fieldset>
 
@@ -48,8 +62,16 @@
                     @Html.LabelFor(model => model.Catalogue)
                 </div>
                 <div class="editor-field">
-                    @Html.DropDownList("Catalogue", Model.Catalogue.Select(x => new SelectListItem { Selected = false, Text = x.Key, Value = x.Value }), new { name = "Catalogue" })
+                    @Html.DropDownList("Catalogue", Model.Catalogue.Select(x => new SelectListItem { Selected = false, Text = x.Value, Value = x.Key }), new { name = "Catalogue" })
                     @Html.ValidationMessageFor(model => model.Catalogue)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Promotions)
+                </div>
+                <div class="editor-field">
+                    @Html.ListBox("Promotions", Model.Promotions.Select(x => new SelectListItem { Selected = false, Text = x.Value, Value = x.Key }), new { name = "Promotions" })
+                    @Html.ValidationMessageFor(model => model.Promotions)
                 </div>
 
                 <div class="editor-label">
@@ -58,6 +80,18 @@
                 <div class="editor-field">
                     @Html.EditorFor(model => model.Colour)
                     @Html.ValidationMessageFor(model => model.Colour)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Gender)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownList("Gender", new List<SelectListItem>
+                        {
+                            new SelectListItem {Selected = true, Value = "", Text = "" }, 
+                            new SelectListItem {Text = "Male",Value = "Male"}, 
+                            new SelectListItem {Text = "Female", Value = "Female"}
+                        })
                 </div>
 
                 <div class="editor-label">
@@ -74,6 +108,28 @@
                 <div class="editor-field">
                     @Html.EditorFor(model => model.Brand)
                     @Html.ValidationMessageFor(model => model.Brand)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ProductType)
+                </div>
+                <div class="editor-field">
+                    
+                    @{
+                        var productTypes = new List<SelectListItem>();
+
+                        productTypes
+                            .AddRange(Enum.GetNames(typeof (ProductType))
+                            .Select(x => new SelectListItem
+                                {
+                                    Text = x,
+                                    Value = x
+                                }));
+                                
+                    }
+                    @Html.DropDownListFor(model => model.ProductType, productTypes)
+                                                                          
+@*                    @Html.ValidationMessageFor(model => model.ProductType)*@
                 </div>
 
                 <div class="editor-label">
@@ -107,10 +163,15 @@
                     @Html.EditorFor(model => model.DiscountAmount)
                     @Html.ValidationMessageFor(model => model.DiscountAmount)
                 </div>
+
+                <p id="photographs"></p>
+                <br/>
+                <input type="button" style="border: solid 1px green; padding: 2px;" id="addPhoto" value="Add Photo" />
                 <p>
                     <input type="submit" value="Create" />
                 </p>
             </fieldset>
+            form.EndForm();
         }
     </article>
 		

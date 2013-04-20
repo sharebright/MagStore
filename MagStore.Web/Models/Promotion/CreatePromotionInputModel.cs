@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using RavenDBMembership.Entities.Enums;
+using RavenDbMembership.Entities.Enums;
 
 namespace MagStore.Web.Models.Promotion
 {

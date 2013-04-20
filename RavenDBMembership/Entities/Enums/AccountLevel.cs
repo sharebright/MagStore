@@ -1,4 +1,4 @@
-﻿namespace RavenDBMembership.Entities.Enums
+﻿namespace RavenDbMembership.Entities.Enums
 {
     public enum AccountLevel
     {

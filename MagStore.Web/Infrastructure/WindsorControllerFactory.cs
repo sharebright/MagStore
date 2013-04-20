@@ -3,8 +3,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Windsor;
-using RavenDBMembership.Entities;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Entities;
+using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Infrastructure
 {

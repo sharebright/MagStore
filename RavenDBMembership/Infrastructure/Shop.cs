@@ -2,10 +2,10 @@
 using System.Linq.Expressions;
 using Raven.Client;
 using Raven.Client.Document;
-using RavenDBMembership.Infrastructure.Interfaces;
+using RavenDbMembership.Infrastructure.Interfaces;
 using RavenDbMembership.Infrastructure;
 
-namespace RavenDBMembership.Infrastructure
+namespace RavenDbMembership.Infrastructure
 {
     public class Shop : IShop
     {
