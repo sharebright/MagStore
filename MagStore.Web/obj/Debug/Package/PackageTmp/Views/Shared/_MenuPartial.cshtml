@@ -1,5 +1,5 @@
-﻿@using RavenDBMembership.Entities
-@using RavenDBMembership.Infrastructure
+﻿@using RavenDbMembership.Entities
+@using RavenDbMembership.Infrastructure
 @{
     var shop = HttpContext.Current.Application["Shop"] as Shop;
     var shoppingCart = ((User) HttpContext.Current.Session["CurrentUser"]).ShoppingCart;

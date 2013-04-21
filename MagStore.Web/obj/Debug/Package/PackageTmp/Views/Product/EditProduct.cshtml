@@ -31,6 +31,14 @@
             <fieldset>
 
                 <div class="editor-label">
+                    @Html.LabelFor(model => model.Id)
+                </div>
+                <div class="editor-field">
+                    <input type="text" readonly="readonly" name="Id" value="@Model.Id" />
+                    @Html.ValidationMessageFor(model => model.Id)
+                </div>
+
+                <div class="editor-label">
                     @Html.LabelFor(model => model.Name)
                 </div>
                 <div class="editor-field">
@@ -44,6 +52,15 @@
                 <div class="editor-field">
                     @Html.EditorFor(model => model.Description)
                     @Html.ValidationMessageFor(model => model.Description)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Catalogue)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.Catalogue, Model.CatalogueList.Select(x => new SelectListItem { Selected = (x.Id == Model.Catalogue), Text = x.Name, Value = x.Id })) 
+@*                    //("Catalogue", Model.CatalogueList.Select(x => new SelectListItem { Selected = (x.Id == Model.Catalogue), Text = x.Name, Value = x.Id }), new { name = "Catalogue" })*@
+                    @Html.ValidationMessageFor(model => model.Catalogue)
                 </div>
 
                 <div class="editor-label">

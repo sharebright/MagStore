@@ -437,7 +437,7 @@ header ul li.menumain:hover {
 
 .social-networks {
 	position:			absolute;
-	right:				285px;
+	right:				355px;
 	top:				63px;
 }
 
@@ -673,8 +673,8 @@ input[type=password],
 input[type=submit],
 select,
 textarea {
-	-moz-appearance:	none;
-	-webkit-appearance:	none;
+	/*-moz-appearance:	none;
+	-webkit-appearance:	none;*/
 	background:			#f4f4f4;
 	border:				1px solid #ccc;
 	border-radius:		3px;

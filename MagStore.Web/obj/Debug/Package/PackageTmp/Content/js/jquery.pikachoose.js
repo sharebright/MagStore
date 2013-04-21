@@ -1,6 +1,6 @@
 /*  5/19/2012
 		PikaChoose
-	Jquery plugin for photo galleries
+	Jquery plugin for File galleries
     Copyright (C) 2011 Jeremy Fry
 
     This program is free software: you can redistribute it and/or modify

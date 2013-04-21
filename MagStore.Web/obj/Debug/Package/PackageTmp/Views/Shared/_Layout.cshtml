@@ -63,6 +63,8 @@
                     runEffect();
                     return false;
                 });
+
+                @RenderSection("ReadyScripts", false);
             });
         </script>
         @RenderSection("Scripts")
@@ -128,10 +130,10 @@
 			</section><!-- .cart end -->
 			<section class="social-networks">
 				<ul>
-					<li><a href="http://facebook.com/coffeecreameu" target="_blank"><img src="~/Content/images/facebook.png" width="26" height="52" alt="Like me on Facebook" /></a></li>
-					<li><a href="http://twitter.com/coffeecreameu" target="_blank"><img src="~/Content/images/twitter.png" width="26" height="52" alt="Follow me on Twitter" /></a></li>
-					<li><a href="http://plus.google.com/111405957653832671873" target="_blank"><img src="~/Content/images/google.png" width="26" height="52" alt="Add me on Google Plus" /></a></li>
-					<li><a href="http://www.linkedin.com/in/banaszek" target="_blank"><img src="~/Content/images/linkedin.png" width="26" height="52" alt="Find me on LInkedIn" /></a></li>
+					<li><a href="http://facebook.com/shakarashop" target="_blank"><img src="~/Content/images/facebook.png" width="26" height="52" alt="Like me on Facebook" /></a></li>
+					<li><a href="http://twitter.com/shakarashop" target="_blank"><img src="~/Content/images/twitter.png" width="26" height="52" alt="Follow me on Twitter" /></a></li>
+@*					<li><a href="http://plus.google.com/111405957653832671873" target="_blank"><img src="~/Content/images/google.png" width="26" height="52" alt="Add me on Google Plus" /></a></li>*@
+@*					<li><a href="http://www.linkedin.com/in/banaszek" target="_blank"><img src="~/Content/images/linkedin.png" width="26" height="52" alt="Find me on LInkedIn" /></a></li>*@
 				</ul>
 			</section><!-- .social-networks end -->
 			
@@ -210,7 +212,7 @@
 				            live: false,
 				            behavior: 'all'
 				        }
-				    }).render().setUser('markrgray').start();
+				    }).render().setUser('shakarashop').start();
 				</script>
 			</section><!-- #tweets end -->
 			

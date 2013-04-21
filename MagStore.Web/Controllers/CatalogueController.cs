@@ -20,8 +20,8 @@ namespace MagStore.Web.Controllers
         [HttpPost]
         public ActionResult ViewProductsInCatalogue(string id)
         {
-            var products = shop.GetCoordinator<Product>().Project().Where(x=>x.Catalogue == id);
             var catalogue = shop.GetCoordinator<Catalogue>().Load(id);
+            var products = shop.GetCoordinator<Product>().Project().Where(x=>x.Catalogue == id);
             return View(new ProductsViewModel { Catalogue = catalogue, Products = products });
         }
 
@@ -43,7 +43,7 @@ namespace MagStore.Web.Controllers
             shop.GetCoordinator<Catalogue>().Save(new Catalogue
             {
                 Id=inputModel.Id,
-                CatalogueName=inputModel.Name,
+                Name=inputModel.Name,
                 DiscountAmount =  inputModel.DiscountAmount,
                 DiscountType = inputModel.DiscountType,
                 Promotions = new List<string>()

@@ -194,6 +194,7 @@
     <Compile Include="Models\LogOnModel.cs" />
     <Compile Include="Models\Product\CreateProductInputModel.cs" />
     <Compile Include="Models\Product\CreateProductViewModel.cs" />
+    <Compile Include="Models\Product\EditProductInputModel.cs" />
     <Compile Include="Models\Product\EditProductViewModel.cs" />
     <Compile Include="Models\Product\ProductsViewModel.cs" />
     <Compile Include="Models\Product\ViewProductViewModel.cs" />

@@ -9,5 +9,15 @@ namespace MagStore.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult UpdateCloudbird()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ActionResult UpdateAzure()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

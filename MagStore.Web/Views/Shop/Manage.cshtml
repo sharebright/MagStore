@@ -7,6 +7,87 @@
 
 @section Scripts
 {
+    <style type="text/css">
+        .productAdminControl {
+            border: solid 1px salmon; 
+            padding: 5px 5px 5px 15px; 
+            background-color: salmon; 
+            color: white;
+        }
+        .productAdminControl a, .productAdminControl h6 {
+            color: white   ;
+        }
+        
+        .catalogueAdminControl {
+            border: solid 1px green; 
+            padding: 5px 5px 5px 15px; 
+            background-color: green; 
+            color: yellow;
+        }
+        .catalogueAdminControl a, .catalogueAdminControl h6 {
+            color: yellow   ;
+        }
+        
+        .userAdminControl {
+            border: solid 1px blue; 
+            padding: 5px 5px 5px 15px; 
+            background-color: blue; 
+            color: plum;
+        }
+        .userAdminControl a, .userAdminControl h6 {
+            color: plum;
+        }
+        
+        .roleAdminControl {
+            border: solid 1px yellow; 
+            padding: 5px 5px 5px 15px; 
+            background-color: yellow; 
+            color: brown;
+        }
+        .roleAdminControl a, .roleAdminControl h6 {
+            color: brown;
+        }
+        
+        .promotionControl {
+            border: solid 1px peru; 
+            padding: 5px 5px 5px 15px; 
+            background-color: peru; 
+            color: khaki;
+        }
+        .promotionControl a, .promotionControl h6 {
+            color: khaki;
+        }
+                
+        .pspControl {
+            border: solid 1px orange; 
+            padding: 5px 5px 5px 15px; 
+            background-color: orange; 
+            color: black;
+        }
+        .pspControl a, .pspControl h6 {
+            color: black;
+        }
+                
+        .cloudBirdControl {
+            border: solid 1px blueviolet; 
+            padding: 5px 5px 5px 15px; 
+            background-color: blueviolet; 
+            color: cyan;
+        }
+        .cloudBirdControl a, .cloudBirdControl h6 {
+            color: cyan;
+        }
+                
+        .azureControl {
+            border: solid 1px orchid; 
+            padding: 5px 5px 5px 15px; 
+            background-color: orchid; 
+            color: darkcyan;
+        }
+        .azureControl a, .azureControl h6 {
+            color: darkcyan ;
+        }
+    </style>
     <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet' type='text/css' />
 	
@@ -25,48 +106,95 @@
 	    </div>
 		<article>
 			<h1>Manage Shop </h1>
-			<h6>1/2 columns</h6>
-		    <div class="one-second" style="">
-		        <div style="border: solid 1px green; padding: 5px 5px 5px 5px;">
-		            <h6>Product Administration</h6>
-		            Here you can:
-		            <ul>
-		                <li>@Html.ActionLink("Create catalogue", "CreateCatalogue", "Catalogue")</li>
-		                <li>@Html.ActionLink("View catalogues", "ViewCatalogues", "Catalogue")</li>
-		                <li>@Html.ActionLink("Create product", "CreateProduct", "Product")</li>
-		                <li>@Html.ActionLink("View products", "ViewProducts", "Product")</li>
-		                <li>@Html.ActionLink("Create promotion", "CreatePromotion", "Promotion")</li>
-                        <li>@Html.ActionLink("View Promotions", "ViewPromotions", "Promotion")</li>
-		            </ul>
-		        </div>
-		    </div>
+			<h6>User and Access Control</h6>
 		    <div class="one-second">
-		        <div style="border: solid 1px blue; padding: 5px 5px 5px 5px;">
-		            <h6>User Administration</h6>		            Here you can:
+		        <div class="userAdminControl">
+		            <h6>User Admin</h6>
+		            Here you can:
 		            <ul>
 		                <li>@Html.ActionLink("Create user", "CreateUser", "Account")</li>
 		                <li>@Html.ActionLink("View users", "ViewUsers", "Account")</li>
 		                <li>@Html.ActionLink("Edit user", "EditUser", "Account")</li>
+		            </ul>
+		        </div>
+		    </div>
+		    <div class="one-second">
+		        <div class="roleAdminControl">
+		            <h6>Role Admin</h6>
+		            Here you can:
+
+		            <ul>
 		                <li>@Html.ActionLink("Create role", "CreateRole", "Account")</li>
 		                <li>@Html.ActionLink("View roles", "ViewRoles", "Account")</li>
-                        <li>@Html.ActionLink("Edit roles", "EditRoles", "Account")</li>
+		                <li>@Html.ActionLink("Edit roles", "EditRoles", "Account")</li>
 		            </ul>
 
 		        </div>
 		    </div>
 			<div class="clear"></div>
-			<h6>1/3 columns</h6>
-			<div class="one-third">Maecenas molestie hendrerit imperdiet. Maecenas tortor 
-			massa, tristique vitae vehicula eget, ullamcorper ac ante. Nulla dignissim 
-			tincidunt nisl, ut rutrum orci sodales et.</div>
-			<div class="one-third">Maecenas molestie hendrerit imperdiet. Maecenas tortor 
-			massa, tristique vitae vehicula eget, ullamcorper ac ante. Nulla dignissim 
-			tincidunt nisl, ut rutrum orci sodales et.</div>
-			<div class="one-third">Maecenas molestie hendrerit imperdiet. Maecenas tortor 
-			massa, tristique vitae vehicula eget, ullamcorper ac ante. Nulla dignissim 
-			tincidunt nisl, ut rutrum orci sodales et.</div>
+			<h6>Products Features</h6>
+		    <div class="one-third" style="">
+		        <div class="catalogueAdminControl">
+		            <h6>Catalogue Admin</h6>
+		            Here you can:
+		            <ul>
+		                <li>@Html.ActionLink("Create catalogue", "CreateCatalogue", "Catalogue")</li>
+		                <li>@Html.ActionLink("View catalogues", "ViewCatalogues", "Catalogue")</li>
+		            </ul>
+		        </div>
+		    </div>
+		    <div class="one-third">
+		        <div class="productAdminControl">
+		            <h6>Product Admin</h6>
+		            Here you can:
+		            <ul>                     
+		                <li>@Html.ActionLink("Create product", "CreateProduct", "Product")</li>
+		                <li>@Html.ActionLink("View products", "ViewProducts", "Product")</li>
+		            </ul>
+		        </div>
+		    </div>
+		    <div class="one-third">
+		        <div class="promotionControl">
+		            <h6>Promotion Admin</h6>
+		            Here you can:
+		            <ul>                     
+		                <li>@Html.ActionLink("Create promotion", "CreatePromotion", "Promotion")</li>
+                        <li>@Html.ActionLink("View Promotions", "ViewPromotions", "Promotion")</li>
+		            </ul>
+		        </div>
+		    </div>
 			<div class="clear"></div>
-			<h6>1/4 columns</h6>
+			<h6>Third Party System Dependencies</h6>
+		    <div class="one-third">
+		        <div class="azureControl">
+		            <h6>Azure Admin</h6>
+		            Here you can:
+		            <ul>
+		                <li>@Html.ActionLink("Amend access", "UpdateAzure", "Shop")</li>
+		            </ul>
+		        </div>
+		    </div>
+		    <div class="one-third">
+		        <div class="pspControl">
+		            <h6>Sagepay Admin</h6>
+		            Here you:
+		            <ul>
+		                <li>@Html.ActionLink("Amend access", "AmendSagepayAccess", "Shop")</li>
+		                <li>@Html.ActionLink("Set mode", "SetSagepayMode", "Shop")</li>
+		            </ul>
+		        </div>
+		    </div>
+		    <div class="one-third">
+		        <div class="cloudBirdControl">
+		            <h6>Cloudbird Admin</h6>
+		            Here you can:
+		            <ul>                     
+		               <li>@Html.ActionLink("Amend access", "UpdateCloudbird", "Shop")</li>
+		            </ul>
+		        </div>
+		    </div>
+			<div class="clear"></div>
+			<h6>Shop Settings</h6>
 			<div class="one-forth">Mauris massa mi, vestibulum eget suscipit vel, porta 
 			in urna. Phasellus nec magna nec lorem accumsan porta nec quis dui.</div>
 			<div class="one-forth">Mauris massa mi, vestibulum eget suscipit vel, porta 

@@ -27,7 +27,7 @@ namespace MagStore.Web.Controllers
             var catalogues =
                 shop.GetCoordinator<Catalogue>()
                     .Project()
-                    .Select(x => new KeyValuePair<string, string>(x.Id, x.CatalogueName));
+                    .Select(x => new KeyValuePair<string, string>(x.Id, x.Name));
 
             var promotions =
                 shop.GetCoordinator<Promotion>()
@@ -106,7 +106,7 @@ namespace MagStore.Web.Controllers
             var catalogues =
                 shop.GetCoordinator<Catalogue>()
                     .Project()
-                    .Select(x => new KeyValuePair<string, string>(x.Id, x.CatalogueName));
+                    .Select(x => new KeyValuePair<string, string>(x.Id, x.Name));
 
             var promotions =
                 shop.GetCoordinator<Promotion>()
@@ -149,27 +149,66 @@ namespace MagStore.Web.Controllers
             return View(new ViewProductViewModel { Products = products });
         }
 
+        [HttpGet]
         public ActionResult EditProduct(string id)
         {
-            var p = shop.GetCoordinator<Product>().Load(id);
-            return View(new EditProductViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Catalogue = p.Catalogue,
-                Brand = p.Brand,
-                Colour = p.Colour,
-                DiscountAmount = p.DiscountAmount,
-                DiscountType = p.DiscountType,
-                Gender = p.Gender,
-                Price = p.Price,
-                ProductType = p.ProductType,
-                Rating = p.Rating,
-                Reviews = p.Reviews,
-                Size = p.Size,
-                Supplier = p.Supplier
-            });
+            var product = shop.GetCoordinator<Product>().Load(id);
+            var editProductViewModel = GetEditProductViewModel(product);
+            return View(editProductViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(EditProductInputModel inputModel)
+        {
+            var product = MapProductModelChangesToEntity(inputModel, shop.GetCoordinator<Product>().Load(inputModel.Id));
+            shop.GetCoordinator<Product>().Save(product);
+            return View(GetEditProductViewModel(product));
+        }
+
+        private Product MapProductModelChangesToEntity(EditProductInputModel inputModel, Product product)
+        {
+            product.AgeRange = inputModel.AgeRange;
+            product.Brand = inputModel.Brand;
+            product.Catalogue = inputModel.Catalogue;
+            product.Colour = inputModel.Colour;
+            product.Description = inputModel.Description;
+            product.DiscountAmount = inputModel.DiscountAmount;
+            product.DiscountType = inputModel.DiscountType;
+            product.Gender = inputModel.Gender;
+            product.Name = inputModel.Name;
+            product.Price = inputModel.Price;
+            product.ProductType = inputModel.ProductType;
+            product.Promotions = inputModel.Promotions;
+            product.Rating = inputModel.Rating;
+            product.Reviews = inputModel.Reviews;
+            product.Size = inputModel.Size;
+            product.Supplier = inputModel.Supplier;
+            return product;
+        }
+
+        private EditProductViewModel GetEditProductViewModel(Product p)
+        {
+            var catalogues = shop.GetCoordinator<Catalogue>().Project();
+            var editProductViewModel = new EditProductViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Catalogue = p.Catalogue,
+                    Brand = p.Brand,
+                    Colour = p.Colour,
+                    DiscountAmount = p.DiscountAmount,
+                    DiscountType = p.DiscountType,
+                    Gender = p.Gender,
+                    Price = p.Price,
+                    ProductType = p.ProductType,
+                    Rating = p.Rating,
+                    Reviews = p.Reviews,
+                    Size = p.Size,
+                    Supplier = p.Supplier,
+                    CatalogueList = catalogues
+                };
+            return editProductViewModel;
         }
     }
 

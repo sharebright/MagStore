@@ -52,7 +52,7 @@
                     <tr>
                         <td>
                             @{
-                                var f = Html.BeginForm("EditProduct", "Product", FormMethod.Post);
+                                var f = Html.BeginForm("EditProduct", "Product", FormMethod.Get);
                                 var subStr = @product.Id.Substring(0, 4) + "...";
                                 <input id="Id" name="Id" type="hidden" value="@product.Id" />
                                 <input type="submit" title="@product.Id" value="@subStr" />
