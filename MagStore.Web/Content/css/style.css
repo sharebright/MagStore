@@ -1470,6 +1470,19 @@ article .accordion .ui-accordion-content {
 	width:				840px;
 }
 
+.full-width {
+	background:			#fff;
+	display:			block;
+	/*height:				400px;*/
+	margin:				30px 30px 30px 30px;
+	padding:			30px;
+	width:				840px;
+}
+
+.category 
+{
+}
+
 /* Form styles
 -----------------------------------------------------------------------------------------------*/
 
