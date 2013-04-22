@@ -72,6 +72,14 @@
                 </div>
 
                 <div class="editor-label">
+                    @Html.LabelFor(model => model.Gender)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.Gender, new [] { "", "Male", "Female" }.Select(x => new SelectListItem { Text = x, Value = x }))
+                    @Html.ValidationMessageFor(model => model.Gender)
+                </div>
+
+                <div class="editor-label">
                     @Html.LabelFor(model => model.Size)
                 </div>
                 <div class="editor-field">

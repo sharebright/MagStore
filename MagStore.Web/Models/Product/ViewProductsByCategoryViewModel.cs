@@ -10,5 +10,7 @@ namespace MagStore.Web.Models.Product
         public string ProductType { get; set; }
 
         public IEnumerable<ProductImage> Images { get; set; }
+
+        public IDictionary<string, string> Filters { get; set; } 
     }
 }

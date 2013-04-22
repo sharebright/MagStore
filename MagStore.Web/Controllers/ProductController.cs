@@ -175,7 +175,42 @@ namespace MagStore.Web.Controllers
 
             IEnumerable<ProductImage> images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images)));
 
-            return View(new ViewProductsByCategoryViewModel { Products = products, ProductType = inputModel.Category, Images = images });
+            IDictionary<string, string> filters = new Dictionary<string, string>();
+            filters.Add("Category", inputModel.Category);
+            filters.Add("Gender", inputModel.Gender);
+
+            return View(new ViewProductsByCategoryViewModel { Products = products, ProductType = inputModel.Category, Images = images, Filters = filters });
         }
+
+        public ActionResult ShowProduct(ShowProductInputModel inputModel)
+        {
+            Product product = shop.Include<Product>(p=>p.Images).Load(inputModel.Id);
+            IEnumerable<ProductImage> images = shop.GetCoordinator<ProductImage>().Load(product.Images);
+            var filters = new Dictionary<string, string>
+            {
+                {"Category", inputModel.Category},
+                {"Gender", inputModel.Gender}
+            };
+
+            return View(new ShowProductViewModel { Product = product, ProductImages = images,  Filters = filters });
+        }
+    }
+
+    public class ShowProductViewModel
+    {
+        public Product Product { get; set; }
+
+        public Dictionary<string, string> Filters { get; set; }
+
+        public IEnumerable<ProductImage> ProductImages { get; set; }
+    }
+
+    public class ShowProductInputModel
+    {
+        public string Id { get; set; }
+
+        public string Category { get; set; }
+
+        public string Gender { get; set; }
     }
 }

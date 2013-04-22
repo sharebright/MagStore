@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = @Model.ProductType;
     Layout = "../Shared/_Layout.cshtml";
+    var filters = string.Empty;
 }
+
+    @if (Model.Filters.Count() > 0)
+    {
+        filters = Model.Filters.Aggregate("?", (current, filter) => current + (filter.Key + "=" + filter.Value + "&"));
+    }
+
 
 @section Scripts
 {
@@ -20,21 +27,21 @@
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
     <div id="breadcrumb">
-       <a href="javascript:history.back()">Back</a> -- <a href="@HttpContext.Current.Request.UrlReferrer.ToString()">Products</a> / Create Product
+        <a href="javascript:history.back()">Back</a> -- <a href="@HttpContext.Current.Request.UrlReferrer.ToString()">@(Model.Filters["Gender"].ToUpper() == "MALE" ? "Men" : "Women")</a> / Create Product
     </div>
     <section class="full-width">
-            <h1>@Model.ProductType</h1>
-            @foreach (var product in Model.Products)
-            {
-                <div class="product-thumb one-forth">
-                    @if (product.Images.Any())
-                    {
-                        <img src="@product.Images.First()" alt="@product.Name" />
-                    }
-                    <br />
-                    @product.Name
-                </div>
-            }
+        <h1>@Model.ProductType</h1>
+        @foreach (var product in Model.Products)
+        {
+            <div class="product-thumb one-forth">
+                @if (product.Images.Any())
+                {
+                    <img src="@product.Images.First()" alt="@product.Name" />
+                }
+                <br />
+                <a href="/Product/ShowProduct/@product.Id@filters">@product.Name</a>
+            </div>
+        }
         <div class="clear"></div>
     </section>
 </section>

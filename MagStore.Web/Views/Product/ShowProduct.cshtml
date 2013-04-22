@@ -1,0 +1,90 @@
+﻿@using RavenDbMembership.Entities
+@using RavenDbMembership.Entities.Enums
+@model MagStore.Web.Controllers.ShowProductViewModel
+
+@{
+    ViewBag.Title = Model.Product.Name;
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet'
+        type='text/css'>
+    <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
+    <script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
+    <script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
+    
+    <style type="text/css">
+        #product-details, #product-main-image 
+        {
+            float: left;
+            width: 50%;
+        }
+        #product-info 
+        {
+            border: solid 1px red;
+            margin: 25px 25px 25px 25px;
+        }
+        #product-details {
+        }
+        .gutter 
+        {
+            border: solid 1px blue;
+            float: left;
+            clear: none;
+            width: 50px;
+        }
+        #product-details div div.detail-legends 
+        {
+            float: left;
+            width: 75px;
+            border: solid 1px red;
+            clear: left;
+            
+        }
+        #product-details div div.detail 
+        {
+            float: left;
+            width: 175px;
+            border: solid 1px red;
+        }
+    </style>
+}
+<!-- MAIN CONTENT START -->
+<section class="main wrapper">
+    <div id="breadcrumb">
+       <a href="javascript:history.back()">Back</a>
+    </div>
+    <section class="full-width">
+        @{
+            ProductImage productImage = Model.ProductImages.Single(x => x.ImageType.ToUpper() == "MAIN");
+        }
+        <div id="product-info">
+            <div id="product-main-image"><img src="@productImage.ImageUrl" alt="@Model.Product.Name" width="100%" /></div>
+            <div class="gutter">
+                <div id="product-details">
+                    <h3>@Model.Product.Name</h3>
+                    <br />
+                    <div><div class="detail-legends">Description:</div><div class="detail">@Model.Product.Description</div></div>
+                    <div><div class="detail-legends">Price:</div><div class="detail">@Model.Product.Price.ToString("N2")</div></div>
+                    <div><div class="detail-legends">Rating:</div><div class="detail">@Model.Product.Rating/5</div></div>
+                
+                    @if (Model.Product.Reviews != null && Model.Product.Reviews.Count() > 0)
+                    {
+                        <div><div>Reviews:</div><div>@Model.Product.Reviews</div></div>
+                    }
+                    <div><div class="detail-legends">Sizes:</div><div class="detail">@Model.Product.Size</div></div>
+                    <div><div class="detail-legends">Colours:</div><div class="detail">@Model.Product.Colour</div></div>
+                    <div><div class="detail-legends">Brand:</div><div class="detail">@Model.Product.Brand</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </section>
+</section>
+<!-- .main end -->
+<!-- MAIN CONTENT END -->
