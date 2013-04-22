@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Linq;
 using RavenDbMembership.Entities;
 using RavenDbMembership.Infrastructure.Interfaces;
 
@@ -43,6 +44,13 @@ namespace RavenDbMembership.Infrastructure
             return load;
         }
 
+        public IEnumerable<T> Load<T>(IEnumerable<string> id) where T : IRavenEntity
+        {
+            IEnumerable<T> load = CurrentSession.Load<T>(id);
+            CurrentSession.Dispose();
+            return load;
+        }
+
         public int Count<T>() where T : IRavenEntity
         {
             var count = session.Query<T>().Count();
@@ -74,7 +82,7 @@ namespace RavenDbMembership.Infrastructure
             CurrentSession.Dispose();
         }
 
-        public IList<T> Project<T>()
+        public IList<T> List<T>()
         {
             var project = CurrentSession.Query<T>().ToList();
             foreach (var product in project.Where(p => p.GetType() == typeof(Product))
@@ -92,6 +100,11 @@ namespace RavenDbMembership.Infrastructure
             }
             session.Dispose();
             return project;
+        }
+
+        public IRavenQueryable<T> Query<T>()
+        {
+            return session.Query<T>();
         }
 
         public ILoaderWithInclude<T> Include<T>(Expression<Func<T, object>> path)

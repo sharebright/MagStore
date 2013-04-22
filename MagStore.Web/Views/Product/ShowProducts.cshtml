@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "Catalogue";
     Layout = "../Shared/_Layout.cshtml";
+
+    var filters = string.Empty;
+    if (Model.Filters.Count() > 0)
+    {
+        filters = Model.Filters.Aggregate("?", (current, filter) => current + (filter.Key + "=" + filter.Value + "&"));
+    }
 }
 @section Scripts
 {
@@ -18,11 +24,11 @@
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
     <section class="full-width">
-            <h1>Products</h1>
+            <h1>Choose what you are looking for</h1>
             @foreach (var category in Model.Categories)
             {
                 <div class="category one-forth">
-                    <a href="/Product/ViewProductsByCategory?Category=@category">@category</a>
+                    <a href="/Product/ViewProductsByCategory@(filters)Category=@category">@category</a>
                 </div>
             }
         <div class="clear"></div>

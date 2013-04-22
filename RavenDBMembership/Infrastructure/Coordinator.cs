@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Raven.Client.Linq;
 using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace RavenDbMembership.Infrastructure
@@ -22,9 +23,19 @@ namespace RavenDbMembership.Infrastructure
             return ravenRepository.Load<T>(id);
         }
 
-        public IList<T> Project()
+        public IEnumerable<T> Load(IEnumerable<string> ids)
         {
-            return ravenRepository.Project<T>();
+            return ravenRepository.Load<T>(ids);
+        }
+
+        public IList<T> List()
+        {
+            return ravenRepository.List<T>();
+        }
+
+        public IRavenQueryable<T> Query<T>()
+        {
+            return ravenRepository.Query<T>();
         }
     }
 }

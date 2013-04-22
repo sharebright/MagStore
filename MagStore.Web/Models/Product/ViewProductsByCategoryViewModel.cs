@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RavenDbMembership.Entities;
 
 namespace MagStore.Web.Models.Product
 {
@@ -7,5 +8,7 @@ namespace MagStore.Web.Models.Product
         public IEnumerable<RavenDbMembership.Entities.Product> Products { get; set; }
 
         public string ProductType { get; set; }
+
+        public IEnumerable<ProductImage> Images { get; set; }
     }
 }

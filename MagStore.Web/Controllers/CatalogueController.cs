@@ -21,13 +21,13 @@ namespace MagStore.Web.Controllers
         public ActionResult ViewProductsInCatalogue(string id)
         {
             var catalogue = shop.GetCoordinator<Catalogue>().Load(id);
-            var products = shop.GetCoordinator<Product>().Project().Where(x=>x.Catalogue == id);
+            var products = shop.GetCoordinator<Product>().List().Where(x=>x.Catalogue == id);
             return View(new ProductsViewModel { Catalogue = catalogue, Products = products });
         }
 
         public ActionResult ViewCatalogues()
         {
-            var catalogues = shop.GetCoordinator<Catalogue>().Project();
+            var catalogues = shop.GetCoordinator<Catalogue>().List();
             return View(new CataloguesViewModel { Catalogues = catalogues });
         }
 

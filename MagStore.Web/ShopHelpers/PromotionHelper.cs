@@ -19,7 +19,7 @@ namespace MagStore.Web.ShopHelpers
         {
             get
             {
-                existingPromotions = shop.GetCoordinator<Promotion>().Project();
+                existingPromotions = shop.GetCoordinator<Promotion>().List();
                 return existingPromotions;
             }
         }

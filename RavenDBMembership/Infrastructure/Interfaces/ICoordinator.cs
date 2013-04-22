@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Raven.Client.Linq;
 
 namespace RavenDbMembership.Infrastructure.Interfaces
 {
@@ -6,6 +7,8 @@ namespace RavenDbMembership.Infrastructure.Interfaces
     {
         void Save( T entity );
         T Load( string id );
-        IList<T> Project();
+        IEnumerable<T> Load( IEnumerable<string> ids );
+        IList<T> List();
+        IRavenQueryable<T> Query<T>();
     }
 }

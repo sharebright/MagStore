@@ -54,7 +54,7 @@ namespace MagStore.Web.Controllers
 
         public ActionResult ViewPromotions()
         {
-            var promotions = shop.GetCoordinator<Promotion>().Project();
+            var promotions = shop.GetCoordinator<Promotion>().List();
             return View(new PromotionsViewModel{Promotions = promotions});
         }
 

@@ -70,7 +70,7 @@ namespace MagStore.Web.Controllers
 
         public EditProductViewModel GetEditProductViewModel(Product p)
         {
-            var catalogues = shop.GetCoordinator<Catalogue>().Project();
+            var catalogues = shop.GetCoordinator<Catalogue>().List();
             var editProductViewModel = new EditProductViewModel
                 {
                     Id = p.Id,

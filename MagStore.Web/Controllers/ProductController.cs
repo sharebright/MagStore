@@ -29,12 +29,12 @@ namespace MagStore.Web.Controllers
         {
             var catalogues =
                 shop.GetCoordinator<Catalogue>()
-                    .Project()
+                    .List()
                     .Select(x => new KeyValuePair<string, string>(x.Id, x.Name));
 
             var promotions =
                 shop.GetCoordinator<Promotion>()
-                    .Project()
+                    .List()
                     .Select(x => new KeyValuePair<string, string>(x.Id, x.Name));
 
             return View(new CreateProductViewModel(catalogues, promotions));
@@ -104,12 +104,12 @@ namespace MagStore.Web.Controllers
 
             var catalogues =
                 shop.GetCoordinator<Catalogue>()
-                    .Project()
+                    .List()
                     .Select(x => new KeyValuePair<string, string>(x.Id, x.Name));
 
             var promotions =
                 shop.GetCoordinator<Promotion>()
-                    .Project()
+                    .List()
                     .Select(x => new KeyValuePair<string, string>(x.Id, x.Name));
 
             return View(new CreateProductViewModel(catalogues, promotions));
@@ -117,7 +117,7 @@ namespace MagStore.Web.Controllers
 
         public ActionResult ViewProducts()
         {
-            var products = shop.GetCoordinator<Product>().Project();
+            var products = shop.GetCoordinator<Product>().List();
             return View(new ViewProductViewModel { Products = products });
         }
 
@@ -138,20 +138,44 @@ namespace MagStore.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult ShowProducts()
+        public ActionResult ShowProducts(ViewProductsByCategoryInputModel inputModel)
         {
-            var categories = Enum.GetNames(typeof(ProductType)).ToList();
-            return View(new ProductCategoriesViewModel { Categories = categories });
+            var products = shop.GetCoordinator<Product>().List();
+
+            var availableCategories = from a in Enum.GetValues(typeof (ProductType)).AsQueryable().OfType<ProductType>()
+                                 from p in products
+                                 where p.ProductType == a
+                                 where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
+                                 select a;
+
+            var filteredProducts = availableCategories.SelectMany(a => products.Where(p => p.ProductType == a)).AsEnumerable();
+
+            var images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p=>p.Images)));
+
+
+            IDictionary<string, string> filters = new Dictionary<string, string>();
+            filters.Add("Gender", inputModel.Gender);
+            return View(new ProductCategoriesViewModel { Categories = availableCategories, Products = filteredProducts, Images = images, Filters = filters });
         }
 
         [HttpGet]
         public ActionResult ViewProductsByCategory(ViewProductsByCategoryInputModel inputModel)
         {
-            var products =
+            IEnumerable<Product> products =
                 shop.GetCoordinator<Product>()
-                    .Project()
+                    .List()
                     .Where(p => p.ProductType == (ProductType)Enum.Parse(typeof(ProductType), inputModel.Category));
-            return View(new ViewProductsByCategoryViewModel { Products = products });
+
+            IQueryable<ProductType> productTypes = Enum.GetValues(typeof (ProductType)).AsQueryable().OfType<ProductType>();
+            IQueryable<ProductType> availableCategories = from a in productTypes
+                                      from p in products
+                                      where p.ProductType == a
+                                      where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
+                                      select a;
+
+            IEnumerable<ProductImage> images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images)));
+
+            return View(new ViewProductsByCategoryViewModel { Products = products, ProductType = inputModel.Category, Images = images });
         }
     }
 }

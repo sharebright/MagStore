@@ -19,8 +19,11 @@
 }
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
+    <div id="breadcrumb">
+       <a href="javascript:history.back()">Back</a> -- <a href="@HttpContext.Current.Request.UrlReferrer.ToString()">Products</a> / Create Product
+    </div>
     <section class="full-width">
-            <h1>Products</h1>
+            <h1>@Model.ProductType</h1>
             @foreach (var product in Model.Products)
             {
                 <div class="product-thumb one-forth">
