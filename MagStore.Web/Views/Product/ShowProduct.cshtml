@@ -22,7 +22,7 @@
         #product-details, #product-main-image 
         {
             float: left;
-            width: 50%;
+            width: 45%;
         }
         #product-info 
         {
@@ -31,7 +31,7 @@
         }
         #product-details {
         }
-        .gutter 
+        .divider
         {
             border: solid 1px blue;
             float: left;
@@ -63,24 +63,23 @@
         @{
             ProductImage productImage = Model.ProductImages.Single(x => x.ImageType.ToUpper() == "MAIN");
         }
-        <div id="product-info">
+        <div id="product-info" class="container_12">
             <div id="product-main-image"><img src="@productImage.ImageUrl" alt="@Model.Product.Name" width="100%" /></div>
-            <div class="gutter">
-                <div id="product-details">
-                    <h3>@Model.Product.Name</h3>
-                    <br />
-                    <div><div class="detail-legends">Description:</div><div class="detail">@Model.Product.Description</div></div>
-                    <div><div class="detail-legends">Price:</div><div class="detail">@Model.Product.Price.ToString("N2")</div></div>
-                    <div><div class="detail-legends">Rating:</div><div class="detail">@Model.Product.Rating/5</div></div>
+            <div class="divider"></div>
+            <div id="product-details">
+                <h3>@Model.Product.Name</h3>
+                <br />
+                <div><div class="detail-legends">Description:</div><div class="detail">@Model.Product.Description</div></div>
+                <div><div class="detail-legends">Price:</div><div class="detail">@Model.Product.Price.ToString("N2")</div></div>
+                <div><div class="detail-legends">Rating:</div><div class="detail">@Model.Product.Rating/5</div></div>
                 
-                    @if (Model.Product.Reviews != null && Model.Product.Reviews.Count() > 0)
-                    {
-                        <div><div>Reviews:</div><div>@Model.Product.Reviews</div></div>
-                    }
-                    <div><div class="detail-legends">Sizes:</div><div class="detail">@Model.Product.Size</div></div>
-                    <div><div class="detail-legends">Colours:</div><div class="detail">@Model.Product.Colour</div></div>
-                    <div><div class="detail-legends">Brand:</div><div class="detail">@Model.Product.Brand</div></div>
-                </div>
+                @if (Model.Product.Reviews != null && Model.Product.Reviews.Count() > 0)
+                {
+                    <div><div>Reviews:</div><div>@Model.Product.Reviews</div></div>
+                }
+                <div><div class="detail-legends">Sizes:</div><div class="detail">@Model.Product.Size</div></div>
+                <div><div class="detail-legends">Colours:</div><div class="detail">@Model.Product.Colour</div></div>
+                <div><div class="detail-legends">Brand:</div><div class="detail">@Model.Product.Brand</div></div>
             </div>
         </div>
         <div class="clear"></div>

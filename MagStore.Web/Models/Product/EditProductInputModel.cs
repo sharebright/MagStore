@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using RavenDbMembership.Entities;
 using RavenDbMembership.Entities.Enums;
 
@@ -17,6 +18,7 @@ namespace MagStore.Web.Models.Product
         public int Rating { get; set; }
         public IEnumerable<string> Reviews { get; set; }
         public IEnumerable<ProductImage> Images { get; set; }
+        public IEnumerable<HttpPostedFileBase> UploadedImages { get; set; }
         public decimal Price { get; set; }
         public ProductType ProductType { get; set; }
         public int[] AgeRange { get; set; }

@@ -1,0 +1,36 @@
+﻿@model MagStore.Web.Controllers.ImageCreationGetModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Create Image</title>
+    </head>
+    <body>
+        @using (Html.BeginForm("CreateImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            Html.ValidationSummary(true);
+            <div>
+                ImageType:
+            </div>
+            <div>
+              @Html.DropDownListFor(model => model.ImageTypes, Model.ImageTypes.Select(x => new SelectListItem { Text = x, Value = x }), new { Name = "ImageType" })
+              @Html.ValidationMessageFor(model => model.ImageTypes)
+            </div>
+            <div>
+              Image to upload:
+            </div>
+            <div>
+                <input type="file" name="Image" />
+            </div>
+            <div>
+                <input type="submit" />
+            </div>
+        }
+        <img src="http://magshopstrg.blob.core.windows.net/resources/08a8edfe-6465-4cf1-a586-85672ed8c579"/>
+    </body>
+</html>

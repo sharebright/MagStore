@@ -9,6 +9,9 @@ using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {
+    using UploadedImages = IEnumerable<KeyValuePair<string, HttpPostedFileBase>>;
+    using ExistingAzureImages = IEnumerable<KeyValuePair<string, string>>;
+    
     public class ProductControllerHelper
     {
         private readonly IShop shop;
@@ -20,7 +23,7 @@ namespace MagStore.Web.Controllers
             this.storage = storage;
         }
 
-        public IEnumerable<string> SaveImagesToRaven(IEnumerable<KeyValuePair<Uri, string>> savedInAzure)
+        public IEnumerable<string> SaveImagesToRaven(IEnumerable<KeyValuePair<Guid, string>> savedInAzure)
         {
             var images = new List<string>();
             foreach (var vp in savedInAzure)
@@ -37,18 +40,34 @@ namespace MagStore.Web.Controllers
             return images;
         }
 
-        public IEnumerable<KeyValuePair<Uri, string>> SaveImagesToAzure(IEnumerable<KeyValuePair<string, HttpPostedFileBase>> uploadedImageAndType)
+        public IEnumerable<KeyValuePair<Guid, string>> SaveImagesToAzure(UploadedImages uploadedImageAndType)
         {
-            return uploadedImageAndType.Select(vp => new KeyValuePair<Uri, string>(storage.AddBlobToResource(vp.Value.FileName, vp.Value.InputStream), vp.Key)).ToList();
+            uploadedImageAndType.Select(vp => storage.AddBlobToResource(vp.Value.FileName, vp.Value.InputStream));
+            return uploadedImageAndType.Select(vp => new KeyValuePair<Guid, string>(Guid.NewGuid(), vp.Key)).ToList();
         }
 
-        public IEnumerable<KeyValuePair<string, HttpPostedFileBase>> ParseImagesFromModel(CreateProductInputModel inputModel)
+        public IEnumerable<KeyValuePair<Guid, string>> UpdateImagesInAzure(UploadedImages uploadedImageAndType, ExistingAzureImages existingAzureImages)
+        {
+            return from e in existingAzureImages
+                   from u in uploadedImageAndType
+                   where e.Key == u.Key
+                   select AddImageAndUpdate(e, u);
+        }
+
+        private KeyValuePair<Guid, string> AddImageAndUpdate(KeyValuePair<string, string> e, KeyValuePair<string, HttpPostedFileBase> u)
+        {
+            storage.AddBlobToResource(e.Value, u.Value.InputStream);
+            return new KeyValuePair<Guid, string>(Guid.Parse(e.Key), u.Key);
+        }
+
+        public UploadedImages ParseImagesFromModel(CreateProductInputModel inputModel)
         {
             return inputModel.File.Select((t, i) => new KeyValuePair<string, HttpPostedFileBase>(inputModel.PhotoType[i], t)).ToList();
         }
 
         public Product MapProductModelChangesToEntity(EditProductInputModel inputModel, Product product)
         {
+            var images = UpdateImageChanges(inputModel.Images, inputModel.UploadedImages);
             product.AgeRange = inputModel.AgeRange;
             product.Brand = inputModel.Brand;
             product.Catalogue = inputModel.Catalogue;
@@ -66,6 +85,16 @@ namespace MagStore.Web.Controllers
             product.Size = inputModel.Size;
             product.Supplier = inputModel.Supplier;
             return product;
+        }
+
+        private IEnumerable<ProductImage> UpdateImageChanges(IEnumerable<ProductImage> images, IEnumerable<HttpPostedFileBase> uploadedImages)
+        {
+            foreach (var productImage in images)
+            {
+                
+            }
+
+            return null;
         }
 
         public EditProductViewModel GetEditProductViewModel(Product p)
