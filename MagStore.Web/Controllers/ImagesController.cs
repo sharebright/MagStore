@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MagStore.Azure;
+using RavenDbMembership.Entities;
 using RavenDbMembership.Entities.Enums;
 using RavenDbMembership.Infrastructure.Interfaces;
 
@@ -36,7 +37,15 @@ namespace MagStore.Web.Controllers
             {
                 string fileName = Guid.NewGuid().ToString();
                 Stream inputStream = postModel.Image.InputStream;
-                var uri = storageAccessor.AddBlobToResource(fileName, inputStream);
+                Uri uri = storageAccessor.AddBlobToResource(fileName, inputStream);
+
+                ProductImage image = new ProductImage
+                    {
+                        Id = fileName,
+                        ImageType = postModel.ImageType.ToString(),
+                        ImageUrl = uri.ToString()
+                    };
+                shop.GetCoordinator<ProductImage>().Save(image);
             }
             return View(new ImageCreationGetModel());
         }
@@ -51,6 +60,6 @@ namespace MagStore.Web.Controllers
 
     public class ImageCreationGetModel
     {
-        public IEnumerable<string> ImageTypes { get { return new []{""}.Union(Enum.GetNames(typeof (ImageType))); } } 
+        public IEnumerable<string> ImageTypes { get { return new[] { "" }.Union(Enum.GetNames(typeof(ImageType))); } }
     }
 }
