@@ -46,6 +46,7 @@
 			        <th scope="col">Reviews</th>
 			        <th scope="col">Size</th>
 			        <th scope="col">Supplier</th>
+                    <th scope="col"></th>
 			    </tr>
                 @foreach (var product in @Model.Products)
                 {
@@ -96,6 +97,7 @@
                         </td>
                         <td>@product.Size</td>
                         <td>@product.Supplier</td>
+                        <td>@Html.ActionLink("Delete", "DeleteProduct", "Product", new { Id = product.Id }, new {})</td>
                     </tr>
                 }
 			</table>

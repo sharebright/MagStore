@@ -10,5 +10,6 @@ namespace RavenDbMembership.Infrastructure.Interfaces
         IEnumerable<T> Load( IEnumerable<string> ids );
         IList<T> List();
         IRavenQueryable<T> Query<T>();
+        void Delete(T entity);
     }
 }

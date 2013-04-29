@@ -37,5 +37,10 @@ namespace RavenDbMembership.Infrastructure
         {
             return ravenRepository.Query<T>();
         }
+
+        public void Delete(T entity)
+        {
+            ravenRepository.Delete(entity);
+        }
     }
 }

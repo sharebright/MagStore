@@ -66,6 +66,7 @@ namespace RavenDbMembership.Infrastructure
         public void Delete<T>(T item) where T : IRavenEntity
         {
             CurrentSession.Delete(item);
+            CurrentSession.SaveChanges();
             session.Dispose();
         }
 
@@ -84,7 +85,7 @@ namespace RavenDbMembership.Infrastructure
 
         public IList<T> List<T>()
         {
-            var project = CurrentSession.Query<T>().ToList();
+            var project = CurrentSession.Query<T>().Customize(x=>x.WaitForNonStaleResultsAsOfNow()).ToList();
             foreach (var product in project.Where(p => p.GetType() == typeof(Product))
                 .Select(p => (p as Product))
                 .Where(product => product != null))

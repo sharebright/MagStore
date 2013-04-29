@@ -271,6 +271,18 @@ namespace MagStore.Web.Controllers
             ViewBag.Photos = storageAccessor.GetBlobClient().GetContainerReference("resources").ListBlobs();
             return View();
         }
+
+        public ActionResult DeleteProduct(DeleteProductInputModel inputModel)
+        {
+            var product = shop.GetCoordinator<Product>().Load(inputModel.Id);
+            shop.GetCoordinator<Product>().Delete(product);
+            return RedirectToAction("ViewProducts");
+        }
+    }
+
+    public class DeleteProductInputModel
+    {
+        public string Id { get; set; }
     }
 
     public class ShowProductViewModel

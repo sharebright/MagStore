@@ -22,13 +22,25 @@
 {
     <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet'
-        type='text/css' />
+          type='text/css' />
     <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
     <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
     <script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
     <script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
+    <style type="text/css">
+        .pre-existing-image
+        {
+            padding: 10px 5px 15px 10px;
+        }
+        .pre-existing-image:nth-child(even) {
+            background: lightyellow;
+        }
+        .pre-existing-image:nth-child(odd) {
+            background: linen;
+        }
+    </style>
 }
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
@@ -147,12 +159,17 @@
                     @foreach (var image in Model.Images)
                     {
                         <div class="pre-existing-image">
-                            @Html.DropDownListFor(i => image, Model.ImageTypes.Select(t => new SelectListItem{ Selected = t == image.ImageType, Text = t, Value = t }), new { Name = "PhotoType" })
+                            @Html.DropDownListFor(i => image, Model.ImageTypes.Select(t => new SelectListItem{ Selected = t == image.ImageType, Text = t, Value = t }), new { Name = "ExistingPhotoType" })
                             <br />
-                            <img src="@image.ImageUrl" alt="@image.Id" />
+                            <br />
+                            <img src="@image.ImageUrl" alt="@image.Id" style="max-width: 400px;" />
                             <input type="hidden" value="@image.Id" name="ExistingImages" />
                             <br />
+                            <br />
+                            @Html.ActionLink("Click here to remove this image off this product", "DeleteImageFromProduct", "Images", new { productId = Model.Id, imageId = image.Id }, new { style = "padding: 2px 5px 2px 5px; background: #fdb; border: solid 1px orange;"})
                         </div>
+                        <br />
+                        <br />
                     }
                 </div>
 
