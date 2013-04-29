@@ -56,16 +56,16 @@ namespace MagStore.Web.Controllers
         private void UpdateImage(string id, string imageType)
         {
             //bool hasChanges = image != null;
-//            Uri uri = null;
-//            if (hasChanges)
-//            {
-//                Stream inputStream = image.InputStream;
-//                uri = storageAccessor.AddBlobToResource(id, inputStream);
-//            }
+            //            Uri uri = null;
+            //            if (hasChanges)
+            //            {
+            //                Stream inputStream = image.InputStream;
+            //                uri = storageAccessor.AddBlobToResource(id, inputStream);
+            //            }
 
             var img = shop.GetCoordinator<ProductImage>().Load(id);
             img.ImageType = imageType;
-//            if (uri != null) img.ImageUrl = uri.ToString();
+            //            if (uri != null) img.ImageUrl = uri.ToString();
             shop.GetCoordinator<ProductImage>()
                 .Save(img);
         }
@@ -128,7 +128,7 @@ namespace MagStore.Web.Controllers
 
                 shop.GetCoordinator<Product>().Save(product);
 
-                return RedirectToAction("EditProduct",new { id } );
+                return RedirectToAction("EditProduct", new { id });
             }
 
             var catalogues =
@@ -165,16 +165,16 @@ namespace MagStore.Web.Controllers
                 .MapProductModelChangesToEntity(inputModel, shop.GetCoordinator<Product>().Load(inputModel.Id));
 
             var existingImages = new List<KeyValuePair<string, string>>();
-            for (var i = 0; i < inputModel.ExistingImages.Count(); i ++)
+            for (var i = 0; i < inputModel.ExistingImages.Count(); i++)
             {
                 var imageAndType = new KeyValuePair<string, string>
                 (
-                    inputModel.ExistingImages.Skip(i).Take(1).Single(), 
-                    inputModel.PhotoType.Skip(i).Take(1).Single()
+                    inputModel.ExistingImages.Skip(i).Take(1).Single(),
+                    inputModel.ExistingPhotoType.Skip(i).Take(1).Single()
                 );
                 existingImages.Add(imageAndType);
             }
-            
+
             UpdateImages(existingImages);
 
             product.Images = product.Images.Union
@@ -182,7 +182,7 @@ namespace MagStore.Web.Controllers
                     CreateImages(productControllerHelper.ParseImagesFromModel(inputModel))
                 );
             shop.GetCoordinator<Product>().Save(product);
-            return View(productControllerHelper.GetEditProductViewModel(product));
+            return RedirectToAction("EditProduct", new { inputModel.Id }); // View(productControllerHelper.GetEditProductViewModel(product));
         }
 
         [HttpGet]
@@ -190,15 +190,15 @@ namespace MagStore.Web.Controllers
         {
             var products = shop.GetCoordinator<Product>().List();
 
-            var availableCategories = from a in Enum.GetValues(typeof (ProductType)).AsQueryable().OfType<ProductType>()
-                                 from p in products
-                                 where p.ProductType == a
-                                 where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
-                                 select a;
+            var availableCategories = from a in Enum.GetValues(typeof(ProductType)).AsQueryable().OfType<ProductType>()
+                                      from p in products
+                                      where p.ProductType == a
+                                      where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
+                                      select a;
 
             var filteredProducts = availableCategories.SelectMany(a => products.Where(p => p.ProductType == a)).AsEnumerable();
 
-            var images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p=>p.Images)));
+            var images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images)));
 
 
             IDictionary<string, string> filters = new Dictionary<string, string>();
@@ -214,12 +214,12 @@ namespace MagStore.Web.Controllers
                     .List()
                     .Where(p => p.ProductType == (ProductType)Enum.Parse(typeof(ProductType), inputModel.Category));
 
-            IQueryable<ProductType> productTypes = Enum.GetValues(typeof (ProductType)).AsQueryable().OfType<ProductType>();
+            IQueryable<ProductType> productTypes = Enum.GetValues(typeof(ProductType)).AsQueryable().OfType<ProductType>();
             IQueryable<ProductType> availableCategories = from a in productTypes
-                                      from p in products
-                                      where p.ProductType == a
-                                      where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
-                                      select a;
+                                                          from p in products
+                                                          where p.ProductType == a
+                                                          where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
+                                                          select a;
 
             IEnumerable<ProductImage> images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images)));
 
@@ -232,7 +232,7 @@ namespace MagStore.Web.Controllers
 
         public ActionResult ShowProduct(ShowProductInputModel inputModel)
         {
-            Product product = shop.Include<Product>(p=>p.Images).Load(inputModel.Id);
+            Product product = shop.Include<Product>(p => p.Images).Load(inputModel.Id);
             IEnumerable<ProductImage> images = shop.GetCoordinator<ProductImage>().Load(product.Images);
             var filters = new Dictionary<string, string>
             {
@@ -240,7 +240,7 @@ namespace MagStore.Web.Controllers
                 {"Gender", inputModel.Gender}
             };
 
-            return View(new ShowProductViewModel { Product = product, ProductImages = images,  Filters = filters });
+            return View(new ShowProductViewModel { Product = product, ProductImages = images, Filters = filters });
         }
 
         [HttpGet]

@@ -18,6 +18,7 @@ namespace MagStore.Web.Models.Product
         public int Rating { get; set; }
         public IEnumerable<string> Reviews { get; set; }
         public IEnumerable<string> ExistingImages { get; set; }
+        public string[] ExistingPhotoType { get; set; }
         public string[] PhotoType { get; set; }
         public HttpPostedFileBase[] UploadedImages { get; set; }
         public decimal Price { get; set; }

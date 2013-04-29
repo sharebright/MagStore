@@ -62,7 +62,7 @@ namespace MagStore.Web.Controllers
             return RedirectToAction( "EditImage", new { Id = postModel.Id }); //View(new ImageEditGetInputModel());
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult DeleteImageFromProduct(string productId, string imageId)
         {
             var product = shop.GetCoordinator<Product>().Load(productId);

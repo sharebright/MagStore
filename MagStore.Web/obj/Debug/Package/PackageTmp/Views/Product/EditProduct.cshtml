@@ -5,6 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section ReadyScripts
+{
+    $("input#addPhoto").click(function() { 
+        $("#photographs").append('<div style="border: solid 1px blue; margin: 3px 3px 3px 3px; padding: 3px 3px 3px 3px;">' + 
+            '<b>Attach an image to this product and specify the type of image:</b><br />' +
+            '<select name="PhotoType">' + '<option value="Thumb">Thumb</option>' + 
+            '<option value="Feature">Feature</option>' + 
+            '<option value="HiRes">HiRes</option>' + 
+            '</select><br /><br />' + 
+            '<input type="file" name="UploadedImages" id="Photo" /></div>');
+     });
+}
+
 @section Scripts
 {
     <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
@@ -24,7 +37,7 @@
     </div>
     <article>
         <h1>Edit Product</h1>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("EditProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.ValidationSummary(true)
 
@@ -126,8 +139,28 @@
                     @Html.EditorFor(model => model.DiscountAmount)
                     @Html.ValidationMessageFor(model => model.DiscountAmount)
                 </div>
+
+                <div class="editor-label">
+                    Images:
+                </div>
+                <div class="editor-field">
+                    @foreach (var image in Model.Images)
+                    {
+                        <div class="pre-existing-image">
+                            @Html.DropDownListFor(i => image, Model.ImageTypes.Select(t => new SelectListItem{ Selected = t == image.ImageType, Text = t, Value = t }), new { Name = "PhotoType" })
+                            <br />
+                            <img src="@image.ImageUrl" alt="@image.Id" />
+                            <input type="hidden" value="@image.Id" name="ExistingImages" />
+                            <br />
+                        </div>
+                    }
+                </div>
+
+                <p id="photographs"></p>
+                <br/>
+                <input type="button" style="border: solid 1px green; padding: 2px;" id="addPhoto" value="Add Photo" />
                 <p>
-                    <input type="submit" value="Edit" />
+                    <input type="submit" value="Apply Changes" />
                 </p>
             </fieldset>
         }
