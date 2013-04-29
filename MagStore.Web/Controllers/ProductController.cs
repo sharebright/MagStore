@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using MagStore.Azure;
 using MagStore.Web.Models.Product;
@@ -14,14 +16,16 @@ namespace MagStore.Web.Controllers
     public class ProductController : Controller
     {
         private readonly IShop shop;
-        private readonly IStorageAccessor storage;
+
+        private readonly IStorageAccessor storageAccessor;
+
         private readonly ProductControllerHelper productControllerHelper;
 
-        public ProductController(IShop shop, IStorageAccessor storage)
+        public ProductController(IShop shop, IStorageAccessor storageAccessor)
         {
             this.shop = shop;
-            this.storage = storage;
-            productControllerHelper = new ProductControllerHelper(this.shop, this.storage);
+            this.storageAccessor = storageAccessor;
+            productControllerHelper = new ProductControllerHelper(this.shop, this.storageAccessor);
         }
 
         [HttpGet]
@@ -40,43 +44,68 @@ namespace MagStore.Web.Controllers
             return View(new CreateProductViewModel(catalogues, promotions));
         }
 
-        [HttpGet]
-        public ActionResult CreatePhoto()
+        private void UpdateImages(IEnumerable<KeyValuePair<string, string>> images)
         {
-            return View();
+            foreach (var image in images)
+            {
+                UpdateImage(image.Key, image.Value);
+            }
         }
 
-        [HttpPost]
-        public ActionResult CreatePhoto(CreatePhotoInputModel model)
+
+        private void UpdateImage(string id, string imageType)
         {
-            //var client=storage.GetBlobClient();
+            //bool hasChanges = image != null;
+//            Uri uri = null;
+//            if (hasChanges)
+//            {
+//                Stream inputStream = image.InputStream;
+//                uri = storageAccessor.AddBlobToResource(id, inputStream);
+//            }
 
-            //CloudBlockBlob blob = null;
-            //CloudBlobContainer cloudBlobContainer = null;
-            //cloudBlobContainer = client.GetContainerReference("resources");
-            //blob = cloudBlobContainer.GetBlockBlobReference(file.FileName);
-            //blob.UploadFromStream(file.InputStream);
-
-            var resources = model.File.Select(file => storage.AddBlobToResource(file.FileName, file.InputStream).ToString());
-
-            ViewBag.Photos = storage.Resources.ListBlobs();
-            return View();
+            var img = shop.GetCoordinator<ProductImage>().Load(id);
+            img.ImageType = imageType;
+//            if (uri != null) img.ImageUrl = uri.ToString();
+            shop.GetCoordinator<ProductImage>()
+                .Save(img);
         }
 
-        public ActionResult ListPhotos()
+        private IEnumerable<string> CreateImages(IEnumerable<KeyValuePair<string, HttpPostedFileBase>> images)
         {
-            ViewBag.Photos = storage.GetBlobClient().GetContainerReference("resources").ListBlobs();
-            return View();
+            var result = new List<string>();
+            foreach (var image in images)
+            {
+                var id = Guid.NewGuid().ToString();
+                CreateImage(image.Value, image.Key, id);
+                result.Add(id);
+            }
+            return result;
         }
+
+        private void CreateImage(HttpPostedFileBase image, string imageType, string fileName)
+        {
+            var inputStream = image.InputStream;
+            var uri = storageAccessor.AddBlobToResource(fileName, inputStream);
+
+            var img = new ProductImage
+            {
+                Id = fileName,
+                ImageType = imageType,
+                ImageUrl = uri.ToString()
+            };
+            shop.GetCoordinator<ProductImage>().Save(img);
+        }
+
 
         [HttpPost]
         public ActionResult CreateProduct(CreateProductInputModel inputModel)
         {
             if (ModelState.IsValid)
             {
+                string id = Guid.NewGuid().ToString();
                 var product = new Product
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = id,
                     Name = inputModel.Name,
                     Description = inputModel.Description,
                     Catalogue = inputModel.Catalogue,
@@ -92,14 +121,14 @@ namespace MagStore.Web.Controllers
                     Size = inputModel.Size,
                     Supplier = inputModel.Supplier,
                     Images =
-                        inputModel.File == null
+                        inputModel.UploadedImages == null
                             ? new List<string>()
-                            : productControllerHelper.SaveImagesToRaven(productControllerHelper.SaveImagesToAzure(productControllerHelper.ParseImagesFromModel(inputModel)))
+                            : CreateImages(productControllerHelper.ParseImagesFromModel(inputModel))
                 };
 
                 shop.GetCoordinator<Product>().Save(product);
 
-                return RedirectToAction("CreateProduct", "Product");
+                return RedirectToAction("EditProduct",new { id } );
             }
 
             var catalogues =
@@ -132,7 +161,26 @@ namespace MagStore.Web.Controllers
         [HttpPost]
         public ActionResult EditProduct(EditProductInputModel inputModel)
         {
-            var product = productControllerHelper.MapProductModelChangesToEntity(inputModel, shop.GetCoordinator<Product>().Load(inputModel.Id));
+            var product = productControllerHelper
+                .MapProductModelChangesToEntity(inputModel, shop.GetCoordinator<Product>().Load(inputModel.Id));
+
+            var existingImages = new List<KeyValuePair<string, string>>();
+            for (var i = 0; i < inputModel.ExistingImages.Count(); i ++)
+            {
+                var imageAndType = new KeyValuePair<string, string>
+                (
+                    inputModel.ExistingImages.Skip(i).Take(1).Single(), 
+                    inputModel.PhotoType.Skip(i).Take(1).Single()
+                );
+                existingImages.Add(imageAndType);
+            }
+            
+            UpdateImages(existingImages);
+
+            product.Images = product.Images.Union
+                (
+                    CreateImages(productControllerHelper.ParseImagesFromModel(inputModel))
+                );
             shop.GetCoordinator<Product>().Save(product);
             return View(productControllerHelper.GetEditProductViewModel(product));
         }
@@ -193,6 +241,35 @@ namespace MagStore.Web.Controllers
             };
 
             return View(new ShowProductViewModel { Product = product, ProductImages = images,  Filters = filters });
+        }
+
+        [HttpGet]
+        public ActionResult CreatePhoto()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePhoto(CreatePhotoInputModel model)
+        {
+            //var client=storageAccessor.GetBlobClient();
+
+            //CloudBlockBlob blob = null;
+            //CloudBlobContainer cloudBlobContainer = null;
+            //cloudBlobContainer = client.GetContainerReference("resources");
+            //blob = cloudBlobContainer.GetBlockBlobReference(file.FileName);
+            //blob.UploadFromStream(file.InputStream);
+
+            var resources = model.File.Select(file => storageAccessor.AddBlobToResource(file.FileName, file.InputStream).ToString());
+
+            ViewBag.Photos = storageAccessor.Resources.ListBlobs();
+            return View();
+        }
+
+        public ActionResult ListPhotos()
+        {
+            ViewBag.Photos = storageAccessor.GetBlobClient().GetContainerReference("resources").ListBlobs();
+            return View();
         }
     }
 

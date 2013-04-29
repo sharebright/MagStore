@@ -62,12 +62,23 @@ namespace MagStore.Web.Controllers
 
         public UploadedImages ParseImagesFromModel(CreateProductInputModel inputModel)
         {
-            return inputModel.File.Select((t, i) => new KeyValuePair<string, HttpPostedFileBase>(inputModel.PhotoType[i], t)).ToList();
+            return inputModel.UploadedImages.Select((t, i) => new KeyValuePair<string, HttpPostedFileBase>(inputModel.PhotoType[i], t)).ToList();
+        }
+
+        public UploadedImages ParseImagesFromModel<T>(T inputModel) where T : IProductPostInputModel
+        {
+            if (inputModel.UploadedImages == null)
+            {
+                return new List<KeyValuePair<string, HttpPostedFileBase>>();
+            }
+
+            return inputModel.UploadedImages
+                .Select((t, i) => new KeyValuePair<string, HttpPostedFileBase>(inputModel.PhotoType[i], t))
+                .ToList();
         }
 
         public Product MapProductModelChangesToEntity(EditProductInputModel inputModel, Product product)
         {
-            var images = UpdateImageChanges(inputModel.Images, inputModel.UploadedImages);
             product.AgeRange = inputModel.AgeRange;
             product.Brand = inputModel.Brand;
             product.Catalogue = inputModel.Catalogue;
@@ -87,7 +98,7 @@ namespace MagStore.Web.Controllers
             return product;
         }
 
-        private IEnumerable<ProductImage> UpdateImageChanges(IEnumerable<ProductImage> images, IEnumerable<HttpPostedFileBase> uploadedImages)
+        private IEnumerable<ProductImage> UpdateImageChanges(IEnumerable<string> images, IEnumerable<HttpPostedFileBase> uploadedImages)
         {
             foreach (var productImage in images)
             {
@@ -100,6 +111,8 @@ namespace MagStore.Web.Controllers
         public EditProductViewModel GetEditProductViewModel(Product p)
         {
             var catalogues = shop.GetCoordinator<Catalogue>().List();
+            var images = shop.GetCoordinator<ProductImage>()
+                            .Load(p.Images);
             var editProductViewModel = new EditProductViewModel
                 {
                     Id = p.Id,
@@ -117,7 +130,8 @@ namespace MagStore.Web.Controllers
                     Reviews = p.Reviews,
                     Size = p.Size,
                     Supplier = p.Supplier,
-                    CatalogueList = catalogues
+                    CatalogueList = catalogues,
+                    Images = images
                 };
             return editProductViewModel;
         }

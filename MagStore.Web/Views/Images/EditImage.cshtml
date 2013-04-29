@@ -1,56 +1,56 @@
-﻿@model dynamic
-@{
-    Layout = "../Shared/_Layout.cshtml";
-}
-@section ReadyScripts
-{
-    $("input#addPhoto").click(function() {
-       $("#photographs").append('<select name="PhotoType">' +
-        '<option value="Thumb">Thumb</option>' +
-        '<option value="Feature">Feature</option>' +
-        '<option value="HiRes">HiRes</option>' +
-        '</select><br />' +
-        '<input type="file" name="UploadedImages" id="Photo" /><br />');
-    });
+﻿@model MagStore.Web.Controllers.EditImageViewModel
 
+@{
+    Layout = null;
 }
+
+<!DOCTYPE html>
+
+@{
+    ViewBag.Title = "Edit Image";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 @section Scripts
 {
     <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet'
-          type='text/css' />
+        type='text/css' />
     <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
     <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
     <script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
     <script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
+    <script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
 }
+<!-- MAIN CONTENT START -->
 <section class="main wrapper">
     <article>
-        <h1>Create Product</h1>
-        @{
-            var form = Html.BeginForm("CreatePhoto", "Product", FormMethod.Post, new { enctype = "multipart/form-data" });
-            <p id="photographs"></p>
-            <br/>
-            <br/>
-            <input type="button" style="border: solid 1px green; padding: 2px;" id="addPhoto" value="Add Photo" />
-            <br/>
-            <br/>
-            <input type="submit" />
-            form.EndForm();
-        }
-
-        @if (ViewBag.Photos != null)
+        <h1>Edit Image</h1>
+        @using (Html.BeginForm("EditImage", "Images", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            foreach (var photo in ViewBag.Photos)
-            {
-                <img src="@photo.Uri" alt="@photo.Name" />
+            <div>
+                Id:
                 <br />
-            }
+                @Model.Image.Id
+                <br />
+                Image Type:
+                <br />
+                @Html.DropDownListFor(model => model.Image.ImageType, Model.ImageTypes.Select(t => new SelectListItem {Text = t, Value = t}),new { Name = "ImageType" })
+                <br />
+                Current Image:
+                <br />
+                <img src="@Model.Image.ImageUrl" alt="" />
+                <br />
+                Change:
+                <br/>
+                <input type="file" name="Image" />
+                <br />
+                <input type="submit" />
+            </div>
         }
     </article>
-		
-    <aside>
+        <aside>
 		
         <section class="categories">
             <h2>About This Theme</h2>

@@ -5,7 +5,7 @@ using RavenDbMembership.Entities.Enums;
 
 namespace MagStore.Web.Models.Product
 {
-    public class EditProductInputModel
+    public class EditProductInputModel : IProductPostInputModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -17,8 +17,9 @@ namespace MagStore.Web.Models.Product
         public string Supplier { get; set; }
         public int Rating { get; set; }
         public IEnumerable<string> Reviews { get; set; }
-        public IEnumerable<ProductImage> Images { get; set; }
-        public IEnumerable<HttpPostedFileBase> UploadedImages { get; set; }
+        public IEnumerable<string> ExistingImages { get; set; }
+        public string[] PhotoType { get; set; }
+        public HttpPostedFileBase[] UploadedImages { get; set; }
         public decimal Price { get; set; }
         public ProductType ProductType { get; set; }
         public int[] AgeRange { get; set; }

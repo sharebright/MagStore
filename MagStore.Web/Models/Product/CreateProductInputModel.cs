@@ -5,7 +5,7 @@ using RavenDbMembership.Entities.Enums;
 
 namespace MagStore.Web.Models.Product
 {
-    public class CreateProductInputModel
+    public class CreateProductInputModel : IProductPostInputModel
     {
         public string Id { get; set; }
         [Required(ErrorMessage = "A name must be supplied.")]
@@ -22,7 +22,7 @@ namespace MagStore.Web.Models.Product
         public int Rating { get; set; }
         public IEnumerable<string> Reviews { get; set; }
         public string[] PhotoType { get; set; }
-        public HttpPostedFileBase[] File { get; set; }
+        public HttpPostedFileBase[] UploadedImages { get; set; }
         [Required(ErrorMessage="The product must have a price.")]
         [Range(0.01, 10000.00, ErrorMessage = "The price must be at least 0.01")]
         public decimal Price { get; set; }
@@ -32,5 +32,11 @@ namespace MagStore.Web.Models.Product
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
         public IEnumerable<string> Promotions { get; set; }
+    }
+
+    public interface IProductPostInputModel
+    {
+        HttpPostedFileBase[] UploadedImages { get; set; }
+        string[] PhotoType { get; set; }
     }
 }

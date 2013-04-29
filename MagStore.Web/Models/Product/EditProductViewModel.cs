@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using RavenDbMembership.Entities.Enums;
 using RavenDbMembership.Entities;
 
@@ -26,5 +28,7 @@ namespace MagStore.Web.Models.Product
         public string Catalogue { get; set; }
 
         public IList<RavenDbMembership.Entities.Catalogue> CatalogueList { get; set; }
+        public IEnumerable<string> ImageTypes { get { return new[] { "" }.Union(Enum.GetNames(typeof(ImageType))); } }
+
     }
 }
