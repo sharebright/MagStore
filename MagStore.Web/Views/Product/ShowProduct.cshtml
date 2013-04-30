@@ -61,7 +61,16 @@
     </div>
     <section class="full-width">
         @{
-            ProductImage productImage = Model.ProductImages.Single(x => x.ImageType.ToUpper() == "MAIN");
+            var productImages = Model.ProductImages;
+            ProductImage productImage;
+            if (productImages == null)
+            {
+                productImage = new ProductImage();
+            }
+            else
+            {
+                productImage = productImages.Single(x => x.ImageType.ToUpper() == "FEATURE");
+            }
         }
         <div id="product-info" class="container_12">
             <div id="product-main-image"><img src="@productImage.ImageUrl" alt="@Model.Product.Name" width="100%" /></div>

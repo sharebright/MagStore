@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MagStore.Web.Models
+﻿namespace MagStore.Web.Models
 {
     public class HomeViewModel
     {

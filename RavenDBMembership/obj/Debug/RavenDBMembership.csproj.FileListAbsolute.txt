@@ -10,12 +10,7 @@ C:\dev\RavenDBMembership\src\RavenDBMembership\bin\Debug\Raven.Client.Lightweigh
 C:\dev\RavenDBMembership\src\RavenDBMembership\obj\Debug\RavenDBMembership.csprojResolveAssemblyReference.cache
 C:\dev\RavenDBMembership\src\RavenDBMembership\obj\Debug\RavenDBMembership.dll
 C:\dev\RavenDBMembership\src\RavenDBMembership\obj\Debug\RavenDBMembership.pdb
-C:\dev\MagSolutions\RavenDBMembership\obj\Debug\RavenDBMembership.csprojResolveAssemblyReference.cache
-C:\dev\MagSolutions\RavenDBMembership\obj\Debug\RavenDBMembership.dll
-C:\dev\MagSolutions\RavenDBMembership\obj\Debug\RavenDBMembership.pdb
-C:\dev\MagSolutions\RavenDBMembership\bin\Debug\RavenDBMembership.dll
-C:\dev\MagSolutions\RavenDBMembership\bin\Debug\RavenDBMembership.pdb
-C:\dev\MagSolutions\RavenDBMembership\bin\Debug\Raven.Abstractions.pdb
-C:\dev\MagSolutions\RavenDBMembership\bin\Debug\Raven.Abstractions.xml
-C:\dev\MagSolutions\RavenDBMembership\bin\Debug\Raven.Client.Lightweight.pdb
-C:\dev\MagSolutions\RavenDBMembership\bin\Debug\Raven.Client.Lightweight.xml
+C:\dev\MagSolutions\RavenDBMembership\bin\Debug\RavenDbMembership.dll
+C:\dev\MagSolutions\RavenDBMembership\bin\Debug\RavenDbMembership.pdb
+C:\dev\MagSolutions\RavenDBMembership\obj\Debug\RavenDbMembership.dll
+C:\dev\MagSolutions\RavenDBMembership\obj\Debug\RavenDbMembership.pdb
