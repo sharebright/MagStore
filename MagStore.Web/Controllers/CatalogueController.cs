@@ -27,7 +27,7 @@ namespace MagStore.Web.Controllers
 
         public ActionResult ViewCatalogues()
         {
-            var catalogues = shop.GetCoordinator<Catalogue>().List();
+            var catalogues = shop.GetCoordinator<Catalogue>().List().OrderBy(c => c.Name).ToList();
             return View(new CataloguesViewModel { Catalogues = catalogues });
         }
 

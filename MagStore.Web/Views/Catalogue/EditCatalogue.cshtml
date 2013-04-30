@@ -1,4 +1,5 @@
-﻿@model MagStore.Web.Models.Catalogue.EditCatalogueViewModel
+﻿@using RavenDbMembership.Entities.Enums
+@model MagStore.Web.Models.Catalogue.EditCatalogueViewModel
 
 @{
     ViewBag.Title = "Edit Catalogue";
@@ -21,7 +22,7 @@
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
     <div id="breadcrumb">
-        @Html.ActionLink("Manage Shop", "Manage", "Shop") / Edit Catalogue
+        @Html.ActionLink("Manage Shop", "Manage", "Shop") / @Html.ActionLink("View Catalogues", "ViewCatalogues", "Catalogue") / Edit Catalogue
     </div>
     <article>
         <h1>Edit Catalogue</h1>
@@ -59,7 +60,8 @@
                     @Html.LabelFor(model => model.DiscountType)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.DiscountType)
+@*                    @Html.EditorFor(model => model.DiscountType)*@
+                    @Html.DropDownListFor(model => model.DiscountType, Enum.GetNames(typeof(DiscountType)).Select(t => new SelectListItem { Selected = t == Model.DiscountType.ToString(), Text = t, Value = t }))
                     @Html.ValidationMessageFor(model => model.DiscountType)
                 </div>
 

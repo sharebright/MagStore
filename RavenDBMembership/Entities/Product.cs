@@ -6,6 +6,7 @@ namespace RavenDbMembership.Entities
 {
     public class Product : IRavenEntity
     {
+        private IEnumerable<string> reviews;
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -16,7 +17,12 @@ namespace RavenDbMembership.Entities
         public string Catalogue { get; set; }
         public string Supplier { get; set; }
         public int Rating { get; set; }
-        public IEnumerable<string> Reviews { get; set; }
+        public IEnumerable<string> Reviews
+        {
+            get { return reviews ?? new List<string>(); }
+            set { reviews = value; }
+        }
+
         public IEnumerable<string> Images { get; set; }
         public decimal Price { get; set; }
         public ProductType ProductType { get; set; }
