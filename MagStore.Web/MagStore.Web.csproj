@@ -190,6 +190,7 @@
     <Compile Include="Models\Catalogue\CataloguesViewModel.cs" />
     <Compile Include="Models\Catalogue\CreateCatalogueInputModel.cs" />
     <Compile Include="Models\Catalogue\CreateCatalogueViewModel.cs" />
+    <Compile Include="Models\Catalogue\DeleteCatalogueInputModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\EditUserModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />

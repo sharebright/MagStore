@@ -50,5 +50,11 @@ namespace MagStore.Web.Controllers
             });
             return RedirectToAction("ViewCatalogues", "Catalogue"); // View(new CreateCatalogueViewModel());
         }
+
+        public ActionResult DeleteCatalogue(DeleteCatalogueInputModel inputModel)
+        {
+            shop.GetCoordinator<Catalogue>().Delete(shop.GetCoordinator<Catalogue>().Load(inputModel.Id));
+            return RedirectToAction("ViewCatalogues");
+        }
     }
 }
