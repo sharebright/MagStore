@@ -51,6 +51,43 @@ namespace MagStore.Web.Controllers
             return RedirectToAction("ViewCatalogues", "Catalogue"); // View(new CreateCatalogueViewModel());
         }
 
+        [HttpGet]
+        public ActionResult EditCatalogue(EditCatalogueGetInputModel getInputModel)
+        {
+            Catalogue catalogue = shop.GetCoordinator<Catalogue>().Load(getInputModel.Id);
+
+            var viewModel = new EditCatalogueViewModel
+            {
+                Id = catalogue.Id,
+                Name = catalogue.Name,
+                DiscountType = catalogue.DiscountType,
+                DiscountAmount = catalogue.DiscountAmount,
+                Promotions = catalogue.Promotions
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditCatalogue(EditCataloguePostInputModel postInputModel)
+        {
+            shop.GetCoordinator<Catalogue>()
+                .Save(UpdateCatalogue(postInputModel));
+
+            return RedirectToAction("EditCatalogue", new { Id = postInputModel.Id });
+        }
+
+        private Catalogue UpdateCatalogue(EditCataloguePostInputModel postInputModel)
+        {
+            var catalogue = shop.GetCoordinator<Catalogue>().Load(postInputModel.Id);
+
+            catalogue.Name = postInputModel.Name;
+            catalogue.DiscountAmount = postInputModel.DiscountAmount;
+            catalogue.DiscountType = postInputModel.DiscountType;
+            catalogue.Promotions = postInputModel.Promotions;
+            return catalogue;
+        }
+
         public ActionResult DeleteCatalogue(DeleteCatalogueInputModel inputModel)
         {
             shop.GetCoordinator<Catalogue>().Delete(shop.GetCoordinator<Catalogue>().Load(inputModel.Id));

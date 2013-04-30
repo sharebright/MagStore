@@ -34,15 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\lib\Microsoft\ServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Abstractions, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Abstractions.dll</HintPath>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\MagStore\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\MagStore\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
