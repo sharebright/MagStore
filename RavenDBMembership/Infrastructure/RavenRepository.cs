@@ -85,7 +85,7 @@ namespace RavenDbMembership.Infrastructure
 
         public IList<T> List<T>()
         {
-            var project = CurrentSession.Query<T>().Customize(x=>x.WaitForNonStaleResultsAsOfNow()).ToList();
+            var project = CurrentSession.Query<T>().ToList();
             foreach (var product in project.Where(p => p.GetType() == typeof(Product))
                 .Select(p => (p as Product))
                 .Where(product => product != null))

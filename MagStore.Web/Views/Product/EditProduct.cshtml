@@ -1,4 +1,5 @@
-﻿@model MagStore.Web.Models.Product.EditProductViewModel
+﻿@using RavenDbMembership.Entities.Enums
+@model MagStore.Web.Models.Product.EditProductViewModel
 
 @{
     ViewBag.Title = "EditProduct";
@@ -118,6 +119,26 @@
                 <div class="editor-field">
                     @Html.EditorFor(model => model.Brand)
                     @Html.ValidationMessageFor(model => model.Brand)
+                </div>
+
+                <div class="editor-field">
+                    
+                    @{
+                        var productTypes = new List<SelectListItem>();
+
+                        productTypes
+                            .AddRange(Enum.GetNames(typeof (ProductType))
+                            .Select(x => new SelectListItem
+                                {
+                                    Selected = x == Model.ProductType.ToString(),
+                                    Text = x,
+                                    Value = x
+                                }));
+                                
+                    }
+                    @Html.DropDownListFor(model => model.ProductType, productTypes)
+                                                                          
+@*                    @Html.ValidationMessageFor(model => model.ProductType)*@
                 </div>
 
                 <div class="editor-label">
