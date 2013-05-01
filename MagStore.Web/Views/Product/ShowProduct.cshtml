@@ -37,10 +37,6 @@
 				        {
 				            <li><img src="@image.ImageUrl" alt="" /></li>
 				        }
-				        <li><img src="~/Content/images/product.jpg" alt="" /></li>
-				        <li><img src="~/Content/images/product.jpg" alt="" /></li>
-				        <li><img src="~/Content/images/product.jpg" alt="" /></li>
-				        <li><img src="~/Content/images/product.jpg" alt="" /></li>
 				    </ul>
 				</div>			
 			</section><!-- .gallery end -->
@@ -76,7 +72,7 @@
 				</p>
 				<p class="dots"></p>
 				<p><a href="#" class="big-buy">Add to Cart</a></p>
-				<p><a href="#">Add to Wish List</a>    - OR -    <a href="#">Add to Compare</a></p>
+@*				<p><a href="#">Add to Wish List</a>    - OR -    <a href="#">Add to Compare</a></p>*@
 			</section><!-- .description end -->
 			
 			<div class="clear"></div>
@@ -88,28 +84,27 @@
 					<li><a href="#reviews">Reviews (@Model.Product.Reviews.Count())</a></li>
 					<li><a href="#related-products">Related Products (1)</a></li>
 				</ul>
-				<div id="description">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus molestie turpis 
-					et purus auctor ac adipiscing sapien volutpat. Vivamus vitae augue mi. Sed quis 
-					leo neque, ac egestas sapien. Mauris ornare, mauris dignissim varius vestibulum, 
-					sapien lectus sollicitudin velit, at ultrices erat libero adipiscing metus. Fusce 
-					bibendum dolor vitae odio convallis vestibulum. Nunc a orci nibh, in tempus massa.</p>
-					<p>Curabitur feugiat mi at ipsum molestie id auctor massa porttitor. Curabitur 
-					vehicula arcu eu eros tincidunt accumsan. Class aptent taciti sociosqu ad litora 
-					torquent per conubia nostra, per inceptos himenaeos. Aliquam erat volutpat. Nunc 
-					velit nulla, mollis in iaculis id, pharetra eu arcu. Vestibulum ac mauris mauris, 
-					eu blandit nibh.</p>
-				</div>
+			    <div id="description">
+			        @{
+                        var descriptions = Model.Product.Description.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                        foreach (var description in descriptions)
+                        {
+                            @description
+                            <br />
+                        }
+			        }
+                    
+@*			        @HttpUtility.HtmlDecode(Model.Product.Description.Replace(Environment.NewLine, "<br />"))*@
+			    </div>
 				<div id="specification">
-					<p>Curabitur feugiat mi at ipsum molestie id auctor massa porttitor. Curabitur 
-					vehicula arcu eu eros tincidunt accumsan. Class aptent taciti sociosqu ad litora 
-					torquent per conubia nostra, per inceptos himenaeos. Aliquam erat volutpat. Nunc 
-					velit nulla, mollis in iaculis id, pharetra eu arcu. Vestibulum ac mauris mauris, 
-					eu blandit nibh.</p>
-					<p>Praesent adipiscing ornare suscipit. Mauris bibendum arcu ut odio molestie eu 
-					pretium metus faucibus. Etiam aliquam accumsan placerat. Cras eget quam massa, at 
-					fringilla ipsum. Donec vel rhoncus nisi. Ut non est a neque facilisis dictum non 
-					eu nunc. Etiam pharetra nunc dui.</p>
+			        @{
+                        var specifications = Model.Product.Specification.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                        foreach (var specification in specifications)
+                        {
+                            @specification
+                            <br />
+                        }
+			        }
 				</div>
 				<div id="reviews">
 					<p>Praesent adipiscing ornare suscipit. Mauris bibendum arcu ut odio molestie eu 

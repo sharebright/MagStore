@@ -104,8 +104,10 @@ namespace MagStore.Web.Controllers
                 var product = new Product
                 {
                     Id = id,
+                    Code = inputModel.Code,
                     Name = inputModel.Name,
                     Description = inputModel.Description,
+                    Specification = inputModel.Specification,
                     Catalogue = inputModel.Catalogue,
                     Brand = inputModel.Brand,
                     Colour = inputModel.Colour,

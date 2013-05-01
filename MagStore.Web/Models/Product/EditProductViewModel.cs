@@ -9,8 +9,10 @@ namespace MagStore.Web.Models.Product
     public class EditProductViewModel
     {
         public string Id { get; set; }
+        public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Specification { get; set; }
         public string Colour { get; set; }
         public string Size { get; set; }
         public string Gender { get; set; }
@@ -29,6 +31,5 @@ namespace MagStore.Web.Models.Product
 
         public IList<RavenDbMembership.Entities.Catalogue> CatalogueList { get; set; }
         public IEnumerable<string> ImageTypes { get { return new[] { "" }.Union(Enum.GetNames(typeof(ImageType))); } }
-
     }
 }

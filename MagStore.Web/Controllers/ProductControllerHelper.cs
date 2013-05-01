@@ -84,9 +84,11 @@ namespace MagStore.Web.Controllers
             product.Catalogue = inputModel.Catalogue;
             product.Colour = inputModel.Colour;
             product.Description = inputModel.Description;
+            product.Specification = inputModel.Specification;
             product.DiscountAmount = inputModel.DiscountAmount;
             product.DiscountType = inputModel.DiscountType;
             product.Gender = inputModel.Gender;
+            product.Code = inputModel.Code;
             product.Name = inputModel.Name;
             product.Price = inputModel.Price;
             product.ProductType = inputModel.ProductType;
@@ -116,8 +118,10 @@ namespace MagStore.Web.Controllers
             var editProductViewModel = new EditProductViewModel
                 {
                     Id = p.Id,
+                    Code = p.Code,
                     Name = p.Name,
                     Description = p.Description,
+                    Specification = p.Specification,
                     Catalogue = p.Catalogue,
                     Brand = p.Brand,
                     Colour = p.Colour,
