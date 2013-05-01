@@ -63,7 +63,12 @@
                         </td>
                         <td>@product.Name</td>
                         <td>@product.ProductType</td>
-                        <td>@product.Description</td>
+                        <td>
+                            @if (product.Description.Length > 70)
+                            {
+                                <span>@product.Description.Substring(0, 70)...</span>
+                            }
+                        </td>
                         <td>@product.Catalogue</td>
                         <td>@product.Brand</td>
                         <td>@product.Colour</td>
