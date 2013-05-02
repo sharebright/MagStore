@@ -100,17 +100,20 @@ namespace MagStore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                string id = Guid.NewGuid().ToString();
-                var product = new Product
+                var sizes = inputModel.Sizes;
+                var products = (from c in inputModel.Colours
+                               where sizes != null
+                                    from s in sizes
+                               select new Product
                 {
-                    Id = id,
+                    Id = Guid.NewGuid().ToString(),
                     Code = inputModel.Code,
                     Name = inputModel.Name,
                     Description = inputModel.Description,
                     Specification = inputModel.Specification,
                     Catalogue = inputModel.Catalogue,
                     Brand = inputModel.Brand,
-                    Colour = inputModel.Colour,
+                    Colour = c,
                     DiscountAmount = inputModel.DiscountAmount,
                     DiscountType = inputModel.DiscountType,
                     Gender = inputModel.Gender,
@@ -118,17 +121,17 @@ namespace MagStore.Web.Controllers
                     ProductType = inputModel.ProductType,
                     Rating = inputModel.Rating,
                     Reviews = inputModel.Reviews,
-                    Size = inputModel.Size,
+                    Size = s,
                     Supplier = inputModel.Supplier,
                     Images =
                         inputModel.UploadedImages == null
                             ? new List<string>()
                             : CreateImages(productControllerHelper.ParseImagesFromModel(inputModel))
-                };
+                }).ToList();
 
-                shop.GetCoordinator<Product>().Save(product);
+                shop.GetCoordinator<Product>().Save(products);
 
-                return RedirectToAction("EditProduct", new { id });
+                return RedirectToAction("EditProduct", new { id = products.First().Id });
             }
 
             var catalogues =
@@ -198,7 +201,7 @@ namespace MagStore.Web.Controllers
 
             var filteredProducts = availableCategories.SelectMany(a => products.Where(p => p.ProductType == a)).AsEnumerable();
 
-            var images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images)));
+            var images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images))).Where(i => i.ImageType == ImageType.Thumb.ToString());
 
 
             IDictionary<string, string> filters = new Dictionary<string, string>();
@@ -221,26 +224,48 @@ namespace MagStore.Web.Controllers
                                                           where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
                                                           select a;
 
-            IEnumerable<ProductImage> images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images)));
+            var coordinator = shop.GetCoordinator<ProductImage>();
+            var ids = availableCategories
+                .SelectMany(a => products
+                    .Where(p => p.ProductType == a)
+                    .SelectMany(p => p.Images));
+
+            var productImages = coordinator.Load(ids);
+
+            var thumbs = productImages.Where(i => i.ImageType == ImageType.Thumb.ToString());
 
             IDictionary<string, string> filters = new Dictionary<string, string>();
             filters.Add("Category", inputModel.Category);
             filters.Add("Gender", inputModel.Gender);
 
-            return View(new ViewProductsByCategoryViewModel { Products = products, ProductType = inputModel.Category, Images = images, Filters = filters });
+            return View(new ViewProductsByCategoryViewModel { Products = products, ProductType = inputModel.Category, Images = thumbs, Filters = filters });
         }
 
         public ActionResult ShowProduct(ShowProductInputModel inputModel)
         {
-            Product product = shop.Include<Product>(p => p.Images).Load(inputModel.Id);
-            IEnumerable<ProductImage> images = shop.GetCoordinator<ProductImage>().Load(product.Images);
+            var productCoordinator = shop.GetCoordinator<Product>();
+            var ravenQueryable = productCoordinator.List();
+            var query = ravenQueryable.Where(p => p.Code == inputModel.Code);
+            var productKeyValuePairs = query.Select(d => new KeyValuePair<string, Product>(d.Id, d));
+            var products = productKeyValuePairs.ToList();
+
+            var product = products.First().Value;//shop.Include<Product>(p => p.Images).Load(inputModel.Id);
+            var images =
+                shop.GetCoordinator<ProductImage>()
+                    .Load(product.Images)
+                    .Where(i => i.ImageType == ImageType.Feature.ToString());
+
+            var availableColours = products.Select(c => c.Value.Colour);
+            var availableSizes = products.Select(c => c.Value.Size);
+            
             var filters = new Dictionary<string, string>
             {
                 {"Category", inputModel.Category},
-                {"Gender", inputModel.Gender}
+                {"Gender", inputModel.Gender},
+                {"Code", inputModel.Code}
             };
 
-            return View(new ShowProductViewModel { Product = product, ProductImages = images, Filters = filters });
+            return View(new ShowProductViewModel { Product = product, ProductImages = images, ProductVariants = products, AvailableColours = availableColours, AvailableSizes = availableSizes, Filters = filters });
         }
 
         [HttpGet]
@@ -289,9 +314,15 @@ namespace MagStore.Web.Controllers
     {
         public Product Product { get; set; }
 
+        public IEnumerable<KeyValuePair<string, Product>> ProductVariants { get; set; }
+
         public Dictionary<string, string> Filters { get; set; }
 
         public IEnumerable<ProductImage> ProductImages { get; set; }
+
+        public IEnumerable<string> AvailableColours { get; set; }
+
+        public IEnumerable<string> AvailableSizes { get; set; }
     }
 
     public class ShowProductInputModel
@@ -299,6 +330,8 @@ namespace MagStore.Web.Controllers
         public string Id { get; set; }
 
         public string Category { get; set; }
+
+        public string Code { get; set; }
 
         public string Gender { get; set; }
     }

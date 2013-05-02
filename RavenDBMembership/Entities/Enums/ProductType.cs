@@ -2,6 +2,7 @@ namespace RavenDbMembership.Entities.Enums
 {
     public enum ProductType
     {
+        Blazers,
         Blouses,
         Bottoms,
         Bras,
@@ -10,6 +11,7 @@ namespace RavenDbMembership.Entities.Enums
         Dresses,
         Footwear,
         Hats,
+        Jackets,
         Jeans,
         Jumpers,
         Knickers,

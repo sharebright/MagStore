@@ -64,9 +64,16 @@
                         <td>@product.Name</td>
                         <td>@product.ProductType</td>
                         <td>
-                            @if (product.Description.Length > 70)
+                            @if (product.Description != null)
                             {
-                                <span>@product.Description.Substring(0, 70)...</span>
+                                if (product.Description.Length > 70)
+                                {
+                                    <span>@product.Description.Substring(0, 70)...</span>
+                                }
+                                else
+                                {
+                                    <span>@product.Description</span>
+                                }
                             }
                         </td>
                         <td>@product.Catalogue</td>
@@ -102,7 +109,7 @@
                         </td>
                         <td>@product.Size</td>
                         <td>@product.Supplier</td>
-                        <td>@Html.ActionLink("Delete", "DeleteProduct", "Product", new { Id = product.Id }, new {})</td>
+                        <td>@Html.ActionLink("Delete", "DeleteProduct", "Product", new { Id = product.Id }, new { })</td>
                     </tr>
                 }
 			</table>

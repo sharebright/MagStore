@@ -1,6 +1,4 @@
-﻿@using RavenDbMembership.Entities
-@using RavenDbMembership.Entities.Enums
-@model MagStore.Web.Controllers.ShowProductViewModel
+﻿@model MagStore.Web.Controllers.ShowProductViewModel
 
 @{
     ViewBag.Title = Model.Product.Name;
@@ -41,39 +39,37 @@
 				</div>			
 			</section><!-- .gallery end -->
 			
-			<section class="description">
-			    <p><span>Brand:</span>@Model.Product.Brand</p>
-			    <br />
-                <p><span>Availability:</span>In Stock</p>
-				<p class="dots"></p>
-				<p class="product-price"><span>Price:</span>&euro;@Model.Product.Price</p>
-			    <br />
-				<p class="dots"></p>
-			    <p><span>Quantity:</span><input type="text" name="quantity" /></p>
-				<p>
-					<span>Size:</span>
-					<select>
-						<option>XS</option>
-						<option>S</option>
-						<option>M</option>
-						<option>L</option>
-						<option>XL</option>
-					</select>
-				</p>
-				<p>
-					<span>Colour:</span>
-					<select>
-						<option>White</option>
-						<option>Red</option>
-						<option>Green</option>
-						<option>Blue</option>
-						<option>Black</option>
-					</select>
-				</p>
-				<p class="dots"></p>
-				<p><a href="#" class="big-buy">Add to Cart</a></p>
-@*				<p><a href="#">Add to Wish List</a>    - OR -    <a href="#">Add to Compare</a></p>*@
-			</section><!-- .description end -->
+		    <section class="description">
+		        <p><span>Brand:</span>@Model.Product.Brand</p>
+		        <br />
+		        <p><span>Availability:</span>In Stock</p>
+		        <p class="dots"></p>
+		        <p class="product-price"><span>Price:</span>&euro;@Model.Product.Price</p>
+		        <br />
+		        <p class="dots"></p>
+		        <p><span>Quantity:</span><input type="text" name="quantity" /></p>
+		        <p>
+		            <span style="width: 70px">Size:</span>
+		            <select style="width: 150px">
+		                @foreach (var size in Model.AvailableSizes)
+		                {
+		                    <option value="@size">@size</option>
+		                }
+		            </select>
+		        </p>
+		        <p>
+		            <span style="width: 70px">Colour:</span>
+		            <select style="width: 150px">
+		                @foreach (var colour in Model.AvailableColours.Distinct())
+		                {
+		                    <option value="@colour">@colour</option>
+		                }
+		            </select>
+		        </p>
+		        <p class="dots"></p>
+		        <p><a href="#" class="big-buy">Add to Cart</a></p>
+		        @*				<p><a href="#">Add to Wish List</a>    - OR -    <a href="#">Add to Compare</a></p>*@
+		    </section><!-- .description end -->
 			
 			<div class="clear"></div>
 			
@@ -97,14 +93,17 @@
 @*			        @HttpUtility.HtmlDecode(Model.Product.Description.Replace(Environment.NewLine, "<br />"))*@
 			    </div>
 				<div id="specification">
-			        @{
-                        var specifications = Model.Product.Specification.Split(new[] { "\r\n" }, StringSplitOptions.None);
-                        foreach (var specification in specifications)
-                        {
-                            @specification
-                            <br />
-                        }
-			        }
+				    @{
+				        if (!string.IsNullOrEmpty(Model.Product.Specification))
+				        {
+				            var specifications = Model.Product.Specification.Split(new[] {"\r\n"}, StringSplitOptions.None);
+				            foreach (var specification in specifications)
+				            {
+				                @specification
+				                <br />
+				            }
+				        }
+				    }
 				</div>
 				<div id="reviews">
 					<p>Praesent adipiscing ornare suscipit. Mauris bibendum arcu ut odio molestie eu 
@@ -134,69 +133,69 @@
 					
 		</section><!-- .shop end -->
 		
-		<aside>
-		
-			<section class="categories">
-				<h2>Categories</h2>
-				<div class="accordion">
-					<h3><a href="#">Clothes</a></h3>
-					<div>
-						<ul>
-							<li><a href="#">Blouses</a></li>
-							<li><a href="#">Tops</a></li>
-							<li><a href="#">Trousers</a></li>
-							<li><a href="#">Skirts</a></li>
-							<li><a href="#">Dresses</a></li>
-							<li><a href="#">Jackets</a></li>
-						</ul>
-					</div>
-					<h3><a href="#">Shoes</a></h3>
-					<div>
-						<ul>
-							<li><a href="#">Boots</a></li>
-							<li><a href="#">Heels</a></li>
-							<li><a href="#">Sandals</a></li>
-						</ul>
-					</div>
-					<h3><a href="#">Addons</a></h3>
-					<div>
-						<ul>
-							<li><a href="#">Bags</a></li>
-							<li><a href="#">Hats</a></li>
-							<li><a href="#">Jewelry</a></li>
-							<li><a href="#">Sun Glasses</a></li>
-						</ul>
-					</div>
-					<h3><a href="#">Lingerie</a></h3>
-					<div>
-						<ul>
-							<li><a href="#">Bras</a></li>
-							<li><a href="#">Panties</a></li>
-							<li><a href="#">Gorsets</a></li>
-						</ul>
-					</div>
-				</div><!-- .accordion end -->
-			</section><!-- .categories end -->
+	    <aside>
+	        <div style="text-align: center;">@Html.Partial("_EditProductButton")</div>
+	        <section class="categories">
+	            <h2>Categories</h2>
+	            <div class="accordion">
+	                <h3><a href="#">Clothes</a></h3>
+	                <div>
+	                    <ul>
+	                        <li><a href="#">Blouses</a></li>
+	                        <li><a href="#">Tops</a></li>
+	                        <li><a href="#">Trousers</a></li>
+	                        <li><a href="#">Skirts</a></li>
+	                        <li><a href="#">Dresses</a></li>
+	                        <li><a href="#">Jackets</a></li>
+	                    </ul>
+	                </div>
+	                <h3><a href="#">Shoes</a></h3>
+	                <div>
+	                    <ul>
+	                        <li><a href="#">Boots</a></li>
+	                        <li><a href="#">Heels</a></li>
+	                        <li><a href="#">Sandals</a></li>
+	                    </ul>
+	                </div>
+	                <h3><a href="#">Addons</a></h3>
+	                <div>
+	                    <ul>
+	                        <li><a href="#">Bags</a></li>
+	                        <li><a href="#">Hats</a></li>
+	                        <li><a href="#">Jewelry</a></li>
+	                        <li><a href="#">Sun Glasses</a></li>
+	                    </ul>
+	                </div>
+	                <h3><a href="#">Lingerie</a></h3>
+	                <div>
+	                    <ul>
+	                        <li><a href="#">Bras</a></li>
+	                        <li><a href="#">Panties</a></li>
+	                        <li><a href="#">Gorsets</a></li>
+	                    </ul>
+	                </div>
+	            </div><!-- .accordion end -->
+	        </section><!-- .categories end -->
 			
-			<section class="tags">
-				<h2>Browse by Tags</h2>
-				<ul>
-					<li><a href="#">Tops</a></li>
-					<li><a href="#">Hats</a></li>
-					<li><a href="#">Furs</a></li>
-					<li><a href="#">Sun Glasses</a></li>
-				</ul>
-			</section><!-- .tags end -->
+	        <section class="tags">
+	            <h2>Browse by Tags</h2>
+	            <ul>
+	                <li><a href="#">Tops</a></li>
+	                <li><a href="#">Hats</a></li>
+	                <li><a href="#">Furs</a></li>
+	                <li><a href="#">Sun Glasses</a></li>
+	            </ul>
+	        </section><!-- .tags end -->
 			
-			<section class="about">
-				<h2>About Us</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac massa nulla, sed laoreet tellus. Proin feugiat rhoncus massa in faucibus. Duis et orci nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				<p><a href="about.html" class="more">Read More</a></p>
-				<p>&nbsp;</p>
-			</section><!-- .about end -->
-		
-		</aside>
-		
+	        <section class="about">
+	            <h2>About Us</h2>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac massa nulla, sed laoreet tellus. Proin feugiat rhoncus massa in faucibus. Duis et orci nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+	            <p><a href="about.html" class="more">Read More</a></p>
+	            <p>&nbsp;</p>
+	        </section><!-- .about end -->
+	        <div style="text-align: center;">@Html.Partial("_EditProductButton")</div>
+	    </aside>
+
 		<div class="clear"></div>
 
 	</section><!-- .main end -->

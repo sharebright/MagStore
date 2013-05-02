@@ -665,12 +665,24 @@ header ul li.menumain:hover {
 
 /* FORMS
 ================================================================================================*/
+.ui-icon { display: none !important; }
+input[type=submit] {
+    border-radius: 4px;
+background-image: linear-gradient(to bottom, #85c4b2 0%, #60a08d 100%) !important;
+    border: 1px solid #60a08d !important;
+    padding: 5px 25px 5px 25px;
+    font-family: 'Signika', sans-serif;
+    font-weight: bold;
+    color: white;
+    margin: 2px 0 15px 0;
+    width: auto !important;
+}
 input[type=checkbox] { margin-top: 5px; }
 input[type=text] { width: 216px !important; }
 input[type=text],
 input[type=datetime],
 input[type=password],
-input[type=submit],
+/*input[type=submit],*/
 select,
 textarea {
 	/*-moz-appearance:	none;

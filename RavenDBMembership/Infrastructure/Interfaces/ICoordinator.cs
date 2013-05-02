@@ -6,7 +6,8 @@ namespace RavenDbMembership.Infrastructure.Interfaces
     public interface ICoordinator<T>
     {
         void Save( T entity );
-        T Load( string id );
+        void Save(IEnumerable<T> entity);
+        T Load(string id);
         IEnumerable<T> Load( IEnumerable<string> ids );
         IList<T> List();
         IRavenQueryable<T> Query<T>();

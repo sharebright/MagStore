@@ -1,5 +1,8 @@
-﻿@using RavenDbMembership.Entities.Enums
+﻿@using RavenDbMembership
+@using RavenDbMembership.Entities.Additives
+@using RavenDbMembership.Entities.Enums
 @model MagStore.Web.Models.Product.CreateProductViewModel
+
 @{
     ViewBag.Title = "CreateProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,6 +44,13 @@
             @Html.ValidationSummary(true);
 
             <fieldset>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Code)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Code)
+                    @Html.ValidationMessageFor(model => model.Code)
+                </div>
 
                 <div class="editor-label">
                     @Html.LabelFor(model => model.Name)
@@ -59,27 +69,42 @@
                 </div>
 
                 <div class="editor-label">
+                    @Html.LabelFor(model => model.Specification)
+                </div>
+                <div class="editor-field">
+                    @Html.TextArea("Description", Model.Specification, new { Name = "Specification" })
+                    @Html.ValidationMessageFor(model => model.Specification)
+                </div>
+
+                <div class="editor-label">
                     @Html.LabelFor(model => model.Catalogue)
                 </div>
                 <div class="editor-field">
                     @Html.DropDownList("Catalogue", Model.Catalogue.Select(x => new SelectListItem { Selected = false, Text = x.Value, Value = x.Key }), new { name = "Catalogue" })
                     @Html.ValidationMessageFor(model => model.Catalogue)
                 </div>
-
+                
+                @if (Model.Promotions.Any())
+                {
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Promotions)
+                    </div>
+                    <div class="editor-field">
+                        @Html.ListBox("Promotions", Model.Promotions.Select(x => new SelectListItem {Selected = false, Text = x.Value, Value = x.Key}), new {name = "Promotions"})
+                        @Html.ValidationMessageFor(model => model.Promotions)
+                    </div>
+                }
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.Promotions)
+                    @Html.LabelFor(model => model.Colours)
                 </div>
                 <div class="editor-field">
-                    @Html.ListBox("Promotions", Model.Promotions.Select(x => new SelectListItem { Selected = false, Text = x.Value, Value = x.Key }), new { name = "Promotions" })
-                    @Html.ValidationMessageFor(model => model.Promotions)
-                </div>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Colour)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Colour)
-                    @Html.ValidationMessageFor(model => model.Colour)
+                    <select id="Colours" multiple="multiple" name="Colours" style="width: 200px; height: 140px;">
+                        @foreach (var c in new Colours())
+                        {
+                            <option value="@c.Key" style="background-color: @c.Value">@c.Key</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Colours)
                 </div>
 
                 <div class="editor-label">
@@ -95,11 +120,16 @@
                 </div>
 
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.Size)
+                    @Html.LabelFor(model => model.Sizes)
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.Size)
-                    @Html.ValidationMessageFor(model => model.Size)
+                    <select id="Sizes" multiple="multiple" name="Sizes" style="width: 200px; height: 140px;">
+                        @foreach (var c in new Sizes())
+                        {
+                            <option value="@c">@c</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Sizes)
                 </div>
 
                 <div class="editor-label">

@@ -53,6 +53,8 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Additives\Colours.cs" />
+    <Compile Include="Entities\Additives\Sizes.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Catalogue.cs" />
     <Compile Include="Entities\Enums\AccountLevel.cs" />

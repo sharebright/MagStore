@@ -16,8 +16,8 @@ namespace MagStore.Web.Models.Product
         public string Description { get; set; }
         public string Specification { get; set; }
         public string Catalogue { get; set; }
-        public string Colour { get; set; }
-        public string Size { get; set; }
+        public IEnumerable<string> Colours { get; set; }
+        public IEnumerable<string> Sizes { get; set; }
 
         [Required(ErrorMessage="Please supply a value.")]
         [StringLength(50, MinimumLength = 4)]

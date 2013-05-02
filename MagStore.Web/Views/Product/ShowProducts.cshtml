@@ -25,7 +25,7 @@
 <section class="main wrapper">
     <section class="full-width">
             <h1>Choose what you are looking for</h1>
-            @foreach (var category in Model.Categories)
+            @foreach (var category in Model.Categories.Distinct())
             {
                 <div class="category one-forth">
                     <a href="/Product/ViewProductsByCategory@(filters)Category=@category">@category</a>

@@ -39,14 +39,32 @@ namespace RavenDbMembership.Infrastructure
 
         public T Load<T>(string id) where T : IRavenEntity
         {
-            T load = CurrentSession.Load<T>(id);
+            T load;
+            try
+            {
+                load = CurrentSession.Load<T>(id);
+            }
+            catch (InvalidOperationException e)
+            {
+                ForceNewSession();
+                load = CurrentSession.Load<T>(id);
+            }
             CurrentSession.Dispose();
             return load;
         }
 
         public IEnumerable<T> Load<T>(IEnumerable<string> id) where T : IRavenEntity
         {
-            IEnumerable<T> load = CurrentSession.Load<T>(id);
+            IEnumerable<T> load;
+            try
+            {
+                load = CurrentSession.Load<T>(id);
+            }
+            catch (InvalidOperationException e)
+            {
+                ForceNewSession();
+                load = CurrentSession.Load<T>(id);
+            }
             CurrentSession.Dispose();
             return load;
         }
@@ -78,8 +96,17 @@ namespace RavenDbMembership.Infrastructure
 
         public void SaveAndCommit<T>(T item) where T : IRavenEntity
         {
-            CurrentSession.Store(item, item.Id);
-            CurrentSession.SaveChanges();
+            try
+            {
+                CurrentSession.Store(item, item.Id);
+                CurrentSession.SaveChanges();
+            }
+            catch (InvalidOperationException e)
+            {
+                ForceNewSession();
+                CurrentSession.Store(item, item.Id);
+                CurrentSession.SaveChanges();
+            }
             CurrentSession.Dispose();
         }
 

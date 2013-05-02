@@ -1,4 +1,5 @@
-﻿@model MagStore.Web.Models.Product.ViewProductsByCategoryViewModel
+﻿@using RavenDbMembership.Entities
+@model MagStore.Web.Models.Product.ViewProductsByCategoryViewModel
 
 @{
     ViewBag.Title = @Model.ProductType;
@@ -31,15 +32,36 @@
     </div>
     <section class="full-width">
         <h1>@Model.ProductType</h1>
-        @foreach (var product in Model.Products)
+        @{
+            //var distinctProducts = Model.Products.GroupBy(p=>p.Name).Select(g=>g.First());
+        }
+        @foreach (var product in distinctProducts)
         {
+            var uri = "";
+            foreach (var thumb in Model.Images)
+            {
+                var match = false;
+                bool imageFound = false;
+                foreach (var image in product.Images)
+                {
+                    match = thumb.ImageUrl.Contains(image);
+
+                    if (match)
+                    {
+                        uri = thumb.ImageUrl;
+                        imageFound = true;
+                        break;
+                    }
+                }
+                if (imageFound) {break;}
+            }
             <div class="product-thumb one-forth">
                 @if (product.Images.Any())
                 {
-                    <img src="@product.Images.First()" alt="@product.Name" />
+                    <img src="@uri" alt="@product.Name" width="150px" />
                 }
                 <br />
-                <a href="/Product/ShowProduct/@product.Id@filters">@product.Name</a>
+                <a href="/Product/ShowProduct/@product.Id@filters&Code=@product.Code">@product.Name</a>
             </div>
         }
         <div class="clear"></div>
