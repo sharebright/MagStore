@@ -33,6 +33,7 @@ namespace RavenDbMembership.Entities.Additives
             Add("Coral", "#F88379");
             Add("Crimson", "#DC143C");
             Add("Cyan", "#00FFFF");
+            Add("Light denim", "#007FFF");
             Add("Desert sand", "#EDC9AF");
             Add("Electric blue", "#7DF9FF");
             Add("Erin", "#00FF3F");

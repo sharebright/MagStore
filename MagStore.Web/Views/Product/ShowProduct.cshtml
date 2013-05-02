@@ -51,7 +51,7 @@
 		        <p>
 		            <span style="width: 70px">Size:</span>
 		            <select style="width: 150px">
-		                @foreach (var size in Model.AvailableSizes)
+		                @foreach (var size in Model.AvailableSizes.Distinct())
 		                {
 		                    <option value="@size">@size</option>
 		                }
