@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using MagStore.Entities.Enums;
 using MagStore.Web.Controllers;
-using RavenDbMembership.Entities.Enums;
 
 namespace MagStore.Web.Models.Catalogue
 {

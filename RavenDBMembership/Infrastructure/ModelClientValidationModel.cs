@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RavenDBMembership.Infrastructure
+namespace MagStore.Infrastructure
 {
     /// <summary>
     /// Provides a base class container for a client validation rule that is sent to the browser.

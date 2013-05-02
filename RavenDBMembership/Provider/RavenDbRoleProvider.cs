@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Web.Security;
 using System.Collections.Specialized;
+using MagStore.Entities;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
-using RavenDbMembership.Entities;
 
-namespace RavenDbMembership.Provider
+namespace MagStore.Provider
 {
 	public class RavenDbRoleProvider : RoleProvider
 	{

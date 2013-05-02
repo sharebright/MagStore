@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using RavenDbMembership.Entities.Enums;
-using RavenDbMembership.Infrastructure.Interfaces;
+using MagStore.Entities.Enums;
+using MagStore.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Entities
+namespace MagStore.Entities
 {
     public class Promotion : IRavenEntity
     {

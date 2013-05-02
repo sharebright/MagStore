@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Security;
 
-namespace RavenDbMembership.Provider
+namespace MagStore.Provider
 {
     class RavenDbMembershipUser : MembershipUser
     {

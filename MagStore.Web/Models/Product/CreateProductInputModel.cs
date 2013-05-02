@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
-using RavenDbMembership.Entities.Enums;
+using MagStore.Entities.Enums;
 
 namespace MagStore.Web.Models.Product
 {

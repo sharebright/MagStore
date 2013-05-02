@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using MagStore.Entities;
+using MagStore.Infrastructure.Interfaces;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Linq;
-using RavenDbMembership.Entities;
-using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Infrastructure
+namespace MagStore.Infrastructure
 {
     public class RavenRepository : IRepository
     {

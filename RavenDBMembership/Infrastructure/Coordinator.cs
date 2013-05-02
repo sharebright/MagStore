@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using MagStore.Infrastructure.Interfaces;
 using Raven.Client.Linq;
-using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Infrastructure
+namespace MagStore.Infrastructure
 {
     public class Coordinator<T> : ICoordinator<T> where T : IRavenEntity
     {

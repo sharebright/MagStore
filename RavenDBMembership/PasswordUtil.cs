@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace RavenDbMembership
+namespace MagStore
 {
 	public static class PasswordUtil
 	{

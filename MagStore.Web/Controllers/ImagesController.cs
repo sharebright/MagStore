@@ -6,9 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MagStore.Azure;
-using RavenDbMembership.Entities;
-using RavenDbMembership.Entities.Enums;
-using RavenDbMembership.Infrastructure.Interfaces;
+using MagStore.Entities;
+using MagStore.Entities.Enums;
+using MagStore.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {

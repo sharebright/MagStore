@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using RavenDbMembership.Entities;
+using MagStore.Entities;
 
 namespace MagStore.Web.Models.Product
 {
     public class ViewProductsByCategoryViewModel
     {
-        public IEnumerable<RavenDbMembership.Entities.Product> Products { get; set; }
+        public IEnumerable<Entities.Product> Products { get; set; }
 
         public string ProductType { get; set; }
 

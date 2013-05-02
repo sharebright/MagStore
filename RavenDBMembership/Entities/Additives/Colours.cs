@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RavenDbMembership.Entities.Additives
+namespace MagStore.Entities.Additives
 {
     public class Colours : Dictionary<string, string>
     {

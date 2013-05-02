@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using RavenDbMembership.Entities;
-using RavenDbMembership.Infrastructure.Interfaces;
+using MagStore.Entities;
+using MagStore.Infrastructure.Interfaces;
 
 namespace MagStore.Web.ShopHelpers
 {

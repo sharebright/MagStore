@@ -82,13 +82,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\RavenDBMembership\MagStore.csproj">
+      <Project>{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}</Project>
+      <Name>MagStore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MagStore.StorageAccessor\MagStore.Azure.csproj">
       <Project>{262E8901-EF1C-4CE7-BD6E-E54EC466D449}</Project>
       <Name>MagStore.Azure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MagStore\MagStore.csproj">
-      <Project>{8EA5C551-4050-4502-B54C-29AA63C1A70E}</Project>
-      <Name>MagStore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

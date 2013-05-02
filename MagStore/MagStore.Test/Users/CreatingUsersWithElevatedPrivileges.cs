@@ -2,6 +2,8 @@
 using FluentAssertions;
 using MagStore.Entities;
 using MagStore.Entities.Enums;
+using MagStore.Infrastructure;
+using MagStore.Infrastructure.Interfaces;
 using NUnit.Framework;
 
 namespace MagStore.Test.Users
@@ -11,7 +13,7 @@ namespace MagStore.Test.Users
         [Test]
         public void ShouldCreateUserWithEmptyShoppingCart()
         {
-            var id = Guid.NewGuid();
+            var id = Guid.NewGuid().ToString();
             Cart cart = new Cart();
             var user = new User
             {
@@ -31,7 +33,7 @@ namespace MagStore.Test.Users
         public void ShouldCreateAdminUserWithElevatedLevel()
         {
             // Arrange
-            var id = Guid.NewGuid();
+            var id = Guid.NewGuid().ToString();
             var user = new User
             {
                 Id = id,

@@ -1,4 +1,4 @@
-﻿namespace RavenDbMembership.Entities.Enums
+﻿namespace MagStore.Entities.Enums
 {
     public enum FulfillmentStatus
     {

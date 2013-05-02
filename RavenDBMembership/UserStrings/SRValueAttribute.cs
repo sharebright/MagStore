@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RavenDbMembership.UserStrings
+namespace MagStore.UserStrings
 {
     [AttributeUsage(AttributeTargets.Field|AttributeTargets.Enum)]
     public class SrValueAttribute : Attribute

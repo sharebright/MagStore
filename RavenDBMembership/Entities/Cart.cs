@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using RavenDbMembership.Infrastructure.Interfaces;
+using MagStore.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Entities
+namespace MagStore.Entities
 {
     public class Cart : IRavenEntity
     {

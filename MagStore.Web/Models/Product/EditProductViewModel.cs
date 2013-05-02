@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using RavenDbMembership.Entities.Enums;
-using RavenDbMembership.Entities;
+using MagStore.Entities;
+using MagStore.Entities.Enums;
 
 namespace MagStore.Web.Models.Product
 {
@@ -29,7 +29,7 @@ namespace MagStore.Web.Models.Product
         public IEnumerable<string> Promotions { get; set; }
         public string Catalogue { get; set; }
 
-        public IList<RavenDbMembership.Entities.Catalogue> CatalogueList { get; set; }
+        public IList<Entities.Catalogue> CatalogueList { get; set; }
         public IEnumerable<string> ImageTypes { get { return new[] { "" }.Union(Enum.GetNames(typeof(ImageType))); } }
     }
 }

@@ -8,8 +8,8 @@
     <ProjectGuid>{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RavenDbMembership</RootNamespace>
-    <AssemblyName>RavenDbMembership</AssemblyName>
+    <RootNamespace>MagStore</RootNamespace>
+    <AssemblyName>MagStore</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\src\</SolutionDir>

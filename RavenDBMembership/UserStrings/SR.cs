@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace RavenDbMembership.UserStrings
+namespace MagStore.UserStrings
 {
     public enum Sr
     {

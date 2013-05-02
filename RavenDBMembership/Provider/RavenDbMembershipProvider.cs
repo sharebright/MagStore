@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Configuration.Provider;
 using System.Linq;
 using System.Web.Security;
+using MagStore.Entities;
 using Raven.Abstractions.Exceptions;
 using Raven.Client;
 using Microsoft.Practices.ServiceLocation;
 using System.Collections.Specialized;
-using RavenDbMembership.Entities;
 
-namespace RavenDbMembership.Provider
+namespace MagStore.Provider
 {
     public class RavenDbMembershipProvider : MembershipProviderValidated
     {

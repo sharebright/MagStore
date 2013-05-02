@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RavenDbMembership
+namespace MagStore
 {
 	public class Role
 	{

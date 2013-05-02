@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RavenDbMembership.Provider
+namespace MagStore.Provider
 {
     public class RavenDbMembershipProviderThatDisposesStore : RavenDbMembershipProvider, IDisposable
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using MagStore.Entities;
+using MagStore.Infrastructure.Interfaces;
 using MagStore.Web.Models.Promotion;
 using MagStore.Web.ShopHelpers;
-using RavenDbMembership.Entities;
-using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {

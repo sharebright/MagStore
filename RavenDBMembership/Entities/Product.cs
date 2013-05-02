@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using RavenDbMembership.Infrastructure.Interfaces;
-using RavenDbMembership.Entities.Enums;
+using MagStore.Entities.Enums;
+using MagStore.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Entities
+namespace MagStore.Entities
 {
     public class Product : IRavenEntity
     {

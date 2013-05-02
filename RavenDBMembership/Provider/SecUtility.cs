@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RavenDbMembership.UserStrings;
+using MagStore.UserStrings;
 
-namespace RavenDbMembership.Provider
+namespace MagStore.Provider
 {
     public class SecUtility
     {

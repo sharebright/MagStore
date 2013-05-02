@@ -1,4 +1,4 @@
-﻿namespace RavenDbMembership.Infrastructure.Interfaces
+﻿namespace MagStore.Infrastructure.Interfaces
 {
     public interface IFormsAuthenticationService
     {

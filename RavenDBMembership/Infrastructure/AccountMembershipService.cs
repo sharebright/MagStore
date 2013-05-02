@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Transactions;
 using System.Web.Security;
-using RavenDbMembership.Infrastructure.Interfaces;
+using MagStore.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Infrastructure
+namespace MagStore.Infrastructure
 {
     public class AccountMembershipService : IMembershipService
     {

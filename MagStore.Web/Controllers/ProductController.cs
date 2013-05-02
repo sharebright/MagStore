@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using MagStore.Azure;
+using MagStore.Entities;
+using MagStore.Entities.Enums;
+using MagStore.Infrastructure.Interfaces;
 using MagStore.Web.Models.Product;
-using RavenDbMembership.Entities;
-using RavenDbMembership.Entities.Enums;
-using RavenDbMembership.Infrastructure.Interfaces;
 using System.Linq;
 
 namespace MagStore.Web.Controllers

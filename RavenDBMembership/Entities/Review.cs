@@ -1,4 +1,4 @@
-﻿namespace RavenDbMembership.Entities
+﻿namespace MagStore.Entities
 {
     public class Review
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Raven.Client.Linq;
 
-namespace RavenDbMembership.Infrastructure.Interfaces
+namespace MagStore.Infrastructure.Interfaces
 {
     public interface ICoordinator<T>
     {

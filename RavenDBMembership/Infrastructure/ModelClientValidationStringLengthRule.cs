@@ -1,4 +1,4 @@
-﻿namespace RavenDBMembership.Infrastructure
+﻿namespace MagStore.Infrastructure
 {
     /// <summary>
     /// Provides a container for a string-length validation rule that is sent to the browser.

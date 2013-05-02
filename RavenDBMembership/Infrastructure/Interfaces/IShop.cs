@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Raven.Client;
 using Raven.Client.Document;
 
-namespace RavenDbMembership.Infrastructure.Interfaces
+namespace MagStore.Infrastructure.Interfaces
 {
     public interface IShop
     {

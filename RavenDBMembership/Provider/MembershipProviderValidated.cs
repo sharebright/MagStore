@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Web.Security;
-using RavenDbMembership.UserStrings;
+using MagStore.UserStrings;
 
-namespace RavenDbMembership.Provider
+namespace MagStore.Provider
 {
     public abstract class MembershipProviderValidated : MembershipProvider
     {

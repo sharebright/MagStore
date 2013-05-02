@@ -1,7 +1,7 @@
 ﻿using System;
-using RavenDbMembership.Entities;
+using MagStore.Entities;
 
-namespace RavenDbMembership.Infrastructure.Interfaces
+namespace MagStore.Infrastructure.Interfaces
 {
     public interface IUserCoordinator
     {

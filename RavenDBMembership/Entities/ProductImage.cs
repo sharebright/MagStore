@@ -1,6 +1,6 @@
-﻿using RavenDbMembership.Infrastructure.Interfaces;
+﻿using MagStore.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Entities
+namespace MagStore.Entities
 {
     public class ProductImage : IRavenEntity
     {

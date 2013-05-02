@@ -4,11 +4,11 @@ namespace MagStore.Web.Models.Promotion
 {
     public class PromotionsViewModel
     {
-        public IEnumerable<RavenDbMembership.Entities.Promotion> Promotions { get; set; }
+        public IEnumerable<Entities.Promotion> Promotions { get; set; }
 
         public PromotionsViewModel()
         {
-            Promotions = new List<RavenDbMembership.Entities.Promotion>();
+            Promotions = new List<Entities.Promotion>();
         }
     }
 }

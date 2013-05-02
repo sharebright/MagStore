@@ -2,10 +2,10 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using MagStore.Entities;
+using MagStore.Infrastructure;
+using MagStore.Infrastructure.Interfaces;
 using MagStore.Web.Models;
-using RavenDbMembership.Entities;
-using RavenDbMembership.Infrastructure;
-using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {

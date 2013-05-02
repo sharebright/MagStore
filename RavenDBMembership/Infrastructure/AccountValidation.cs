@@ -1,6 +1,6 @@
 ﻿using System.Web.Security;
 
-namespace RavenDbMembership.Infrastructure
+namespace MagStore.Infrastructure
 {
     public static class AccountValidation
     {

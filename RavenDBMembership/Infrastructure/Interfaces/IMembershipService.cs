@@ -1,6 +1,6 @@
 ﻿using System.Web.Security;
 
-namespace RavenDbMembership.Infrastructure.Interfaces
+namespace MagStore.Infrastructure.Interfaces
 {
     public interface IMembershipService
     {

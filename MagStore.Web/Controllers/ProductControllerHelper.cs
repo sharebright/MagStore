@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MagStore.Azure;
+using MagStore.Entities;
+using MagStore.Infrastructure.Interfaces;
 using MagStore.Web.Models.Product;
-using RavenDbMembership.Entities;
-using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web.Controllers
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
+using MagStore.Infrastructure.Interfaces;
 using Raven.Client.Document;
-using RavenDbMembership.Infrastructure.Interfaces;
 
-namespace RavenDbMembership.Infrastructure
+namespace MagStore.Infrastructure
 {
     public class Shop : IShop
     {

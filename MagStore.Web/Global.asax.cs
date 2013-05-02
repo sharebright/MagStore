@@ -4,12 +4,12 @@ using System.Web.Routing;
 using System.Reflection;
 using Castle.MicroKernel.Registration;
 using MagStore.Azure;
+using MagStore.Infrastructure;
+using MagStore.Infrastructure.Interfaces;
 using MagStore.Web.Infrastructure;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
 using Raven.Client.Document;
-using RavenDbMembership.Infrastructure;
-using RavenDbMembership.Infrastructure.Interfaces;
 
 namespace MagStore.Web
 {
