@@ -64,11 +64,13 @@
     <Compile Include="Entities\Enums\ImageType.cs" />
     <Compile Include="Entities\Enums\ProductType.cs" />
     <Compile Include="Entities\Fulfillment.cs" />
+    <Compile Include="Infrastructure\Interfaces\IShopSettings.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductImage.cs" />
     <Compile Include="Entities\Promotion.cs" />
     <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\ShopSettings.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Infrastructure\AccountMembershipService.cs" />
     <Compile Include="Infrastructure\AccountValidation.cs" />

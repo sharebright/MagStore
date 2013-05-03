@@ -5,7 +5,6 @@ using System.Web.Security;
 using MagStore.Entities;
 using MagStore.Infrastructure;
 using MagStore.Infrastructure.Interfaces;
-using MagStore.Provider;
 using MagStore.Web.Models;
 using MagStore.Web.Models.Account;
 
@@ -16,7 +15,7 @@ namespace MagStore.Web.Controllers
         private readonly IRepository finder;
         private IFormsAuthenticationService FormsService { get; set; }
         private IMembershipService MembershipService { get; set; }
-        private RoleProvider roleProvider;
+        private readonly RoleProvider roleProvider;
 
         public AccountController(IRepository finder, RoleProvider roleProvider)
         {
@@ -201,7 +200,7 @@ namespace MagStore.Web.Controllers
         [HttpGet]
         public ActionResult CreateRole()
         {
-            User u = Session["CurrentUser"] as User;
+            var u = Session["CurrentUser"] as User;
             var viewModel = new CreateRoleViewModel
             {
                 User = u

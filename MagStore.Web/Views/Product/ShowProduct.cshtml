@@ -47,27 +47,33 @@
 		        <p class="product-price"><span>Price:</span>&euro;@Model.Product.Price</p>
 		        <br />
 		        <p class="dots"></p>
-		        <p><span>Quantity:</span><input type="text" name="quantity" /></p>
-		        <p>
-		            <span style="width: 70px">Size:</span>
-		            <select style="width: 150px">
-		                @foreach (var size in Model.AvailableSizes.Distinct())
-		                {
-		                    <option value="@size">@size</option>
-		                }
-		            </select>
-		        </p>
-		        <p>
-		            <span style="width: 70px">Colour:</span>
-		            <select style="width: 150px">
-		                @foreach (var colour in Model.AvailableColours.Distinct())
-		                {
-		                    <option value="@colour">@colour</option>
-		                }
-		            </select>
-		        </p>
-		        <p class="dots"></p>
-		        <p><a href="#" class="big-buy">Add to Cart</a></p>
+		        @using (Html.BeginForm("AddToCart", "ShoppingCart", FormMethod.Post))
+		        {
+		            <p>
+		                <span style="width: 70px">Size:</span>
+		                <select style="width: 150px" name="Size">
+		                    @foreach (var size in Model.AvailableSizes.Distinct())
+		                    {
+		                        <option value="@size">@size</option>
+		                    }
+		                </select>
+		            </p>
+		            <p>
+		                <span style="width: 70px">Colour:</span>
+		                <select style="width: 150px" name="Colour">
+		                    @foreach (var colour in Model.AvailableColours.Distinct())
+		                    {
+		                        <option value="@colour">@colour</option>
+		                    }
+		                </select>
+		            </p>
+		            <p class="dots"></p>
+@*		            <p><span>Quantity:</span><input type="text" name="Quantity" value="1" /></p>*@
+		            <input type="hidden" name="Code" value="@Model.Product.Code" />
+		            <input type="hidden" name="ProductId" value="@Model.Product.Id" />
+		            <input type="submit" value="Add to Cart" style="font-size: 25px; width: 230px !important;" />
+		        }     
+                <p><a href="#" class="big-buy">Add to Cart</a></p>
 		        @*				<p><a href="#">Add to Wish List</a>    - OR -    <a href="#">Add to Compare</a></p>*@
 		    </section><!-- .description end -->
 			

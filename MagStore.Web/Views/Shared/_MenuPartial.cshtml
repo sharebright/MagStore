@@ -4,11 +4,11 @@
     var shop = HttpContext.Current.Application["Shop"] as Shop;
     var shoppingCart = ((User) HttpContext.Current.Session["CurrentUser"]).ShoppingCart;
 
-    IEnumerable<Product> products = null;
-    foreach (var productId in shoppingCart.Products)
-    {
-        products = shop.GetCoordinator<Product>().List().Where(x=>x.Id==productId).ToList();
-    }
+    IEnumerable<Product> products = shoppingCart.Products;
+//    foreach (var productId in shoppingCart.Products)
+//    {
+//        products = shop.GetCoordinator<Product>().List().Where(x=>x.Id==productId).ToList();
+//    }
 
     decimal total;
     try
@@ -21,7 +21,7 @@
     }
 
     <ul>
-        <li class="cart-title"><a href="#">Shopping Cart:</a></li>
+        <li class="cart-title">@Html.ActionLink("Shopping Cart:", "ShoppingCart", "ShoppingCart")</li>
         <li class="cart-price"><a href="#">£@total.ToString("0.00")</a></li>
         <li class="cart-items"><a href="#">@shoppingCart.Products.Count items</a></li>
         @if (Request.IsAuthenticated)

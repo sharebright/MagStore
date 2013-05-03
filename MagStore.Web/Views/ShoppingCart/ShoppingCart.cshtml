@@ -1,0 +1,93 @@
+﻿@model MagStore.Web.Models.ShoppingCart.ShoppingCartGetViewModel
+
+@{
+    ViewBag.Title = "View Shopping Cart";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet' type='text/css'>
+	
+    <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
+    <script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
+    <script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
+    
+    <style type="text/css">
+        td.total
+        {
+	        font-weight: bold; 
+	        font-size: 20px;
+	    }
+    </style>
+}
+
+<!-- MAIN CONTENT START -->
+
+<section class="main wrapper">
+    <section class="full-width">
+        
+            <h1>Your Cart</h1>
+            <h6>Products in cart</h6>
+            <table class="no-borders">
+                <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Colour</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Line Price</th>
+                </tr>
+                @foreach (var product in @Model.Products.GroupBy(p=>p.Id).Select(g=>g.First()))
+                {
+                    <tr>
+                        <td>
+                            @{
+                                using (Html.BeginForm("RemoveProductFromBasket", "ShoppingCart", FormMethod.Post))
+                                {
+                                    <div style="margin-top: -10px; margin-bottom: 0; vertical-align: text-top; background: none;">
+                                        <input type="hidden" name="Id" value="@product.Id" />
+                                        <input type="submit" value="Remove" style="margin-bottom: 0;"/>
+                                    </div>
+                                }
+                            }
+                        </td>
+                        <td>@product.Name</td>
+                        <td>@product.Size</td>
+                        <td>@product.Colour</td>
+                        <td>
+                            @{
+                                var quantity = Model.Products.Count(p => p.Id == product.Id);
+                                using (Html.BeginForm("UpdateProductQuantity", "ShoppingCart", FormMethod.Post))
+                                {
+                                    <div style="margin-top: -10px; margin-bottom: 0; vertical-align: text-top; background: none;">
+                                        <input type="hidden" name="Id" value="@product.Id" />
+                                        @Html.TextBox("Quantity", @quantity, new { Name = "Quantity", Style = "width: 30px !important; margin: 0 5px 0 0;" } )
+                                        <input type="submit" value="update" style="margin-bottom: 0;"/>
+                                    </div>
+                                }
+                            }
+                        </td>
+                        <td>@product.Price</td>
+                        <td>@Model.Products.Where(p => p.Id == product.Id).Sum(p=>p.Price)</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="5">&nbsp;</td>
+                    <td class="total">Total:</td>
+                    <td class="total">@Model.Products.Sum(p => p.Price)</td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+        
+		
+    </section>		
+    <div class="clear"></div>
+
+</section><!-- .main end -->
+
+<!-- MAIN CONTENT END -->

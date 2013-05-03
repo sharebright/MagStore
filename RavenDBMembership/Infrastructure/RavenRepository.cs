@@ -141,7 +141,17 @@ namespace MagStore.Infrastructure
 
         public IRavenQueryable<T> Query<T>()
         {
-            return session.Query<T>();
+            IRavenQueryable<T> query;
+            try
+            {
+                query = CurrentSession.Query<T>();
+            }
+            catch (Exception)
+            {
+                ForceNewSession();
+                query = CurrentSession.Query<T>();
+            }
+            return query;
         }
 
         public ILoaderWithInclude<T> Include<T>(Expression<Func<T, object>> path)

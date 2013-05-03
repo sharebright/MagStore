@@ -24,7 +24,7 @@ namespace MagStore.Entities
 		    ShoppingCart = new Cart
 		        {
 		        Id = Guid.NewGuid().ToString(),
-                Products = new List<string>(),
+                Products = new List<Product>(),
                 Promotions = new List<string>()
 		    };
 			Roles = new List<string>();

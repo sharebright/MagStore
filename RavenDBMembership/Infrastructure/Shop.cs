@@ -23,5 +23,7 @@ namespace MagStore.Infrastructure
         {
             return finder.Include(path);
         }
+
+        public IShopSettings Settings { get; set; }
     }
 }

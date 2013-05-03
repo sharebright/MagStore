@@ -27,6 +27,7 @@ namespace MagStore.Web
             filters.Add(new HandleErrorAttribute());
         }
 
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -59,6 +60,11 @@ namespace MagStore.Web
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Session_End()
+        {
+           Container.Resolve<IFormsAuthenticationService>().SignOut();
         }
 
         protected void Application_End()

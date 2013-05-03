@@ -7,12 +7,12 @@ namespace MagStore.Entities
     {
         public Cart()
         {
-            Products = new List<string>();
+            Products = new List<Product>();
             Promotions = new List<string>();
         }
 
         public string Id { get; set; }
-        public IList<string> Products { get; set; }
+        public IList<Product> Products { get; set; }
         public IList<string> Promotions { get; set; }
     }
 }
