@@ -1,11 +1,13 @@
-﻿using System.Web.Mvc;
-using Castle.Windsor;
+﻿using System.Reflection;
+using System.Web.Mvc;
 using System.Web.Routing;
-using System.Reflection;
+using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using MagStore.Azure;
 using MagStore.Infrastructure;
 using MagStore.Infrastructure.Interfaces;
+using MagStore.Provider;
 using MagStore.Web.Infrastructure;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
@@ -47,6 +49,7 @@ namespace MagStore.Web
 
             // RavenDB embedded
             Container.Register(Component.For<IDocumentStore>().UsingFactoryMethod(GetDocumentStore).LifeStyle.Singleton);
+            Container.Register(Component.For<RoleProvider>().ImplementedBy<RavenDbRoleProvider>().LifeStyle.Singleton);
             Container.Register(Component.For<IRepository>().ImplementedBy<RavenRepository>().LifestylePerWebRequest());
             Container.Register(Component.For<IShop>().ImplementedBy<Shop>().LifeStyle.Singleton);
             Container.Register(Component.For<IStorageAccessor>().UsingFactoryMethod(GetStorageAccessor).LifeStyle.PerWebRequest);

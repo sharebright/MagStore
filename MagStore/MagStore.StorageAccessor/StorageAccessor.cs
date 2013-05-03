@@ -28,8 +28,8 @@ namespace MagStore.Azure
 
         public Uri AddBlobToResource(string fileName, Stream inputStream)
         {
-            CloudBlockBlob createdBlob = CreateBlob(fileName, inputStream);
-            Uri createdBlobUri = createdBlob.Uri;
+            var createdBlob = CreateBlob(fileName, inputStream);
+            var createdBlobUri = createdBlob.Uri;
             return createdBlobUri;
         }
 

@@ -1,5 +1,4 @@
-﻿@using MagStore.Entities
-@model MagStore.Web.Models.Product.ViewProductsByCategoryViewModel
+﻿@model MagStore.Web.Models.Product.ViewProductsByCategoryViewModel
 
 @{
     ViewBag.Title = @Model.ProductType;
@@ -41,7 +40,7 @@
             foreach (var thumb in Model.Images)
             {
                 var match = false;
-                bool imageFound = false;
+                var imageFound = false;
                 foreach (var image in product.Images)
                 {
                     match = thumb.ImageUrl.Contains(image);

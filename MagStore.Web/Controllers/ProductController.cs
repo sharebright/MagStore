@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MagStore.Azure;
@@ -7,7 +8,6 @@ using MagStore.Entities;
 using MagStore.Entities.Enums;
 using MagStore.Infrastructure.Interfaces;
 using MagStore.Web.Models.Product;
-using System.Linq;
 
 namespace MagStore.Web.Controllers
 {
@@ -212,13 +212,13 @@ namespace MagStore.Web.Controllers
         [HttpGet]
         public ActionResult ViewProductsByCategory(ViewProductsByCategoryInputModel inputModel)
         {
-            IEnumerable<Product> products =
+            var products =
                 shop.GetCoordinator<Product>()
                     .List()
                     .Where(p => p.ProductType == (ProductType)Enum.Parse(typeof(ProductType), inputModel.Category));
 
-            IQueryable<ProductType> productTypes = Enum.GetValues(typeof(ProductType)).AsQueryable().OfType<ProductType>();
-            IQueryable<ProductType> availableCategories = from a in productTypes
+            var productTypes = Enum.GetValues(typeof(ProductType)).AsQueryable().OfType<ProductType>();
+            var availableCategories = from a in productTypes
                                                           from p in products
                                                           where p.ProductType == a
                                                           where p.Gender.ToUpper() == inputModel.Gender.ToUpper()

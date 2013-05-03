@@ -11,7 +11,7 @@ namespace MagStore.Web.Controllers
     public class PromotionController : Controller
     {
         private readonly IShop shop;
-        private PromotionHelper promotionHelper;
+        private readonly PromotionHelper promotionHelper;
 
         public PromotionController(IShop shop)
         {
@@ -48,7 +48,7 @@ namespace MagStore.Web.Controllers
 
             shop.GetCoordinator<Promotion>().Save(promotion);
 
-            return RedirectToAction("EditPromotion", "Promotion", new { Id = promotion.Id});
+            return RedirectToAction("EditPromotion", "Promotion", new {promotion.Id});
         }
 
         public ActionResult ViewPromotions()

@@ -1,6 +1,4 @@
-﻿using System;
-using FluentAssertions;
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿using FluentAssertions;
 using NUnit.Framework;
 
 namespace MagStore.Test.Azure.Storage

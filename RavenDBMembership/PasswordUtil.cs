@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace MagStore
 {

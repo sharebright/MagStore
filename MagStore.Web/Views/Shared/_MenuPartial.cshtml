@@ -1,7 +1,5 @@
 ﻿@using MagStore.Entities
 @using MagStore.Infrastructure
-@using MagStore.Entities
-@using MagStore.Infrastructure
 @{
     var shop = HttpContext.Current.Application["Shop"] as Shop;
     var shoppingCart = ((User) HttpContext.Current.Session["CurrentUser"]).ShoppingCart;

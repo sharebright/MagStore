@@ -54,7 +54,7 @@ namespace MagStore.Web.Controllers
         [HttpGet]
         public ActionResult EditCatalogue(EditCatalogueGetInputModel getInputModel)
         {
-            Catalogue catalogue = shop.GetCoordinator<Catalogue>().Load(getInputModel.Id);
+            var catalogue = shop.GetCoordinator<Catalogue>().Load(getInputModel.Id);
 
             var viewModel = new EditCatalogueViewModel
             {
@@ -74,7 +74,7 @@ namespace MagStore.Web.Controllers
             shop.GetCoordinator<Catalogue>()
                 .Save(UpdateCatalogue(postInputModel));
 
-            return RedirectToAction("EditCatalogue", new { Id = postInputModel.Id });
+            return RedirectToAction("EditCatalogue", new {postInputModel.Id });
         }
 
         private Catalogue UpdateCatalogue(EditCataloguePostInputModel postInputModel)

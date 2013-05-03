@@ -1,7 +1,4 @@
-﻿using Castle.Windsor;
-using MagStore.Infrastructure;
-using MagStore.Infrastructure.Interfaces;
-using NSubstitute;
+﻿using MagStore.Infrastructure;
 using NUnit.Framework;
 
 namespace MagStore.Test.Users

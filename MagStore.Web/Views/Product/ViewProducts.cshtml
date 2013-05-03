@@ -109,7 +109,7 @@
                         </td>
                         <td>@product.Size</td>
                         <td>@product.Supplier</td>
-                        <td>@Html.ActionLink("Delete", "DeleteProduct", "Product", new { Id = product.Id }, new { })</td>
+                        <td>@Html.ActionLink("Delete", "DeleteProduct", "Product", new {product.Id }, new { })</td>
                     </tr>
                 }
 			</table>

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration.Provider;
 using System.Linq;
 using System.Web.Security;
 using MagStore.Entities;
+using Microsoft.Practices.ServiceLocation;
 using Raven.Abstractions.Exceptions;
 using Raven.Client;
-using Microsoft.Practices.ServiceLocation;
-using System.Collections.Specialized;
 
 namespace MagStore.Provider
 {
@@ -336,10 +335,10 @@ namespace MagStore.Provider
             {
                 throw new ArgumentNullException("user");
             }
-            string username = user.UserName;
+            var username = user.UserName;
             SecUtility.CheckParameter(ref username, true, true, true, 0x100, "UserName");
             
-            string email = user.Email;
+            var email = user.Email;
             SecUtility.CheckParameter(ref email, RequiresUniqueEmail, RequiresUniqueEmail, false, 0x100, "Email");
             user.Email = email;
 
@@ -423,7 +422,7 @@ namespace MagStore.Provider
                 var q = from u in session.Query<User>()
                             where u.ApplicationName == ApplicationName
                         select u;
-                IEnumerable<User> results = predicate != null ? q.Where(predicate) : q;
+                var results = predicate != null ? q.Where(predicate) : q;
                 var users = results as User[] ?? results.ToArray();
                 totalRecords = users.Count();
                 var pagedUsers = users.Skip(pageIndex * pageSize).Take(pageSize);

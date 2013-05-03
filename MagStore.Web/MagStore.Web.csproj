@@ -173,6 +173,8 @@
     <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\WindsorServiceLocator.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Account\CreateRoleInputModel.cs" />
+    <Compile Include="Models\Account\CreateRoleViewModel.cs" />
     <Compile Include="Models\Catalogue\CataloguesViewModel.cs" />
     <Compile Include="Models\Catalogue\CreateCatalogueInputModel.cs" />
     <Compile Include="Models\Catalogue\CreateCatalogueViewModel.cs" />
@@ -487,6 +489,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Product\_EditProductButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\CreateRole.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

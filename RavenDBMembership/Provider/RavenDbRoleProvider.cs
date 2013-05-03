@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web.Security;
-using System.Collections.Specialized;
 using MagStore.Entities;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;

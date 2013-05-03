@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using FluentAssertions;
 using MagStore.Entities;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace MagStore.Test.Products

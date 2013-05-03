@@ -59,7 +59,7 @@ namespace MagStore.Infrastructure
             // than return false in certain failure scenarios.
             try
             {
-                MembershipUser currentUser = _provider.GetUser(userName, true /* userIsOnline */);
+                var currentUser = _provider.GetUser(userName, true /* userIsOnline */);
                 return currentUser.ChangePassword(oldPassword, newPassword);
             }
             catch (ArgumentException)

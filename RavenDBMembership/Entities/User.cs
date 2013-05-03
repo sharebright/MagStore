@@ -21,8 +21,8 @@ namespace MagStore.Entities
 
 		public User()
 		{
-		    ShoppingCart = new Cart()
-		    {
+		    ShoppingCart = new Cart
+		        {
 		        Id = Guid.NewGuid().ToString(),
                 Products = new List<string>(),
                 Promotions = new List<string>()

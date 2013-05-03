@@ -36,8 +36,8 @@ namespace MagStore.Provider
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
-            int num = 0;
-            for (int i = 0; i < password.Length; i++)
+            var num = 0;
+            for (var i = 0; i < password.Length; i++)
             {
                 if (!char.IsLetterOrDigit(password, i))
                 {
@@ -54,7 +54,7 @@ namespace MagStore.Provider
                 status = MembershipCreateStatus.InvalidPassword;
                 return null;
             }
-            ValidatePasswordEventArgs e = new ValidatePasswordEventArgs(username, password, true);
+            var e = new ValidatePasswordEventArgs(username, password, true);
             this.OnValidatingPassword(e);
             if (e.Cancel)
             {
@@ -79,8 +79,8 @@ namespace MagStore.Provider
             {
                 throw new ArgumentException("Password is shorter than the minimum " + this.MinRequiredPasswordLength, "newPassword");
             }
-            int num3 = 0;
-            for (int i = 0; i < newPassword.Length; i++)
+            var num3 = 0;
+            for (var i = 0; i < newPassword.Length; i++)
             {
                 if (!char.IsLetterOrDigit(newPassword, i))
                 {
@@ -98,7 +98,7 @@ namespace MagStore.Provider
                 throw new ArgumentException(Sr.Password_does_not_match_regular_expression.WithParameters(),
                     "newPassword");
             }
-            ValidatePasswordEventArgs e = new ValidatePasswordEventArgs(username, newPassword, false);
+            var e = new ValidatePasswordEventArgs(username, newPassword, false);
             this.OnValidatingPassword(e);
             if (e.Cancel)
             {

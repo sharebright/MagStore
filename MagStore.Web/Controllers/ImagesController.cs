@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -55,11 +54,11 @@ namespace MagStore.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                string fileName = postModel.Id;
+                var fileName = postModel.Id;
                 UpdateImage(postModel, fileName);
             }
 
-            return RedirectToAction( "EditImage", new { Id = postModel.Id }); //View(new ImageEditGetInputModel());
+            return RedirectToAction( "EditImage", new {postModel.Id }); //View(new ImageEditGetInputModel());
         }
 
         [HttpGet]
@@ -88,11 +87,11 @@ namespace MagStore.Web.Controllers
 
         private void UpdateImage(ImageEditPostModel postModel, string fileName)
         {
-            bool hasChanges = postModel.Image != null;
+            var hasChanges = postModel.Image != null;
             Uri uri = null;
             if (hasChanges)
             {
-                Stream inputStream = postModel.Image.InputStream;
+                var inputStream = postModel.Image.InputStream;
                 uri = storageAccessor.AddBlobToResource(fileName, inputStream);
             }
 

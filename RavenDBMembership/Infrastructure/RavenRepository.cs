@@ -146,7 +146,7 @@ namespace MagStore.Infrastructure
 
         public ILoaderWithInclude<T> Include<T>(Expression<Func<T, object>> path)
         {
-            return CurrentSession.Include<T>(path);
+            return CurrentSession.Include(path);
         }
     }
 }

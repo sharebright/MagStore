@@ -5,7 +5,9 @@ using System.Web.Security;
 using MagStore.Entities;
 using MagStore.Infrastructure;
 using MagStore.Infrastructure.Interfaces;
+using MagStore.Provider;
 using MagStore.Web.Models;
+using MagStore.Web.Models.Account;
 
 namespace MagStore.Web.Controllers
 {
@@ -14,10 +16,12 @@ namespace MagStore.Web.Controllers
         private readonly IRepository finder;
         private IFormsAuthenticationService FormsService { get; set; }
         private IMembershipService MembershipService { get; set; }
+        private RoleProvider roleProvider;
 
-        public AccountController(IRepository finder)
+        public AccountController(IRepository finder, RoleProvider roleProvider)
         {
             this.finder = finder;
+            this.roleProvider = roleProvider;
         }
 
         protected override void Initialize(RequestContext requestContext)
@@ -192,6 +196,24 @@ namespace MagStore.Web.Controllers
             var user = MembershipService.GetUser(model.Username);
             MembershipService.UpdateUser(user, model.UserRoles);
             return RedirectToAction("ManageUsers");
+        }
+
+        [HttpGet]
+        public ActionResult CreateRole()
+        {
+            User u = Session["CurrentUser"] as User;
+            var viewModel = new CreateRoleViewModel
+            {
+                User = u
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult CreateRole(CreateRoleInputModel inputModel)
+        {
+            roleProvider.CreateRole(inputModel.Role);
+            return RedirectToAction("CreateRole");
         }
 
         [HttpPost]

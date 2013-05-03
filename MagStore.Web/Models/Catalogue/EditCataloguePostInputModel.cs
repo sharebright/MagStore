@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using MagStore.Entities.Enums;
-using MagStore.Web.Controllers;
 
 namespace MagStore.Web.Models.Catalogue
 {
