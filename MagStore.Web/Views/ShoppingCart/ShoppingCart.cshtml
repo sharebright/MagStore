@@ -81,6 +81,15 @@
                     <td class="total">Total:</td>
                     <td class="total">@Model.Products.Sum(p => p.Price)</td>
                 </tr>
+                <tr>
+                    <td colspan="6">&nbsp;</td>
+                    <td>
+                        @using (Html.BeginForm("Checkout", "ShoppingCart", FormMethod.Post))
+                        {
+                            <input type="submit" value="Check Out Now!" />
+                        }
+                    </td>
+                </tr>
             </table>
             <p>&nbsp;</p>
         

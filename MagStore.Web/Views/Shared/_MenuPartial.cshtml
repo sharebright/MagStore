@@ -22,8 +22,8 @@
 
     <ul>
         <li class="cart-title">@Html.ActionLink("Shopping Cart:", "ShoppingCart", "ShoppingCart")</li>
-        <li class="cart-price"><a href="#">£@total.ToString("0.00")</a></li>
-        <li class="cart-items"><a href="#">@shoppingCart.Products.Count items</a></li>
+        <li class="cart-price">@Html.ActionLink("£"+total.ToString("0.00"), "ShoppingCart", "ShoppingCart")</li>
+        <li class="cart-items">@Html.ActionLink(shoppingCart.Products.Count + " items", "ShoppingCart", "ShoppingCart")</li>
         @if (Request.IsAuthenticated)
         {
             <li class="cart-login">

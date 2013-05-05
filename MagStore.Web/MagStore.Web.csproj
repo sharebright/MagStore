@@ -399,11 +399,11 @@
     <Content Include="Views\Store\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MagStore\MagStore.StorageAccessor\MagStore.Azure.csproj">
+    <ProjectReference Include="..\MagStore.StorageAccessor\MagStore.Azure.csproj">
       <Project>{262E8901-EF1C-4CE7-BD6E-E54EC466D449}</Project>
       <Name>MagStore.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RavenDBMembership\MagStore.csproj">
+    <ProjectReference Include="..\MagStore\MagStore.csproj">
       <Project>{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}</Project>
       <Name>MagStore</Name>
     </ProjectReference>
@@ -499,6 +499,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ShoppingCart\ShoppingCart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
@@ -48,9 +49,13 @@ namespace MagStore.Web.Controllers
                 if (MembershipService.ValidateUser(model.UserName, model.Password))
                 {
                     FormsService.SignIn(model.UserName, model.RememberMe);
+
                     var providerUserKey = MembershipService.GetUser(model.UserName).ProviderUserKey as string;
+                    var cart = (Session["CurrentUser"] as User).ShoppingCart;
                     var currentUser = finder.Load<User>(providerUserKey);
+                    currentUser.ShoppingCart = cart;
                     Session["CurrentUser"] = currentUser;
+
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -61,7 +66,7 @@ namespace MagStore.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("LogOn", model);
         }
 
         // **************************************
@@ -71,7 +76,7 @@ namespace MagStore.Web.Controllers
         public ActionResult LogOff()
         {
             FormsService.SignOut();
-
+            (Session["CurrentUser"] as User).ShoppingCart.Products = new List<Product>();
             return RedirectToAction("Index", "Home");
         }
 

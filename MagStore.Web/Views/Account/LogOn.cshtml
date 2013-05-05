@@ -1,4 +1,5 @@
-﻿@model MagStore.Web.Models.LogOnModel
+﻿@using MagStore.Web.Models
+@model MagStore.Web.Models.LogOnModel
 
 @{
     ViewBag.Title = "Log On";
@@ -17,7 +18,6 @@
 	<script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
 	<script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
 }
-@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
 <!-- MAIN CONTENT START -->
 
@@ -31,6 +31,7 @@
 					<li><a href="#tab2">Register</a></li>
 				</ul>
 			    <div id="tab1">
+                    @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 			        @using (Html.BeginForm("LogOn", "Account", FormMethod.Post))
 			        {
 			            <div>
@@ -57,7 +58,7 @@
 			                        @Html.CheckBoxFor(m => m.RememberMe)
 			                        @Html.LabelFor(m => m.RememberMe)
 			                    </div>
-
+                                @Html.Hidden("returnUrl", Request.UrlReferrer.PathAndQuery)
 			                    <p>
 			                        <input type="submit" value="Log On" />
 			                    </p>
@@ -66,7 +67,7 @@
 			        }
 			    </div>
 			    <div id="tab2">
-			        @Html.Partial("RegisterPartial")
+			        @Html.Partial("RegisterPartial", new RegisterModel())
 			    </div>
 			</section>
 		</article>

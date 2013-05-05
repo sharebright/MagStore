@@ -91,5 +91,20 @@ namespace MagStore.Web.Controllers
             user.ShoppingCart.Products = productsToSave;
             return RedirectToAction("ShoppingCart");
         }
+
+        public ActionResult Checkout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var products = (Session["CurrentUser"] as User).ShoppingCart.Products;
+                return View(new CheckoutViewModel {Products = products});
+            }
+            return RedirectToAction("LogOn", "Account");
+        }
+    }
+
+    public class CheckoutViewModel
+    {
+        public IList<Product> Products { get; set; }
     }
 }

@@ -82,7 +82,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RavenDBMembership\MagStore.csproj">
+    <ProjectReference Include="..\MagStore\MagStore.csproj">
       <Project>{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}</Project>
       <Name>MagStore</Name>
     </ProjectReference>
