@@ -2,38 +2,31 @@
 using MagStore.Payments.Processors;
 using MagStore.Payments.Providers;
 using NSubstitute;
-using NUnit.Framework;
 using SagePayMvc;
 
 namespace MagStore.Test.Payments
 {
-    public class MakingPaymentsSetUpFixture
+    public class MakingPaymentsSetUpFixture : TestSetUpFixture
     {
-        private SagePayPaymentProvider paymentProvider;
-        protected IAuthRequest authRequest;
-        protected IAuthResponse authResponse;
-        protected IPaymentProcessor paymentProcessor;
+        private IPaymentProvider paymentProvider;
+        protected IAuthRequest AuthRequest;
+        protected IAuthResponse AuthResponse;
+        protected IPaymentProcessor PaymentProcessor;
+        protected ITransactionRegistrar TransactionRegistrar;
 
-        [SetUp]
-        public virtual void SetUp()
+        protected override void Arrange()
         {
-            Arrange();
-
-            Act();
+            TransactionRegistrar = Substitute.For<ITransactionRegistrar>();
+            PaymentProcessor = Substitute.For<SagePayPaymentProcessor>(TransactionRegistrar);
+            paymentProvider = new SagePayPaymentProvider(PaymentProcessor);
+            AuthRequest = Substitute.For<IAuthRequest>();
+            AuthRequest.BillingAddress = Substitute.For<Address>();
+            AuthRequest.DeliveryAddress = Substitute.For<Address>();
         }
 
-        protected void Arrange()
+        protected override void Act()
         {
-            paymentProcessor = Substitute.For<SagePayPaymentProcessor>();
-            paymentProvider = new SagePayPaymentProvider(paymentProcessor);
-            authRequest = Substitute.For<IAuthRequest>();
-            authRequest.BillingAddress = Substitute.For<Address>();
-            authRequest.DeliveryAddress = Substitute.For<Address>();
-        }
-
-        protected void Act()
-        {
-            authResponse = paymentProvider.MakePayment(authRequest);
+            AuthResponse = paymentProvider.MakePayment(AuthRequest);
         }
     }
 }

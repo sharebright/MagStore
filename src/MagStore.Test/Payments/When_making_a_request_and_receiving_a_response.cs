@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
+using SagePayMvc;
 
 namespace MagStore.Test.Payments
 {
@@ -10,13 +11,25 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_receive_an_auth_request()
         {
-            paymentProcessor.Received().Authorise(Arg.Is(authRequest));
+            PaymentProcessor.Received().Authorise(AuthRequest);
         }
 
         [Test]
         public void The_payment_processor_should_return_a_response()
         {
-            authResponse.Should().NotBeNull();
+            AuthResponse.Should().NotBeNull();
+        }
+
+        [Test]
+        public void The_transaction_registrar_should_receive_the_valid_request()
+        {
+            TransactionRegistrar.Received().Send(
+                AuthRequest.Context,
+                AuthRequest.TransactionId,
+                Arg.Any<ShoppingBasket>(),
+                AuthRequest.BillingAddress,
+                AuthRequest.DeliveryAddress,
+                AuthRequest.CustomerEmail);
         }
     }
 }

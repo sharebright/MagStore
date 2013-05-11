@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using MagStore.Entities;
 using MagStore.Payments.Messages;
 using SagePayMvc;
 
@@ -24,17 +26,20 @@ namespace MagStore.Payments.Processors
         {
             ValidateRequest(authRequest);
 
-//            TransactionRegistrationResponse t = registrar.Send(
-//                authRequest.Context,
-//                authRequest.TransactionId,
-//                authRequest.Contents,
-//                GetAddress(authRequest.BillingAddress),
-//                GetAddress(authRequest.DeliveryAddress),
-//                authRequest.CustomerEmail,
-//                authRequest.PaymentFormProfile,
-//                authRequest.Currency);
+            TransactionRegistrationResponse t = registrar.Send(
+                authRequest.Context,
+                authRequest.TransactionId,
+                ConvertToShoppingBasket(authRequest.Products),
+                authRequest.BillingAddress,
+                authRequest.DeliveryAddress,
+                authRequest.CustomerEmail);
 
             return new SagePayAuthResponse();
+        }
+
+        private ShoppingBasket ConvertToShoppingBasket(IList<Product> products)
+        {
+            return default(ShoppingBasket); // new ShoppingBasket("Test");
         }
 
         private void ValidateRequest(IAuthRequest authRequest)

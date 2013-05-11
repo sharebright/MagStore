@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using FluentAssertions;
-using MagStore.Entities;
 using NUnit.Framework;
-using SagePayMvc;
 
 namespace MagStore.Test.Payments
 {
@@ -13,10 +10,10 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_throw_argumentnullexception_for_an_auth_request_that_is_null()
         {
-            authRequest = null;
+            AuthRequest = null;
             var paramName =
                 Assert.Throws<ArgumentNullException>(
-                    () => paymentProcessor.Authorise(authRequest),
+                    () => PaymentProcessor.Authorise(AuthRequest),
                     "An null request is required to make this test valid.")
                 .ParamName;
 
@@ -26,10 +23,10 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_throw_argumentnullexception_for_an_auth_request_with_null_context()
         {
-            authRequest.Context = null;
+            AuthRequest.Context = null;
             var paramName =
                 Assert.Throws<ArgumentNullException>(
-                        () => paymentProcessor.Authorise(authRequest),
+                        () => PaymentProcessor.Authorise(AuthRequest),
                         "A null context is required to make this test valid.")
                     .ParamName;
             
@@ -39,10 +36,10 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_throw_argumentnullexception_for_an_auth_request_with_null_transaction_id()
         {
-            authRequest.TransactionId = null;
+            AuthRequest.TransactionId = null;
             var paramName =
                 Assert.Throws<ArgumentNullException>(
-                        () => paymentProcessor.Authorise(authRequest),
+                        () => PaymentProcessor.Authorise(AuthRequest),
                         "A null transaction id is required to make this test valid.")
                     .ParamName;
 
@@ -52,10 +49,10 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_throw_argumentnullexception_for_an_auth_request_with_a_null_product_list()
         {
-            authRequest.Products = null;
+            AuthRequest.Products = null;
             var paramName =
                 Assert.Throws<ArgumentNullException>(
-                        () => paymentProcessor.Authorise(authRequest),
+                        () => PaymentProcessor.Authorise(AuthRequest),
                         "A null product list is required to make this test valid.")
                     .ParamName;
 
@@ -65,10 +62,10 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_throw_argumentnullexception_for_an_auth_request_with_a_null_customer_email()
         {
-            authRequest.CustomerEmail = null;
+            AuthRequest.CustomerEmail = null;
             var paramName =
                 Assert.Throws<ArgumentNullException>(
-                        () => paymentProcessor.Authorise(authRequest),
+                        () => PaymentProcessor.Authorise(AuthRequest),
                         "A null customer email is required to make this test valid.")
                     .ParamName;
 
@@ -78,10 +75,10 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_throw_argumentnullexception_for_an_auth_request_with_a_null_billing_address()
         {
-            authRequest.BillingAddress = null;
+            AuthRequest.BillingAddress = null;
             var paramName =
                 Assert.Throws<ArgumentNullException>(
-                        () => paymentProcessor.Authorise(authRequest),
+                        () => PaymentProcessor.Authorise(AuthRequest),
                         "A null billing address is required to make this test valid.")
                     .ParamName;
 
@@ -91,11 +88,11 @@ namespace MagStore.Test.Payments
         [Test]
         public void The_payment_processor_should_throw_argumentnullexception_for_an_auth_request_with_a_null_delivery_address()
         {
-            authRequest.DeliveryAddress = null;
+            AuthRequest.DeliveryAddress = null;
 
             var paramName =
                 Assert.Throws<ArgumentNullException>(
-                        () => paymentProcessor.Authorise(authRequest),
+                        () => PaymentProcessor.Authorise(AuthRequest),
                         "A null delivery address is required to make this test valid.")
                     .ParamName;
 

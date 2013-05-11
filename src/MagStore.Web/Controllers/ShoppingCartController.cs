@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Routing;
 using MagStore.Entities;
 using MagStore.Infrastructure.Interfaces;
 using MagStore.Web.Models.ShoppingCart;
@@ -13,7 +12,7 @@ namespace MagStore.Web.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IShop shop;
-        private ITransactionRegistrar registrar;
+        private readonly ITransactionRegistrar registrar;
 
         public ShoppingCartController(IShop shop, ITransactionRegistrar registrar)
         {

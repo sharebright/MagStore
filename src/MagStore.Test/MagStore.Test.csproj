@@ -75,8 +75,9 @@
     <Compile Include="Azure.Storage\StorageAccountSetUpFixture.cs" />
     <Compile Include="Azure.Storage\When_saving_a_blob_to.cs" />
     <Compile Include="Payments\MakingPaymentsSetUpFixture.cs" />
+    <Compile Include="TestSetUpFixture.cs" />
     <Compile Include="Payments\When_making_a_request_and_receiving_a_response.cs" />
-    <Compile Include="Payments\When_making_a__valid_request_and_receiving_a_response.cs" />
+    <Compile Include="Payments\When_making_an_invalid_request.cs" />
     <Compile Include="Products\WhenAddingAProductToTheCart.cs" />
     <Compile Include="Users\CreatingUsersWithElevatedPrivileges.cs" />
     <Compile Include="Users\UserCoordinatorBase.cs" />
