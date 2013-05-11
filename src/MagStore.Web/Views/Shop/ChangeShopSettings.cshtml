@@ -1,0 +1,163 @@
+﻿@model MagStore.Web.Models.Shop.ShopSettingsViewModel
+
+@{
+    ViewBag.Title = "Change Shop Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+{
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet'
+          type='text/css' />
+    <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
+    <script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
+    <script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
+}
+<!-- MAIN CONTENT START -->
+<section class="main wrapper">
+    <div id="breadcrumb">
+        @Html.ActionLink("Manage Shop", "Manage", "Shop") / Change Shop Settings
+    </div>
+    <article>
+        <h1>Edit Product</h1>
+        @using (Html.BeginForm("ChangeShopSettings", "Shop", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TagLine)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TagLine)
+                    @Html.ValidationMessageFor(model => model.TagLine)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CurrencySymbol)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.CurrencySymbol)
+                    @Html.ValidationMessageFor(model => model.CurrencySymbol)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CurrencyConversion)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.CurrencyConversion)
+                    @Html.ValidationMessageFor(model => model.CurrencyConversion)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CurrencyFormat)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.CurrencyFormat)
+                    @Html.ValidationMessageFor(model => model.CurrencyFormat)
+                </div>
+
+                @if (Model.Logo == null || string.IsNullOrEmpty(Model.Logo.Id))
+                {
+                    <div class="editor-label">
+                        Upload a logo
+                    </div>
+                    <input type="file" name="Logo" />
+                }
+                else
+                {
+                    <div class="editor-label">
+                        Logo:
+                    </div>
+                    <img src="@Model.Logo.ImageUrl" alt="Logo" style="max-width: 400px;" />
+                    <input type="hidden" name="Logo" value="@Model.Logo.Id"/>
+                    <br />
+                    @Html.ActionLink(
+                        "Click here to remove the logo",
+                        "DeleteLogoFromSettings",
+                        "Shop",
+                        new {Logo = Model.Logo},
+                        new {style = "padding: 2px 5px 2px 5px; background: #fdb; border: solid 1px orange;"})
+                }
+                <br />
+                <br />
+                <input type="submit" value="Update" />
+            </fieldset>
+        }
+    </article>
+		
+    <aside>
+		
+        <section class="categories">
+            <h2>About This Theme</h2>
+            <div class="accordion">
+                <h3><a href="#">Typography</a></h3>
+                <div>
+                    <ul>
+                        <li><a href="typography.html">Submenu 1</a></li>
+                        <li><a href="typography.html">Submenu 2</a></li>
+                        <li><a href="typography.html">Submenu 3</a></li>
+                    </ul>
+                </div>
+                <h3><a href="#">Columns &amp; Buttons</a></h3>
+                <div>
+                    <ul>
+                        <li><a href="columns.html">Submenu 1</a></li>
+                        <li><a href="columns.html">Submenu 2</a></li>
+                        <li><a href="columns.html">Submenu 3</a></li>
+                    </ul>
+                </div>
+                <h3><a href="#">Tables</a></h3>
+                <div>
+                    <ul>
+                        <li><a href="tables.html">Submenu 1</a></li>
+                        <li><a href="tables.html">Submenu 2</a></li>
+                        <li><a href="tables.html">Submenu 3</a></li>
+                    </ul>
+                </div>
+                <h3><a href="#">Pricing Table</a></h3>
+                <div>
+                    <ul>
+                        <li><a href="pricing.html">Submenu 1</a></li>
+                        <li><a href="pricing.html">Submenu 2</a></li>
+                        <li><a href="pricing.html">Submenu 3</a></li>
+                    </ul>
+                </div>
+                <h3><a href="#">Tabs &amp; Accordion</a></h3>
+                <div>
+                    <ul>
+                        <li><a href="tabs.html">Submenu 1</a></li>
+                        <li><a href="tabs.html">Submenu 2</a></li>
+                        <li><a href="tabs.html">Submenu 3</a></li>
+                    </ul>
+                </div>
+            </div><!-- .accordion end -->
+        </section><!-- .categories end -->
+			
+        <section class="about">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac massa nulla, sed laoreet tellus. Proin feugiat rhoncus massa in faucibus. Duis et orci nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p><a href="about.html" class="more">Read More</a></p>
+            <p>&nbsp;</p>
+        </section><!-- .about end -->
+		
+    </aside>
+		
+    <div class="clear"></div>
+
+</section>
+<!-- .main end -->
+<!-- MAIN CONTENT END -->

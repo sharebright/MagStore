@@ -1,0 +1,50 @@
+﻿@using MagStore.Entities
+@using MagStore.Infrastructure
+@{
+    var shop = HttpContext.Current.Application["Shop"] as Shop;
+    var shopSettings = shop.GetSettings();
+    var currencySymbol = shopSettings.CurrencySymbol;
+    var currencyFormat = shopSettings.CurrencyFormat ?? "0.00";
+    var currencyConversion = shopSettings.CurrencyConversion == 0 ? 1m : shopSettings.CurrencyConversion;
+    var shoppingCart = ((User)HttpContext.Current.Session["CurrentUser"]).ShoppingCart;
+
+    IEnumerable<Product> products = shoppingCart.Products;
+//    foreach (var productId in shoppingCart.Products)
+//    {
+//        products = shop.GetCoordinator<Product>().List().Where(x=>x.Id==productId).ToList();
+//    }
+
+    decimal total;
+    try
+    {
+        total = products.Sum(x => x.Price);
+    }
+    catch (Exception e)
+    {
+         total = 0;
+    }
+
+    <ul>
+        <li class="cart-title">@Html.ActionLink("Shopping Cart:", "ShoppingCart", "ShoppingCart")</li>
+        <li class="cart-price">@Html.ActionLink(currencySymbol + (total * currencyConversion).ToString(currencyFormat), "ShoppingCart", "ShoppingCart")</li>
+        <li class="cart-items">@Html.ActionLink(shoppingCart.Products.Count + " items", "ShoppingCart", "ShoppingCart")</li>
+        @if (Request.IsAuthenticated)
+        {
+            <li class="cart-login">
+                @if (User.IsInRole("Administrator")){
+                @Html.ActionLink("Manage Shop", "Manage", "Shop")
+                }
+            </li>
+            <li class="cart-login">
+                @Html.ActionLink("Log out " + Context.User.Identity.Name, "LogOff", "Account", null, new {id = "loginLink"})
+            </li>
+            <li><a href="#" id="button">Account</a></li>
+        }
+        else
+        {
+            <li class="cart-login">
+                @Html.ActionLink("Log in", "LogOn", "Account", null, new {id = "loginLink"})
+            </li>
+        }
+    </ul>
+}

@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Test", "MagStore.Test\MagStore.Test.csproj", "{DD4C9CEA-92AE-4D7C-A2CF-E4D2B9026074}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Test", "src\MagStore.Test\MagStore.Test.csproj", "{DD4C9CEA-92AE-4D7C-A2CF-E4D2B9026074}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Web", "MagStore.Web\MagStore.Web.csproj", "{7481B397-DC99-463D-A16F-5C5D0D4D3806}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Web", "src\MagStore.Web\MagStore.Web.csproj", "{7481B397-DC99-463D-A16F-5C5D0D4D3806}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore", "MagStore\MagStore.csproj", "{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore", "src\MagStore\MagStore.csproj", "{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Azure", "MagStore.StorageAccessor\MagStore.Azure.csproj", "{262E8901-EF1C-4CE7-BD6E-E54EC466D449}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.StorageAccessor", "src\MagStore.StorageAccessor\MagStore.StorageAccessor.csproj", "{262E8901-EF1C-4CE7-BD6E-E54EC466D449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenNamespaceUpdatePatch", "RavenNamespaceUpdatePatch\RavenNamespaceUpdatePatch.csproj", "{3F2FB45A-1800-48A1-B631-CAEE002ED9A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenNamespaceUpdatePatch", "src\RavenNamespaceUpdatePatch\RavenNamespaceUpdatePatch.csproj", "{3F2FB45A-1800-48A1-B631-CAEE002ED9A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Payments", "src\MagStore.Payments\MagStore.Payments.csproj", "{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,16 @@ Global
 		{3F2FB45A-1800-48A1-B631-CAEE002ED9A2}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3F2FB45A-1800-48A1-B631-CAEE002ED9A2}.Release|x86.ActiveCfg = Release|x86
 		{3F2FB45A-1800-48A1-B631-CAEE002ED9A2}.Release|x86.Build.0 = Release|x86
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
