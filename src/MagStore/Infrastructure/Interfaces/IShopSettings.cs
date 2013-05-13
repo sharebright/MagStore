@@ -8,5 +8,6 @@
         string Logo { get; set; }
         string CurrencyFormat { get; set; }
         decimal CurrencyConversion { get; set; }
+        decimal DeliveryCharge { get; set; }
     }
 }

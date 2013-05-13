@@ -1,0 +1,98 @@
+﻿@using MagStore.Infrastructure
+@model MagStore.Web.Models.ShoppingCart.InitiatePaymentViewModel
+@{
+    var shop = HttpContext.Current.Application["shop"] as Shop;
+    var settings = shop.GetSettings();
+    var currencySymbol = settings.CurrencySymbol;
+    var currencyFormat = settings.CurrencyFormat;
+    var currencyConversion = settings.CurrencyConversion == 0 ? 1m : settings.CurrencyConversion;
+    ViewBag.Title = "View Shopping Cart";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Signika:400,700|Norican' rel='stylesheet'
+          type='text/css'>
+    <!--[if lt IE 9]><script src="js/html5shiv.js"></script><![endif]-->
+    <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-ui-1.8.21.custom.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.menu.pack.js"></script>
+    <script type="text/javascript" src="~/Content/js/hover.zoom.js"></script>
+    <script type="text/javascript" src="~/Content/js/settings-inner.js"></script>
+    <style type="text/css">
+        td.total
+        {
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .submit-style, .submit-style:hover {
+            border-radius: 4px;
+            background-image: linear-gradient(to bottom, #85c4b2 0%, #60a08d 100%) !important;
+            border: 1px solid #60a08d !important;
+            padding: 7px 25px 7px 25px;
+            font-family: 'Signika', sans-serif;
+            font-weight: bold;
+            color: white;
+            margin: 2px 0 15px 0;
+            width: 75px !important;
+            color: white;
+            text-decoration: none;
+            cursor: default;
+            float: left;
+        }
+        .submit-style-link, .submit-style-link:hover {
+            color: white;
+            text-decoration: none;
+            cursor: default;
+            width: 75px !important;
+        }
+        #addresses {
+            height: 600px;
+            margin-top: -25px;
+        }
+
+        div#billing h2, div#delivery h2
+        {
+            margin-bottom: 45px;
+        }
+        div#billing, div#delivery {
+            float: left;
+            width: 50%;
+            max-width: 350px;
+            padding: 15px 15px 15px 15px;
+        }
+
+        div#use-billing-address
+        {
+            height: 36px;
+            margin-top: -38px;
+        }
+    </style>
+}
+<!-- MAIN CONTENT START -->
+<section class="main wrapper">
+    <section class="full-width">
+        
+        <h1>Please Supply the billing and delivery address</h1>
+        @using (Html.BeginForm("SaveAddresses", "ShoppingCart", FormMethod.Post))
+        {
+            <div id="addresses">
+                <div id="billing">
+                    <h2>Billing Address:</h2>
+                    @Html.EditorFor(model => model.BillingAddress)
+                </div>
+                <div id="delivery">
+                    <h2>Delivery Address:</h2>
+                    <div id="use-billing-address">Use billing address for delivery? @Html.CheckBox("UseBillingAddress", false)</div>
+                    @Html.EditorFor(model => model.DeliveryAddress)
+                </div>
+                <input type="submit" value="Enter Card Details"/>
+            </div>
+        }
+    </section>
+    <div class="clear"></div>
+
+</section>
+<!-- .main end -->
+<!-- MAIN CONTENT END -->

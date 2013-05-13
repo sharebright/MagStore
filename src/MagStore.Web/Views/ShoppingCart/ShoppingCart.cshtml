@@ -7,6 +7,7 @@
     var currencySymbol = settings.CurrencySymbol;
     var currencyFormat = settings.CurrencyFormat;
     var currencyConversion = settings.CurrencyConversion == 0 ? 1m : settings.CurrencyConversion;
+    var deliveryCharge = settings.DeliveryCharge * currencyConversion;
     ViewBag.Title = "View Shopping Cart";
     Layout = "../Shared/_Layout.cshtml";
 }
@@ -28,6 +29,18 @@
 	        font-weight: bold; 
 	        font-size: 20px;
 	    }
+	    td#quantity-column {
+	        width: 150px;
+	        
+	    }
+	    table.no-borders td {
+	        padding: 20px 10px 7px 10px;
+	    }
+	    .delivery-charge, .sub-total
+	    {
+	        padding-top: 14px !important;
+	        white-space: nowrap;
+	    }
     </style>
 }
 
@@ -38,65 +51,102 @@
         
             <h1>Your Cart</h1>
             <h6>Products in cart</h6>
-            <table class="no-borders">
+        <table class="no-borders">
+            <tr>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">Name</th>
+                <th scope="col">Size</th>
+                <th scope="col">Colour</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit Price</th>
+                <th scope="col">Line Price</th>
+            </tr>
+            @foreach (var product in @Model.Products.GroupBy(p=>p.Id).Select(g=>g.First()))
+            {
                 <tr>
-                    <th scope="col">&nbsp;</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Size</th>
-                    <th scope="col">Colour</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Unit Price</th>
-                    <th scope="col">Line Price</th>
+                    <td>
+                        @{
+                            using (Html.BeginForm("RemoveProductFromBasket", "ShoppingCart", FormMethod.Post))
+                            {
+                                <div style="margin-top: -10px; margin-bottom: 0; vertical-align: text-top; background: none;">
+                                    <input type="hidden" name="Id" value="@product.Id" />
+                                    <input type="submit" value="Remove" style="margin-bottom: 0;"/>
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td>@product.Name</td>
+                    <td>@product.Size</td>
+                    <td>@product.Colour</td>
+                    <td id="quantity-column">
+                        @{
+                            var quantity = Model.Products.Count(p => p.Id == product.Id);
+                            using (Html.BeginForm("UpdateProductQuantity", "ShoppingCart", FormMethod.Post))
+                            {
+                                <div style="margin-top: -10px; margin-bottom: 0; vertical-align: text-top; background: none;">
+                                    <input type="hidden" name="Id" value="@product.Id" />
+                                    @Html.TextBox("Quantity", @quantity, new { Name = "Quantity", Style = "width: 20px !important; margin: 0 5px 0 0;" } )
+                                    <input type="submit" value="update" style="margin-bottom: 0;"/>
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td>@currencySymbol @((product.Price * currencyConversion).ToString(currencyFormat))</td>
+                    <td>@currencySymbol @Model.Products.Where(p => p.Id == product.Id).Sum(p => p.Price * currencyConversion).ToString(currencyFormat)</td>
                 </tr>
-                @foreach (var product in @Model.Products.GroupBy(p=>p.Id).Select(g=>g.First()))
-                {
-                    <tr>
-                        <td>
-                            @{
-                                using (Html.BeginForm("RemoveProductFromBasket", "ShoppingCart", FormMethod.Post))
-                                {
-                                    <div style="margin-top: -10px; margin-bottom: 0; vertical-align: text-top; background: none;">
-                                        <input type="hidden" name="Id" value="@product.Id" />
-                                        <input type="submit" value="Remove" style="margin-bottom: 0;"/>
-                                    </div>
-                                }
-                            }
-                        </td>
-                        <td>@product.Name</td>
-                        <td>@product.Size</td>
-                        <td>@product.Colour</td>
-                        <td>
-                            @{
-                                var quantity = Model.Products.Count(p => p.Id == product.Id);
-                                using (Html.BeginForm("UpdateProductQuantity", "ShoppingCart", FormMethod.Post))
-                                {
-                                    <div style="margin-top: -10px; margin-bottom: 0; vertical-align: text-top; background: none;">
-                                        <input type="hidden" name="Id" value="@product.Id" />
-                                        @Html.TextBox("Quantity", @quantity, new { Name = "Quantity", Style = "width: 30px !important; margin: 0 5px 0 0;" } )
-                                        <input type="submit" value="update" style="margin-bottom: 0;"/>
-                                    </div>
-                                }
-                            }
-                        </td>
-                        <td>@currencySymbol @((product.Price * currencyConversion).ToString(currencyFormat))</td>
-                        <td>@currencySymbol @Model.Products.Where(p => p.Id == product.Id).Sum(p => p.Price * currencyConversion).ToString(currencyFormat)</td>
-                    </tr>
-                }
+            }
+            @if (Model.Products.Count() > 0)
+            {
+                <tr>
+                    <td colspan="5">&nbsp;</td>
+                    <td class="delivery-charge">Delivery Charge:</td>
+                    <td class="delivery-charge">@currencySymbol @deliveryCharge.ToString(currencyFormat)</td>
+                </tr>
+                <tr>
+                    <td colspan="5">&nbsp;</td>
+                    <td class="sub-total">Sub Total:</td>
+                    <td class="sub-total">@currencySymbol 
+                        @{
+                            var subTotal = Model.Products.Sum(p => p.Price*currencyConversion);
+                        }
+                        @subTotal.ToString(currencyFormat)</td>
+                </tr>
                 <tr>
                     <td colspan="5">&nbsp;</td>
                     <td class="total">Total:</td>
-                    <td class="total">@currencySymbol @Model.Products.Sum(p => p.Price * currencyConversion).ToString(currencyFormat)</td>
+                    <td class="total">@currencySymbol
+                        @{
+                            var grandTotal = subTotal + deliveryCharge;
+                        }
+                        @grandTotal.ToString(currencyFormat)</td>
                 </tr>
                 <tr>
                     <td colspan="6">&nbsp;</td>
                     <td>
                         @using (Html.BeginForm("Checkout", "ShoppingCart", FormMethod.Post))
                         {
-                            <input type="submit" value="Check Out Now!" />
+                            foreach (var p in @Model.Products)
+                            {
+                                <input type="hidden" name="Products" value="@p.Id" />
+                            }
+                            <input type="hidden" name="DeliveryCharge" value="@deliveryCharge" />
+                            <input type="hidden" name="SubTotal" value="@subTotal" />
+                            <input type="submit" value="Check Out Now!"  />
                         }
                     </td>
                 </tr>
-            </table>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">&nbsp;</td>
+                    <td>
+                        <input type="button" value="Check Out Now!" style="background-color: #b0c4de !important; color: #708090; border-radius: 4px; padding: 7px 15px 7px 15px;" disabled="disabled" />
+                    </td>
+                </tr>
+            }
+            
+        </table>
             <p>&nbsp;</p>
         
 		

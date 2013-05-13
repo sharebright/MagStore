@@ -63,6 +63,14 @@
                 </div>
 
                 <div class="editor-label">
+                    @Html.LabelFor(model => model.DeliveryCharge)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.DeliveryCharge)
+                    @Html.ValidationMessageFor(model => model.DeliveryCharge)
+                </div>
+
+                <div class="editor-label">
                     @Html.LabelFor(model => model.CurrencyFormat)
                 </div>
                 <div class="editor-field">

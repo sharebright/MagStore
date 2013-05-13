@@ -51,8 +51,9 @@
                         <td>
                         @{
                             var form = Html.BeginForm("EditProduct", "Product", FormMethod.Get);
-                                <input type="hidden" name="Id" value="@product.Id" />
-                                <input type="submit" value="@product.Id" />
+                            <input type="hidden" name="Id" value="@product.Id" />
+                            var subStr = @product.Id.Substring(0, 4) + "...";
+                            <input type="submit" value="@subStr" />
                             form.EndForm();
                         }
                         </td>

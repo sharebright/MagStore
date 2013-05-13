@@ -9,6 +9,7 @@ namespace MagStore.Web.Models.Shop
         public string CurrencySymbol { get; set; }
         public string CurrencyFormat { get; set; }
         public decimal CurrencyConversion { get; set; }
+        public decimal DeliveryCharge { get; set; }
         public HttpPostedFileBase Logo { get; set; }
     }
 }

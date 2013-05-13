@@ -208,7 +208,13 @@
     <Compile Include="Models\Promotion\PromotionViewModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\ShoppingCart\AddToCartPostInputModel.cs" />
+    <Compile Include="Models\ShoppingCart\CheckoutGetInputModel.cs" />
+    <Compile Include="Models\ShoppingCart\CheckoutPostInputModel.cs" />
+    <Compile Include="Models\ShoppingCart\CheckoutViewModel.cs" />
+    <Compile Include="Models\ShoppingCart\InitiatePaymentPostInputModel.cs" />
+    <Compile Include="Models\ShoppingCart\InitiatePaymentViewModel.cs" />
     <Compile Include="Models\ShoppingCart\RemoveProductFromBasketPostInputModel.cs" />
+    <Compile Include="Models\ShoppingCart\SaveAddressesPostInputModel.cs" />
     <Compile Include="Models\ShoppingCart\ShoppingCartGetViewModel.cs" />
     <Compile Include="Models\ShoppingCart\UpdateProductQuantityPostInputModel.cs" />
     <Compile Include="Models\Shop\ChangeShopSettingsPostInputModel.cs" />
@@ -514,6 +520,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shop\ChangeShopSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ShoppingCart\InitiatePayment.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

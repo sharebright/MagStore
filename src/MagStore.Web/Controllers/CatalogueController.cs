@@ -21,8 +21,24 @@ namespace MagStore.Web.Controllers
         public ActionResult ViewProductsInCatalogue(string id)
         {
             var catalogue = shop.GetCoordinator<Catalogue>().Load(id);
-            var products = shop.GetCoordinator<Product>().List().Where(x=>x.Catalogue == id);
-            return View(new ProductsViewModel { Catalogue = catalogue, Products = products });
+
+            return View(new ProductsViewModel { Catalogue = catalogue, Products = OrderedProducts(id) });
+        }
+
+        private IEnumerable<Product> OrderedProducts(string id)
+        {
+            var products = shop.GetCoordinator<Product>()
+                .List()
+                .Where(x => x.Catalogue == id)
+                .OrderByDescending(p => p.Code)
+                .ThenBy(p => p.Id);
+
+            var enumerator = products.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                yield return enumerator.Current;
+            }
         }
 
         public ActionResult ViewCatalogues()

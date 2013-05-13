@@ -64,6 +64,7 @@
     <Compile Include="Entities\Enums\ImageType.cs" />
     <Compile Include="Entities\Enums\ProductType.cs" />
     <Compile Include="Entities\Fulfillment.cs" />
+    <Compile Include="Entities\Payment.cs" />
     <Compile Include="Infrastructure\Interfaces\IShopSettings.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Product.cs" />

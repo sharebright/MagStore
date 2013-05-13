@@ -13,6 +13,7 @@ namespace MagStore.Web.Models.Shop
             CurrencySymbol = settings.CurrencySymbol;
             CurrencyFormat = settings.CurrencyFormat;
             CurrencyConversion = settings.CurrencyConversion;
+            DeliveryCharge = settings.DeliveryCharge;
             Logo = logo;
         }
 
@@ -22,6 +23,7 @@ namespace MagStore.Web.Models.Shop
         public string CurrencySymbol { get; set; }
         public string CurrencyFormat { get; set; }
         public decimal CurrencyConversion { get; set; }
+        public decimal DeliveryCharge { get; set; }
         public ProductImage Logo { get; set; }
     }
 }

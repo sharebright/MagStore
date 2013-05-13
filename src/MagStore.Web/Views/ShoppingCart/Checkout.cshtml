@@ -1,5 +1,5 @@
 ﻿@using MagStore.Infrastructure
-@model MagStore.Web.Controllers.CheckoutViewModel
+@model MagStore.Web.Models.ShoppingCart.CheckoutViewModel
 @{
     var shop = HttpContext.Current.Application["shop"] as Shop;
     var settings = shop.GetSettings();
@@ -24,22 +24,104 @@
         td.total
         {
             font-weight: bold;
-            font-size: 20px;
+            font-size: 25px;
         }
+        .submit-style, .submit-style:hover {
+            border-radius: 4px;
+            background-image: linear-gradient(to bottom, #85c4b2 0%, #60a08d 100%) !important;
+            border: 1px solid #60a08d !important;
+            padding: 7px 25px 7px 25px;
+            font-family: 'Signika', sans-serif;
+            font-weight: bold;
+            color: white;
+            margin: 2px 0 15px 0;
+            width: 75px !important;
+            color: white;
+            text-decoration: none;
+            cursor: default;
+            float: left;
+        }
+        .submit-style-link, .submit-style-link:hover {
+            color: white;
+            text-decoration: none;
+            cursor: default;
+            width: 75px !important;
+       }
     </style>
 }
 <!-- MAIN CONTENT START -->
 <section class="main wrapper">
     <section class="full-width">
         
-        <h1>Check out</h1>
-        <h6>Products in cart</h6>
-        @using (Html.BeginForm())
-        {
-        <input type="submit" />
-        }
+        <h1>Please review your order before continuing to pay</h1>
+        <table>
+            <tr>
+                <td colspan="3" class="total">
+                    Total to pay including delivery charge:
+                </td>
+                <td class="total">
+                    @currencySymbol 
+                    @{
+                        decimal subTotal = Model.SubTotal + Model.DeliveryCharge;
+                    }
+                    @subTotal
+                </td>
+            </tr>
+        </table>
+            <table>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Colour</th>
+                </tr>
+                @foreach (var product in Model.Products.GroupBy(p => p.Id).Select(g => g.First()))
+                {
+                    <tr>
+                        <td>
+                            @Model.Products.Count(p => p.Id == product.Id)
+                        </td>
+                        <td>
+                            @product.Name
+                        </td>
+                        <td>
+                            @product.Size
+                        </td>
+                        <td>
+                            @product.Colour
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div>
+                            <div style="width: 50%; float: left;">
+                                <a href="/ShoppingCart/ShoppingCart" class="submit-style-link">
+                                    <div class="submit-style">
+                                        Back to Cart
+                                    </div>
+                                </a>
+                            </div>
+                            <div style="width: 50%; float: left; text-align: right;">
+                                @using (Html.BeginForm("InitiatePayment", "ShoppingCart", FormMethod.Post))
+                                {
+                                    foreach (var product in Model.Products.GroupBy(p => p.Id).Select(g => g.First()))
+                                    {
+                                        <input type="hidden" name="Products" value="@product.Id" />
+                                        <input type="hidden" name="Total" value="@subTotal" />
+                                    }
+                                    <input type="submit" value="Pay Securely" />
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 		
-    </section>		
+    </section>
     <div class="clear"></div>
 
 </section>

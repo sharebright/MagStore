@@ -62,6 +62,7 @@
       <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,18 +70,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Azure.Storage\An_azure_storage_account_with_a_resources_container.cs" />
-    <Compile Include="Azure.Storage\An_empty_container.cs" />
-    <Compile Include="Azure.Storage\From_the_azure_storage_account.cs" />
-    <Compile Include="Azure.Storage\StorageAccountSetUpFixture.cs" />
-    <Compile Include="Azure.Storage\When_saving_a_blob_to.cs" />
+    <Compile Include="Checkout\Checkingout\There_are_no_products_in_the_cart.cs" />
+    <Compile Include="Checkout\Checkingout\There_are_products_in_the_cart.cs" />
+    <Compile Include="Checkout\Checkingout\There_is_a_zero_sub_total_the_cart.cs" />
+    <Compile Include="Checkout\Checkingout\When_checking_out.cs" />
+    <Compile Include="Checkout\InitiatingPayment\When_processing_a_payment_with_an_empty_list_of_products.cs" />
+    <Compile Include="Checkout\InitiatingPayment\When_initiating_a_payment.cs" />
+    <Compile Include="Checkout\InitiatingPayment\When_processing_a_payment_with_a_zero_total_amount.cs" />
     <Compile Include="Payments\MakingPaymentsSetUpFixture.cs" />
     <Compile Include="TestSetUpFixture.cs" />
     <Compile Include="Payments\When_making_a_request_and_receiving_a_response.cs" />
     <Compile Include="Payments\When_making_an_invalid_request.cs" />
     <Compile Include="Products\WhenAddingAProductToTheCart.cs" />
-    <Compile Include="Users\CreatingUsersWithElevatedPrivileges.cs" />
-    <Compile Include="Users\UserCoordinatorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +92,10 @@
     <ProjectReference Include="..\MagStore.Payments\MagStore.Payments.csproj">
       <Project>{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}</Project>
       <Name>MagStore.Payments</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MagStore.Web\MagStore.Web.csproj">
+      <Project>{7481B397-DC99-463D-A16F-5C5D0D4D3806}</Project>
+      <Name>MagStore.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\MagStore\MagStore.csproj">
       <Project>{07CCE5B6-9111-46DC-AAEC-00D80E19FE4A}</Project>

@@ -42,59 +42,6 @@ namespace MagStore.Web.Controllers
             return View(new CreateProductViewModel(catalogues, promotions));
         }
 
-        private void UpdateImages(IEnumerable<KeyValuePair<string, string>> images)
-        {
-            foreach (var image in images)
-            {
-                UpdateImage(image.Key, image.Value);
-            }
-        }
-
-
-        private void UpdateImage(string id, string imageType)
-        {
-            //bool hasChanges = image != null;
-            //            Uri uri = null;
-            //            if (hasChanges)
-            //            {
-            //                Stream inputStream = image.InputStream;
-            //                uri = storageAccessor.AddBlobToResource(id, inputStream);
-            //            }
-
-            var img = shop.GetCoordinator<ProductImage>().Load(id);
-            img.ImageType = imageType;
-            //            if (uri != null) img.ImageUrl = uri.ToString();
-            shop.GetCoordinator<ProductImage>()
-                .Save(img);
-        }
-
-        private IEnumerable<string> CreateImages(IEnumerable<KeyValuePair<string, HttpPostedFileBase>> images)
-        {
-            var result = new List<string>();
-            foreach (var image in images)
-            {
-                var id = Guid.NewGuid().ToString();
-                CreateImage(image.Value, image.Key, id);
-                result.Add(id);
-            }
-            return result;
-        }
-
-        private void CreateImage(HttpPostedFileBase image, string imageType, string fileName)
-        {
-            var inputStream = image.InputStream;
-            var uri = storageAccessor.AddBlobToResource(fileName, inputStream);
-
-            var img = new ProductImage
-            {
-                Id = fileName,
-                ImageType = imageType,
-                ImageUrl = uri.ToString()
-            };
-            shop.GetCoordinator<ProductImage>().Save(img);
-        }
-
-
         [HttpPost]
         public ActionResult CreateProduct(CreateProductInputModel inputModel)
         {
@@ -102,32 +49,32 @@ namespace MagStore.Web.Controllers
             {
                 var sizes = inputModel.Sizes;
                 var products = (from c in inputModel.Colours
-                               where sizes != null
-                                    from s in sizes
-                               select new Product
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Code = inputModel.Code,
-                    Name = inputModel.Name,
-                    Description = inputModel.Description,
-                    Specification = inputModel.Specification,
-                    Catalogue = inputModel.Catalogue,
-                    Brand = inputModel.Brand,
-                    Colour = c,
-                    DiscountAmount = inputModel.DiscountAmount,
-                    DiscountType = inputModel.DiscountType,
-                    Gender = inputModel.Gender,
-                    Price = inputModel.Price,
-                    ProductType = inputModel.ProductType,
-                    Rating = inputModel.Rating,
-                    Reviews = inputModel.Reviews,
-                    Size = s,
-                    Supplier = inputModel.Supplier,
-                    Images =
-                        inputModel.UploadedImages == null
-                            ? new List<string>()
-                            : CreateImages(productControllerHelper.ParseImagesFromModel(inputModel))
-                }).ToList();
+                                where sizes != null
+                                from s in sizes
+                                select new Product
+                 {
+                     Id = Guid.NewGuid().ToString(),
+                     Code = inputModel.Code,
+                     Name = inputModel.Name,
+                     Description = inputModel.Description,
+                     Specification = inputModel.Specification,
+                     Catalogue = inputModel.Catalogue,
+                     Brand = inputModel.Brand,
+                     Colour = c,
+                     DiscountAmount = inputModel.DiscountAmount,
+                     DiscountType = inputModel.DiscountType,
+                     Gender = inputModel.Gender,
+                     Price = inputModel.Price,
+                     ProductType = inputModel.ProductType,
+                     Rating = inputModel.Rating,
+                     Reviews = inputModel.Reviews,
+                     Size = s,
+                     Supplier = inputModel.Supplier,
+                     Images =
+                         inputModel.UploadedImages == null
+                             ? new List<string>()
+                             : CreateImages(productControllerHelper.ParseImagesFromModel(inputModel))
+                 }).ToList();
 
                 shop.GetCoordinator<Product>().Save(products);
 
@@ -149,8 +96,21 @@ namespace MagStore.Web.Controllers
 
         public ActionResult ViewProducts()
         {
-            var products = shop.GetCoordinator<Product>().List();
-            return View(new ViewProductViewModel { Products = products });
+            return View(new ViewProductViewModel { Products = OrderedProducts() });
+        }
+
+        private IEnumerable<Product> OrderedProducts()
+        {
+            var enumerator = shop.GetCoordinator<Product>()
+                                 .List()
+                                 .OrderByDescending(p => p.Code)
+                                 .ThenBy(p => p.Id)
+                                 .GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                yield return enumerator.Current;
+            }
         }
 
         [HttpGet]
@@ -202,14 +162,30 @@ namespace MagStore.Web.Controllers
                                       where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
                                       select a;
 
-            var filteredProducts = availableCategories.SelectMany(a => products.Where(p => p.ProductType == a)).AsEnumerable();
+            var filteredProducts = availableCategories
+                .SelectMany(a => products.Where(p => p.ProductType == a))
+                .AsEnumerable();
 
-            var images = shop.GetCoordinator<ProductImage>().Load(availableCategories.SelectMany(a => products.Where(p => p.ProductType == a).SelectMany(p => p.Images))).Where(i => i.ImageType == ImageType.Thumb.ToString());
+            var images = shop
+                .GetCoordinator<ProductImage>()
+                .Load(availableCategories
+                .SelectMany(a => products
+                    .Where(p => p.ProductType == a)
+                    .SelectMany(p => p.Images))
+                )
+                .Where(i => i.ImageType == ImageType.Thumb.ToString());
 
 
             IDictionary<string, string> filters = new Dictionary<string, string>();
             filters.Add("Gender", inputModel.Gender);
-            return View(new ProductCategoriesViewModel { Categories = availableCategories, Products = filteredProducts, Images = images, Filters = filters });
+            
+            return View(new ProductCategoriesViewModel
+            {
+                Categories = availableCategories, 
+                Products = filteredProducts,
+                Images = images, 
+                Filters = filters
+            });
         }
 
         [HttpGet]
@@ -222,18 +198,18 @@ namespace MagStore.Web.Controllers
 
             var productTypes = Enum.GetValues(typeof(ProductType)).AsQueryable().OfType<ProductType>();
             var availableCategories = from a in productTypes
-                                                          from p in products
-                                                          where p.ProductType == a
-                                                          where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
-                                                          select a;
+                                      from p in products
+                                      where p.ProductType == a
+                                      where p.Gender.ToUpper() == inputModel.Gender.ToUpper()
+                                      select a;
 
-            var coordinator = shop.GetCoordinator<ProductImage>();
+            var imagesCoordinator = shop.GetCoordinator<ProductImage>();
             var ids = availableCategories
                 .SelectMany(a => products
                     .Where(p => p.ProductType == a)
                     .SelectMany(p => p.Images));
 
-            var productImages = coordinator.Load(ids);
+            var productImages = imagesCoordinator.Load(ids);
 
             var thumbs = productImages.Where(i => i.ImageType == ImageType.Thumb.ToString());
 
@@ -259,8 +235,8 @@ namespace MagStore.Web.Controllers
                     .Where(i => i.ImageType == ImageType.Feature.ToString());
 
             var availableColours = products.Select(c => c.Value.Colour);
-            var availableSizes = products.Select(c => c.Value.Size);
-            
+            var availableSizes = products.Select(c => Convert.ToInt32(c.Value.Size)).OrderBy(c => c).Select(c => c.ToString());
+
             var filters = new Dictionary<string, string>
             {
                 {"Category", inputModel.Category},
@@ -271,40 +247,54 @@ namespace MagStore.Web.Controllers
             return View(new ShowProductViewModel { Product = product, ProductImages = images, ProductVariants = products, AvailableColours = availableColours, AvailableSizes = availableSizes, Filters = filters });
         }
 
-        [HttpGet]
-        public ActionResult CreatePhoto()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult CreatePhoto(CreatePhotoInputModel model)
-        {
-            //var client=storageAccessor.GetBlobClient();
-
-            //CloudBlockBlob blob = null;
-            //CloudBlobContainer cloudBlobContainer = null;
-            //cloudBlobContainer = client.GetContainerReference("resources");
-            //blob = cloudBlobContainer.GetBlockBlobReference(file.FileName);
-            //blob.UploadFromStream(file.InputStream);
-
-            var resources = model.File.Select(file => storageAccessor.AddBlobToResource(file.FileName, file.InputStream).ToString());
-
-            ViewBag.Photos = storageAccessor.Resources.ListBlobs();
-            return View();
-        }
-
-        public ActionResult ListPhotos()
-        {
-            ViewBag.Photos = storageAccessor.GetBlobClient().GetContainerReference("resources").ListBlobs();
-            return View();
-        }
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteProduct(DeleteProductInputModel inputModel)
         {
             var product = shop.GetCoordinator<Product>().Load(inputModel.Id);
             shop.GetCoordinator<Product>().Delete(product);
             return RedirectToAction("ViewProducts");
+        }
+
+        private void UpdateImages(IEnumerable<KeyValuePair<string, string>> images)
+        {
+            foreach (var image in images)
+            {
+                UpdateImage(image.Key, image.Value);
+            }
+        }
+
+        private void UpdateImage(string id, string imageType)
+        {
+            var img = shop.GetCoordinator<ProductImage>().Load(id);
+            img.ImageType = imageType;
+            shop.GetCoordinator<ProductImage>().Save(img);
+        }
+
+        private IEnumerable<string> CreateImages(IEnumerable<KeyValuePair<string, HttpPostedFileBase>> images)
+        {
+            var result = new List<string>();
+            foreach (var image in images)
+            {
+                var id = Guid.NewGuid().ToString();
+                CreateImage(image.Value, image.Key, id);
+                result.Add(id);
+            }
+            return result;
+        }
+
+        private void CreateImage(HttpPostedFileBase image, string imageType, string fileName)
+        {
+            var inputStream = image.InputStream;
+            var uri = storageAccessor.AddBlobToResource(fileName, inputStream);
+
+            var img = new ProductImage
+            {
+                Id = fileName,
+                ImageType = imageType,
+                ImageUrl = uri.ToString()
+            };
+            shop.GetCoordinator<ProductImage>().Save(img);
         }
     }
 }

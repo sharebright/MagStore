@@ -19,5 +19,6 @@ namespace MagStore.Entities
         public string Logo { get; set; }
         public string CurrencyFormat { get; set; }
         public decimal CurrencyConversion { get; set; }
+        public decimal DeliveryCharge { get; set; }
     }
 }

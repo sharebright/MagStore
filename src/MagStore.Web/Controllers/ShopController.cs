@@ -58,6 +58,7 @@ namespace MagStore.Web.Controllers
             settings.CurrencySymbol = inputModel.CurrencySymbol;
             settings.CurrencyFormat = inputModel.CurrencyFormat;
             settings.CurrencyConversion = inputModel.CurrencyConversion;
+            settings.DeliveryCharge = inputModel.DeliveryCharge;
             settings.Name = inputModel.Name;
             settings.TagLine = inputModel.TagLine;
 

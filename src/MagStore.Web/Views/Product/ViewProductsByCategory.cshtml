@@ -32,7 +32,7 @@
     <section class="full-width">
         <h1>@Model.ProductType</h1>
         @{
-            var distinctProducts = Model.Products.GroupBy(p=>p.Name).Select(g=>g.First());
+            var distinctProducts = Model.Products.GroupBy(p=>p.Code).Select(g=>g.First());
         }
         @foreach (var product in distinctProducts)
         {
