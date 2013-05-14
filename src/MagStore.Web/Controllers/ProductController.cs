@@ -70,6 +70,7 @@ namespace MagStore.Web.Controllers
                      Reviews = inputModel.Reviews,
                      Size = s,
                      Supplier = inputModel.Supplier,
+                     Tags = inputModel.Tags,
                      Images =
                          inputModel.UploadedImages == null
                              ? new List<string>()

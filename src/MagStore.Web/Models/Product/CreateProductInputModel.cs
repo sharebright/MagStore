@@ -41,6 +41,7 @@ namespace MagStore.Web.Models.Product
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
         public IEnumerable<string> Promotions { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
 
     public interface IProductPostInputModel

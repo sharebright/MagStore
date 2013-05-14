@@ -65,6 +65,7 @@ namespace MagStore.Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.Add(typeof(EditProductInputModel), new TagPropertyModelBinder());
+            ModelBinders.Binders.Add(typeof(CreateProductInputModel), new TagPropertyModelBinder());
         }
 
         protected void Session_End()

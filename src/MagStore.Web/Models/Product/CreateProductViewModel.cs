@@ -31,5 +31,6 @@ namespace MagStore.Web.Models.Product
         public DiscountType DiscountType { get; set; }
         public decimal DiscountAmount { get; set; }
         public IEnumerable<KeyValuePair<string, string>> Promotions { get; set; }
+        public string Tags { get; set; }
     }
 }

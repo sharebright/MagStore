@@ -9,13 +9,22 @@
 @section ReadyScripts
 {
     $("input#addPhoto").click(function() { 
-        $("#photographs").append('<div style="border: solid 1px blue; margin: 3px 3px 3px 3px; padding: 3px 3px 3px 3px;">' + 
-            '<b>Attach an image to this product and specify the type of image:</b><br />' +
-            '<select name="PhotoType">' + '<option value="Thumb">Thumb</option>' + 
-            '<option value="Feature">Feature</option>' + 
-            '<option value="HiRes">HiRes</option>' + 
-            '</select><br /><br />' + 
-            '<input type="file" name="UploadedImages" id="Photo" /></div>');
+        $("#photographs").append('<div style="border: solid 1px blue; margin: 3px 3px 3px 3px; padding: 3px 3px 3px 3px;">
+            ' + 
+            '<b>Attach an image to this product and specify the type of image:</b><br />
+            ' +
+            '<select name="PhotoType">' + '<option value="Thumb">Thumb</option>
+                ' + 
+            '<option value="Feature">Feature</option>
+                ' + 
+            '<option value="HiRes">HiRes</option>
+                ' + 
+            '</select><br />
+            <br />
+            ' + 
+            '<input type="file" name="UploadedImages" id="Photo" />
+    </div>
+');
      });
 }
 @section Scripts
@@ -82,14 +91,14 @@
                     @Html.DropDownList("Catalogue", Model.Catalogue.Select(x => new SelectListItem { Selected = false, Text = x.Value, Value = x.Key }), new { name = "Catalogue" })
                     @Html.ValidationMessageFor(model => model.Catalogue)
                 </div>
-                
+
                 @if (Model.Promotions.Any())
                 {
                     <div class="editor-label">
                         @Html.LabelFor(model => model.Promotions)
                     </div>
                     <div class="editor-field">
-                        @Html.ListBox("Promotions", Model.Promotions.Select(x => new SelectListItem {Selected = false, Text = x.Value, Value = x.Key}), new {name = "Promotions"})
+                        @Html.ListBox("Promotions", Model.Promotions.Select(x => new SelectListItem { Selected = false, Text = x.Value, Value = x.Key }), new { name = "Promotions" })
                         @Html.ValidationMessageFor(model => model.Promotions)
                     </div>
                 }
@@ -143,12 +152,12 @@
                     @Html.LabelFor(model => model.ProductType)
                 </div>
                 <div class="editor-field">
-                    
+
                     @{
                         var productTypes = new List<SelectListItem>();
 
                         productTypes
-                            .AddRange(Enum.GetNames(typeof (ProductType))
+                            .AddRange(Enum.GetNames(typeof(ProductType))
                             .Select(x => new SelectListItem
                                 {
                                     Text = x,
@@ -157,8 +166,8 @@
                                 
                     }
                     @Html.DropDownListFor(model => model.ProductType, productTypes)
-                                                                          
-@*                    @Html.ValidationMessageFor(model => model.ProductType)*@
+
+                    @*                    @Html.ValidationMessageFor(model => model.ProductType)*@
                 </div>
 
                 <div class="editor-label">
@@ -192,9 +201,14 @@
                     @Html.EditorFor(model => model.DiscountAmount)
                     @Html.ValidationMessageFor(model => model.DiscountAmount)
                 </div>
-
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Tags)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Tags)
+                </div>
                 <p id="photographs"></p>
-                <br/>
+                <br />
                 <input type="button" style="border: solid 1px green; padding: 2px;" id="addPhoto" value="Add Photo" />
                 <p>
                     <input type="submit" value="Create" />
@@ -203,9 +217,9 @@
             form.EndForm();
         }
     </article>
-		
+
     <aside>
-		
+
         <section class="categories">
             <h2>About This Theme</h2>
             <div class="accordion">
@@ -249,18 +263,21 @@
                         <li><a href="tabs.html">Submenu 3</a></li>
                     </ul>
                 </div>
-            </div><!-- .accordion end -->
-        </section><!-- .categories end -->
-			
+            </div>
+            <!-- .accordion end -->
+        </section>
+        <!-- .categories end -->
+
         <section class="about">
             <h2>About Us</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac massa nulla, sed laoreet tellus. Proin feugiat rhoncus massa in faucibus. Duis et orci nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <p><a href="about.html" class="more">Read More</a></p>
             <p>&nbsp;</p>
-        </section><!-- .about end -->
-		
+        </section>
+        <!-- .about end -->
+
     </aside>
-		
+
     <div class="clear"></div>
 
 </section>

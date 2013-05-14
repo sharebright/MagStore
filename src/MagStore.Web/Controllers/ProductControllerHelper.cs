@@ -137,7 +137,7 @@ namespace MagStore.Web.Controllers
                     Supplier = p.Supplier,
                     CatalogueList = catalogues,
                     Images = images,
-                    Tags = string.Join(",", p.Tags)
+                    Tags = string.Join(",", p.Tags ?? new string[0])
                 };
             return editProductViewModel;
         }
