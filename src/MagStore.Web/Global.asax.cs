@@ -9,10 +9,12 @@ using MagStore.Infrastructure;
 using MagStore.Infrastructure.Interfaces;
 using MagStore.Provider;
 using MagStore.Web.Infrastructure;
+using MagStore.Web.Models.Product;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
 using Raven.Client.Document;
 using SagePayMvc;
+using Component = Castle.MicroKernel.Registration.Component;
 
 namespace MagStore.Web
 {
@@ -62,11 +64,12 @@ namespace MagStore.Web
             AreaRegistration.RegisterAllAreas();
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(EditProductInputModel), new TagPropertyModelBinder());
         }
 
         protected void Session_End()
         {
-           Container.Resolve<IFormsAuthenticationService>().SignOut();
+            Container.Resolve<IFormsAuthenticationService>().SignOut();
         }
 
         protected void Application_End()
@@ -91,11 +94,10 @@ namespace MagStore.Web
         {
             var storageAccessor = new StorageAccessor
             (
-                "magshopstrg", 
+                "magshopstrg",
                 "H3g2iG5XyUzX5BhUqBtw5VRtdSN++0aNhXDhKHpEJe2kDh/oSEOGbrhKDQ0AkdVdM0P+Ons+7mH2FMNzxNyddw=="
             );
             return storageAccessor;
         }
     }
-
 }

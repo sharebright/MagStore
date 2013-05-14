@@ -29,5 +29,6 @@ namespace MagStore.Web.Models.Product
         public decimal DiscountAmount { get; set; }
         public IEnumerable<string> Promotions { get; set; }
         public string Catalogue { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
 }

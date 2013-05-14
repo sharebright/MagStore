@@ -31,5 +31,6 @@ namespace MagStore.Web.Models.Product
 
         public IList<Entities.Catalogue> CatalogueList { get; set; }
         public IEnumerable<string> ImageTypes { get { return new[] { "" }.Union(Enum.GetNames(typeof(ImageType))); } }
+        public string Tags { get; set; }
     }
 }

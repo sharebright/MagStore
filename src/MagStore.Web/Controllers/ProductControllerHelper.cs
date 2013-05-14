@@ -97,6 +97,7 @@ namespace MagStore.Web.Controllers
             product.Reviews = inputModel.Reviews;
             product.Size = inputModel.Size;
             product.Supplier = inputModel.Supplier;
+            product.Tags = inputModel.Tags;
             return product;
         }
 
@@ -135,7 +136,8 @@ namespace MagStore.Web.Controllers
                     Size = p.Size,
                     Supplier = p.Supplier,
                     CatalogueList = catalogues,
-                    Images = images
+                    Images = images,
+                    Tags = string.Join(",", p.Tags)
                 };
             return editProductViewModel;
         }
