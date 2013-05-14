@@ -9,36 +9,45 @@
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta name="author" content="MAG Solutions Ltd - magsolutionslimited.co.uk, info@magsolutionslimited.co.uk" />
-        <meta name="description" content="store is an online fashion shop." />
-        <meta name="keywords" content="shop clothes online, shop fashion online, online clothing shop, online british fashion, online fashion store" />
-	
-        <title>@storeName - @ViewBag.Title</title>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-    
-        <style type="text/css">
-            .social-networks, .searchbox { z-index: 1;}
-            .account-menu { z-index: 2;}
-            .toggler {
-                width: 500px;
-                height: 200px;
-                z-index: 2;
-            }
-            #button {
-                padding: .5em 1em;
-                text-decoration: none;
-            }
-            #effect {
-                position: relative;
-                left: 900px;
-                width: 240px;
-                height: 110px;
-                padding: 0.4em;
-                display: none;
-            }
+<head>
+    <meta name="author" content="MAG Solutions Ltd - magsolutionslimited.co.uk, info@magsolutionslimited.co.uk" />
+    <meta name="description" content="store is an online fashion shop." />
+    <meta name="keywords" content="shop clothes online, shop fashion online, online clothing shop, online british fashion, online fashion store" />
+
+    <title>@storeName - @ViewBag.Title</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+    <style type="text/css">
+        .social-networks, .searchbox {
+            z-index: 1;
+        }
+
+        .account-menu {
+            z-index: 2;
+        }
+
+        .toggler {
+            width: 500px;
+            height: 200px;
+            z-index: 2;
+        }
+
+        #button {
+            padding: .5em 1em;
+            text-decoration: none;
+        }
+
+        #effect {
+            position: relative;
+            left: 900px;
+            width: 240px;
+            height: 110px;
+            padding: 0.4em;
+            display: none;
+        }
+
             #effect h3 {
                 margin: 0;
                 padding: 0.2em;
@@ -46,44 +55,44 @@
                 height: 20px;
                 font-size: 15px;
             }
-        </style>
-        <script type="text/javascript">
-            $(function () {
-                // run the currently selected effect
-                function runEffect() {
-                    // get effect type from
-                    var selectedEffect = "slide"; //$("#effectTypes").val();
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            // run the currently selected effect
+            function runEffect() {
+                // get effect type from
+                var selectedEffect = "slide"; //$("#effectTypes").val();
 
-                    // most effect types need no options passed by default
-                    var options = {};
-                    // some effects have required parameters
-                    if (selectedEffect === "fold") {
-                        options = { percent: 0 };
-                    } else if (selectedEffect === "size") {
-                        options = { to: { width: 200, height: 60} };
-                    }
+                // most effect types need no options passed by default
+                var options = {};
+                // some effects have required parameters
+                if (selectedEffect === "fold") {
+                    options = { percent: 0 };
+                } else if (selectedEffect === "size") {
+                    options = { to: { width: 200, height: 60 } };
+                }
 
-                    // run the effect
-                    $("#effect").toggle(selectedEffect, options, 500);
-                };
+                // run the effect
+                $("#effect").toggle(selectedEffect, options, 500);
+            };
 
-                // set effect from select menu value
-                $("#button").click(function () {
-                    runEffect();
-                    return false;
-                });
-
-                @RenderSection("ReadyScripts", false);
+            // set effect from select menu value
+            $("#button").click(function () {
+                runEffect();
+                return false;
             });
-        </script>
-        @RenderSection("Scripts")
-    </head>
+
+            @RenderSection("ReadyScripts", false);
+        });
+    </script>
+    @RenderSection("Scripts")
+</head>
 
 <body @RenderSection("BodyTag", false)>
 
-<!-- HEADER START -->
+    <!-- HEADER START -->
 
-	<header>
+    <header>
 	
 		<div class="wrapper">
 		    <section class="account-menu">
@@ -123,7 +132,7 @@
 			</nav>
 			
 			<section class="cart">
-			    @Html.Partial("_MenuPartial", new {})
+			    @Html.Partial("_MenuPartial", new { })
 			</section><!-- .cart end -->
 			<section class="social-networks">
 				<ul>
@@ -134,24 +143,25 @@
 				</ul>
 			</section><!-- .social-networks end -->
 			
-			<section class="searchbox">
-				<form>
-					<input type="text" value="Search product">
-					<input type="button" value="Search">
-				</form>
-			</section><!-- .searchbox end -->
+		    <section class="searchbox">
+            @using (Html.BeginForm("Index", "Search", FormMethod.Post))
+            {
+                <input type="text" placeholder="Search product" name="searchText"/>
+                <input type="submit" value="Search" />
+            }
+		    </section><!-- .searchbox end -->
 			
 		</div><!-- .wrapper end -->
 		
 	</header>
 
-<!-- HEADER END -->
+    <!-- HEADER END -->
 
-@RenderBody()
+    @RenderBody()
 
     <!-- FOOTER START -->
 
-	<footer>
+    <footer>
 	
 		<div class="wrapper">
 		
@@ -234,7 +244,7 @@
 	
 	</footer>
 
-<!-- FOOTER END -->
+    <!-- FOOTER END -->
 
 </body>
 </html>

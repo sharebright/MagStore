@@ -5,6 +5,7 @@ using System.Web.Security;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using MagStore.Azure;
+using MagStore.Indexes;
 using MagStore.Infrastructure;
 using MagStore.Infrastructure.Interfaces;
 using MagStore.Provider;
@@ -13,6 +14,7 @@ using MagStore.Web.Models.Product;
 using Microsoft.Practices.ServiceLocation;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Indexes;
 using SagePayMvc;
 using Component = Castle.MicroKernel.Registration.Component;
 
@@ -53,6 +55,7 @@ namespace MagStore.Web
 
             // RavenDB embedded
             Container.Register(Component.For<IDocumentStore>().UsingFactoryMethod(GetDocumentStore).LifeStyle.Singleton);
+            Container.Register(Component.For<IDocumentSession>().UsingFactoryMethod(x => x.Resolve<IDocumentStore>().OpenSession()).LifestylePerWebRequest().OnDestroy(x => x.SaveChanges()));
             Container.Register(Component.For<RoleProvider>().ImplementedBy<RavenDbRoleProvider>().LifeStyle.Singleton);
             Container.Register(Component.For<IRepository>().ImplementedBy<RavenRepository>().LifestylePerWebRequest());
             Container.Register(Component.For<IShop>().ImplementedBy<Shop>().LifeStyle.Singleton);
@@ -88,6 +91,7 @@ namespace MagStore.Web
                 Url = "https://ec2-eu4.cloudbird.net/databases/c818ddc6-dc4b-4b57-a439-4329fff0e61b.rdbtest-mag"
             };
             documentStore.Initialize();
+            IndexCreation.CreateIndexes(typeof(Products_FullText).Assembly, documentStore);
             return documentStore;
         }
 
