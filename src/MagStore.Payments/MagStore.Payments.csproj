@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MagStore">
-      <HintPath>..\..\lib\MagStore\MagStore.dll</HintPath>
-    </Reference>
     <Reference Include="SagePayMvc">
       <HintPath>..\..\lib\SagePayMvc\SagePayMvc.dll</HintPath>
     </Reference>
@@ -55,6 +52,12 @@
     <Compile Include="Messages\SagePayAuthRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\SagePayPaymentProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MagStore\MagStore.csproj">
+      <Project>{07cce5b6-9111-46dc-aaec-00d80e19fe4a}</Project>
+      <Name>MagStore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
