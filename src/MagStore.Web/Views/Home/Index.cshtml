@@ -1,5 +1,11 @@
-﻿@model MagStore.Web.Models.HomeViewModel
+﻿@using MagStore.Infrastructure
+@model MagStore.Web.Models.HomeViewModel
 @{
+    var shop = HttpContext.Current.Application["shop"] as Shop;
+    var settings = shop.GetSettings();
+    var currencySymbol = settings.CurrencySymbol;
+    var currencyFormat = settings.CurrencyFormat;
+    var currencyConversion = settings.CurrencyConversion == 0 ? 1m : settings.CurrencyConversion;
     ViewBag.Title = "Home Page";
 }
     
@@ -30,17 +36,13 @@
                 <div class="slider-content">
                     <h2>Boom! We're here</h2>
                     <ul>
-                        <li>10 different pages</li>
-                        <li>Built in HTML5 & CSS3</li>
-                        <li>Plenty of jQuery plugins</li>
-                        <li>Tested on all modern browsers</li>
-                        <li>Working perfectly on mobile devices</li>
-                        <li>Only Google web fonts</li>
-                        <li>Multi-place Google Map</li>
-                        <li>Twitter Feed</li>
+                        <li>Many products</li>
+                        <li>Plenty of Shoes and Dresses</li>
+                        <li>Various sizes large and small</li>
+                        <li>Colours for all occasions</li>
                     </ul>
                 </div>
-                <h3><span>from only</span>&euro;199.90</h3>
+                <h3><span>from only</span>@currencySymbol 2990</h3>
                 <h4>-15%</h4>
             </li>
             <li>
@@ -56,7 +58,7 @@
                         <li>Accordions</li>
                     </ul>
                 </div>
-                <h3><span>from only</span>&euro;229.90</h3>
+                <h3><span>from only</span>@currencySymbol 2990</h3>
                 <h4>-25%</h4>
             </li>
             <li>
@@ -72,7 +74,7 @@
                         <li>Google Map markers</li>
                     </ul>
                 </div>
-                <h3><span>from only</span>&euro;99.90</h3>
+                <h3><span>from only</span>@currencySymbol 2990</h3>
                 <h4>-30%</h4>
             </li>
         </ul>
@@ -92,7 +94,7 @@
                         <a href="product.html" class="more">More Info</a>
                         <a href="#" class="buy">Add to Cart</a>
                     </div>
-                    <p>&euro;199.90</p>
+                    <p>@currencySymbol 199.90</p>
                 </li>
                 <li>
                     <div class="boxgrid">
@@ -101,7 +103,7 @@
                         <a href="product.html" class="more">More Info</a>
                         <a href="#" class="buy">Add to Cart</a>
                     </div>
-                    <p>&euro;199.90</p>
+                    <p>@currencySymbol 199.90</p>
                 </li>
                 <li>
                     <div class="boxgrid">
@@ -110,7 +112,7 @@
                         <a href="product.html" class="more">More Info</a>
                         <a href="#" class="buy">Add to Cart</a>
                     </div>
-                    <p>&euro;199.90</p>
+                    <p>@currencySymbol 199.90</p>
                 </li>
                 <li>
                     <div class="boxgrid">
@@ -119,7 +121,7 @@
                         <a href="product.html" class="more">More Info</a>
                         <a href="#" class="buy">Add to Cart</a>
                     </div>
-                    <p>&euro;199.90</p>
+                    <p>@currencySymbol 199.90</p>
                 </li>
             </ul>
         </div>
@@ -131,37 +133,37 @@
             <li>
                 <div class="zoom-image"><a href="product.html" class="zoom"><img src="~/Content/images/latest-product1.jpg" alt="Latest Product" /></a></div>
                 <h3><a href="product.html">Product name, brand and model goes here</a></h3>
-                <p>&euro;199.90</p>
+                <p>@currencySymbol 199.90</p>
                 <p class="button"><a href="#" class="buy">Add to Cart</a></p>
             </li>
             <li>
                 <div class="zoom-image"><a href="product.html" class="zoom"><img src="~/Content/images/latest-product2.jpg" alt="Latest Product" /></a></div>
                 <h3><a href="product.html">Product name, brand and model goes here</a></h3>
-                <p>&euro;199.90</p>
+                <p>@currencySymbol 199.90</p>
                 <p class="button"><a href="#" class="buy">Add to Cart</a></p>
             </li>
             <li>
                 <div class="zoom-image"><a href="product.html" class="zoom"><img src="~/Content/images/latest-product3.jpg" alt="Latest Product" /></a></div>
                 <h3><a href="product.html">Product name, brand and model goes here</a></h3>
-                <p>&euro;199.90</p>
+                <p>@currencySymbol 199.90</p>
                 <p class="button"><a href="#" class="buy">Add to Cart</a></p>
             </li>
             <li>
                 <div class="zoom-image"><a href="product.html" class="zoom"><img src="~/Content/images/latest-product4.jpg" alt="Latest Product" /></a></div>
                 <h3><a href="product.html">Product name, brand and model goes here</a></h3>
-                <p>&euro;199.90</p>
+                <p>@currencySymbol 199.90</p>
                 <p class="button"><a href="#" class="buy">Add to Cart</a></p>
             </li>
             <li>
                 <div class="zoom-image"><a href="product.html" class="zoom"><img src="~/Content/images/latest-product5.jpg" alt="Latest Product" /></a></div>
                 <h3><a href="product.html">Product name, brand and model goes here</a></h3>
-                <p>&euro;199.90</p>
+                <p>@currencySymbol 199.90</p>
                 <p class="button"><a href="#" class="buy">Add to Cart</a></p>
             </li>
             <li>
                 <div class="zoom-image"><a href="product.html" class="zoom"><img src="~/Content/images/latest-product6.jpg" alt="Latest Product" /></a></div>
                 <h3><a href="product.html">Product name, brand and model goes here</a></h3>
-                <p>&euro;199.90</p>
+                <p>@currencySymbol 199.90</p>
                 <p class="button"><a href="#" class="buy">Add to Cart</a></p>
             </li>
         </ul>

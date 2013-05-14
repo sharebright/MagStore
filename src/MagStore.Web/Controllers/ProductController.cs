@@ -235,7 +235,7 @@ namespace MagStore.Web.Controllers
                     .Where(i => i.ImageType == ImageType.Feature.ToString());
 
             var availableColours = products.Select(c => c.Value.Colour);
-            var availableSizes = products.Select(c => Convert.ToInt32(c.Value.Size)).OrderBy(c => c).Select(c => c.ToString());
+            var availableSizes = products.Select(c => c.Value.Size).OrderBy(c => c).Select(c => c.ToString());
 
             var filters = new Dictionary<string, string>
             {
