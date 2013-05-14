@@ -32,8 +32,5 @@
       <frameworkAssembly assemblyName="System.Core" targetFramework="Silverlight5.0" />
       <frameworkAssembly assemblyName="System.Windows" targetFramework="Silverlight5.0" />
     </frameworkAssemblies>
-    <references>
-      <reference file="Castle.Windsor.dll" />
-    </references>
   </metadata>
 </package>

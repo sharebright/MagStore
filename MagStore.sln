@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Test", "src\MagStore.Test\MagStore.Test.csproj", "{DD4C9CEA-92AE-4D7C-A2CF-E4D2B9026074}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Web", "src\MagStore.Web\MagStore.Web.csproj", "{7481B397-DC99-463D-A16F-5C5D0D4D3806}"
@@ -12,6 +12,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenNamespaceUpdatePatch", "src\RavenNamespaceUpdatePatch\RavenNamespaceUpdatePatch.csproj", "{3F2FB45A-1800-48A1-B631-CAEE002ED9A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagStore.Payments", "src\MagStore.Payments\MagStore.Payments.csproj", "{CAD7547B-F74E-49FE-9216-B5EFE52F18EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7014B3E3-ADEC-4126-9A24-6889E318C447}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
